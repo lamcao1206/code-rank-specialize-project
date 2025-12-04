@@ -1,0 +1,87 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-6. Create a Discussion \\ \hline
+\textbf{Date Created} & 20th September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a \textbf{Primary User} initiates a new discussion thread, typically linked to a specific problem ID or a general topic, setting the initial content and title.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User navigates to a problem page or the main forum and selects the \textit{"New Discussion"} option.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item The discussion creation interface is accessible.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item A new discussion thread is created with the status \textit{"Active."}
+    \item The discussion is visible to other Primary Users.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item Primary User accesses the problem/forum page and initiates creation.
+    \item The user enters the discussion title and body content.
+    \item The user submits the discussion.
+    \item The System saves the new thread, assigns a unique ID, and displays it.
+\end{enumerate}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Content Validation Error}: If the title or body content is empty, the System displays an error message and requires the User to correct the input before submission.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1: Submission Failure}: If the database connection fails, the System displays a technical error and saves the content as a temporary draft (if possible).
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-6: Create a Discussion}
+\end{table}

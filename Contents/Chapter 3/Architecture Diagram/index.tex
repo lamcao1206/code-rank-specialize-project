@@ -1,24 +1,23 @@
 \newpage
 
-\subsection{Architecture Diagram}
-\subsubsection{Architectural Decision Rationale}
-Architectural diagrams provide a structured view of how a software system is organized and how its components interact. In modern software development, two primary architectural styles are commonly considered: \textbf{monolithic architecture} and \textbf{distributed (microservice) architecture}.
+\section{Architecture Diagram}
+\subsection{Architectural Decision Rationale}
+Architectural diagrams provide a structured view of how a software system is organized and how its components interact. In modern software development, two primary architectural styles are commonly considered: \textbf{monolithic architecture} and \textbf{microservice architecture}.
 
-A \textbf{monolithic architecture} consolidates all application logic into a single deployable unit. This style offers simplicity, easier debugging, and lower operational cost, but may become difficult to scale or maintain as the system grows. In contrast, a \textbf{distributed architecture} breaks the system into independent services that communicate through network protocols. This design provides modularity, improved fault isolation, and scalability, but also introduces additional complexity in deployment, communication, and monitoring.
+A \textbf{monolithic architecture} is a traditional model of a software program, which is built as a unified unit that is self-contained and independent from other applications. The word “monolith” is often attributed to something large and glacial, which isn’t far from the truth of a monolith architecture for software design. \cite{atlassian_microservices_vs_monolith}
 
-The choice between these architectural approaches depends on the project’s specific requirements, team size, and long-term goals. Smaller systems or teams often benefit from the straightforwardness of monolithic architecture, while larger, more complex systems may require the flexibility and scalability of distributed services.
+A \textbf{microservices architecture}, also simply known as microservices, is an architectural method that relies on a series of independently deployable services. These services have their own business logic and database with a specific goal. Updating, testing, deployment, and scaling occur within each service. Microservices decouple major business, domain-specific concerns into separate, independent code bases. \cite{atlassian_microservices_vs_monolith}
 
-After evaluating our project goals and team constraints, we decided to implement a service-based modular monolith as the core architectural foundation for CodeRank. This design offers a balanced middle ground, allowing us to structure our system into clear modules while maintaining the simplicity of a single deployable unit.
-The key reasons for selecting this approach include:
+As can be seen, the choice between these architectural approaches depends on the project’s specific requirements, team size, and long-term goals. Smaller systems or teams often benefit from the straightforwardness of monolithic architecture, while larger, more complex systems may require the flexibility and scalability of distributed services.
+
+After evaluating our project goals and team size, we decided to implement a service-based modular monolith as the core architectural foundation for CodeRank. The key reasons for selecting this approach include:
 \begin{itemize}
     \item \textbf{Team Size and Feasibility}
-With only two participants, adopting a full microservice architecture would introduce significant overhead in DevOps, deployment, and service management. A modular monolith allows us to focus on implementing core features without the burden of distributed complexity.
+With only two members, adopting a full microservice architecture would introduce significant overhead in DevOps, deployment, and service management. In contrast, a modular monolith allows us to focus on implementing core features without the burden of distributed complexity.
     \item \textbf{Easier Development and Maintenance}
 By separating the system into modules—such as the Discussion Module, Submission Module, Auth Module, and Contest Module—we can maintain clean boundaries within a single codebase. This structure enables faster development cycles and reduces merging conflicts.
     \item \textbf{Future Scalability}
- While CodeRank currently operates as a monolithic application, its modules are designed following \textbf{Domain-Driven Design} (DDD) principles. These boundaries can later be extracted into microservices if the system needs to scale. This ensures long-term flexibility without requiring microservices prematurely.
-    \item \textbf{Technology Compatibility}
- Some components, such as the LLM-based Chatbot Module, rely on Python, whereas the main backend is developed in Go. To support cross-language integration without restructuring the entire system, we use gRPC communication and message queues, maintaining overall architectural simplicity.
+While CodeRank currently operates as a monolithic application, its modules are designed following \textbf{Domain-Driven Design} (DDD) principles. These boundaries can later be extracted into microservices if the system needs to scale. This ensures long-term flexibility without requiring microservices prematurely.
 \end{itemize}
 \begin{figure}[h!]
     \centering
@@ -27,8 +26,9 @@ By separating the system into modules—such as the Discussion Module, Submissio
     \caption{Architecture Diagram}
     \label{fig:leetcode-system}
 \end{figure}
+\clearpage
 
-\subsubsection{System Components}
+\subsection{System Components}
 
 \begin{figure}[h!]
     \centering

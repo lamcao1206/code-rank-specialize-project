@@ -1,0 +1,83 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-1. Problems Management \\ \hline
+
+\textbf{Date Created} & 20th September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User, Superadmin, Moderator \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how Moderators and Superadmins manage algorithmic problems on the platform. The process includes creating, editing, approving, and publishing problems. It also covers defining problem statements, input/output formats, constraints, sample test cases, and hidden test cases.
+\\ \hline
+
+\textbf{Trigger} &
+A Moderator or Superadmin decides to create, edit, approve, or publish a problem.
+\\ \hline
+
+\textbf{Preconditions} &%
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\itemsep}{0pt}
+\item The user is logged in as a Moderator or Superadmin.
+\item The problem management interface is accessible.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+\item A new problem is created and saved as draft.
+\item A draft problem is updated or submitted for approval.
+\item A published problem may be updated after Superadmin approval.
+\item A problem is published once the approval rule is satisfied.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &%
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item Moderator/Superadmin accesses the problem management interface.
+    \item Moderator creates a new problem (saved as draft).
+    \item Moderator edits draft problem (auto-saved).
+    \item Moderator or Superadmin submits the problem for approval.
+    \item Moderator approves problem → System checks publishing rule.
+    \item If approvals $\ge$ 3 (Moderators) or 1 (Superadmin), system auto-publishes.
+    \item Superadmin can directly approve and publish a problem.
+\end{enumerate}
+\end{minipage}
+
+\\ \hline
+
+
+\textbf{Alternative Flow} &
+
+\textbf{AF–1:} Moderator edits a published problem → System saves changes as \textit{pending\_edit} → Requires Superadmin approval. 
+
+\textbf{AF–2:} If approval threshold is not met, the problem stays pending until more approvals are collected.
+\\ \hline
+
+\textbf{Exceptions} &
+\textbf{E–1:} Superadmin rejects a pending edit → System notifies Moderator.
+
+\textbf{E–2:} Any moderator rejects a pending edit → System notifies Moderator.
+\\ \hline
+\end{tabular}
+\caption{UC-1: Problems Management}
+\end{table}

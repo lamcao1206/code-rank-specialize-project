@@ -1,0 +1,98 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-5. Solving a Problem \\ \hline
+
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User selects a problem, writes code using the built-in editor, runs sample test cases, and submits the solution for evaluation. The user receives feedback such as pass/fail results, execution time, and error messages, similar to platforms like LeetCode.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User clicks on a problem from the Problem List page.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item The selected problem is published and accessible.
+    \item The code editor and test case runner are available.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user's solution is evaluated by the system.
+    \item Submission results are recorded (pass/fail, time, memory).
+    \item The user may see their submission history for the problem.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User opens a problem from the Problem List.
+    \item The System displays the problem description, examples, constraints, and editor.
+    \item The User writes or edits code in the editor.
+    \item The User clicks \textit{Submit}.
+    \item The System runs the solution against all hidden test cases.
+    \item The System returns final evaluation results (Accepted, Wrong Answer, Time Limit Exceeded, Runtime Error, etc.).
+    \item The System stores the submission result in the user’s submission history.
+\end{enumerate}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Code Run Fails} — The code fails during the sample run (syntax error, runtime error). System displays error messages without blocking further editing.
+    \item \textbf{AF-2: Wrong Answer on Submission} — Hidden test cases fail. System shows expected vs actual output.
+    \item \textbf{AF-3: Time Limit Exceeded} — System stops execution and informs the user.
+    \item \textbf{AF-4: Memory Limit Exceeded} — System terminates execution and displays a memory error.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1}: Code execution service unavailable → System displays an error and disables Run/Submit temporarily.
+    \item \textbf{E-2}: Submission timeout due to server overload → System requests the user to retry.
+    \item \textbf{E-3}: Problem deleted or unpublished during solving → User is redirected with a notification.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{Use Case UC-5: Solving a Problem}
+\end{table}

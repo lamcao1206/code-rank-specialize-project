@@ -1,0 +1,96 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-3. Primary User Account Registration \\ \hline
+
+\textbf{Date Created} & 20th September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User creates a new account through the Sign-Up interface. The process begins from the Sign-In page, where the user chooses to register instead. Upon successful registration, the system displays a confirmation toast and navigates the user back to the login page.
+\\ \hline
+
+\textbf{Trigger} &
+A Primary User clicks the \textit{Sign Up} button on the Sign-In page.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is on the Sign-In page.
+    \item The user has not previously registered with the same email address.
+    \item The Sign-Up form is accessible.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item A new Primary User account is created in the system.
+    \item A success toast notification is displayed.
+    \item The system redirects the user to the Sign-In page.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User is on the Sign-In page and clicks the \textit{Sign Up} button.
+    \item The System displays the Sign-Up form.
+    \item The Primary User enters required information (e.g., email, password, full name).
+    \item The Primary User clicks the \textit{Register} button.
+    \item The System validates the input fields.
+    \item If validation succeeds, the System creates a new user account.
+    \item The System shows a success toast message: \textit{"Account created successfully!"}
+    \item The System redirects the user back to the Sign-In page.
+\end{enumerate}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Invalid Input} — If required fields are missing or invalid, the System highlights the errors and prevents submission.
+    \item \textbf{AF-2: Email Already Exists} — If the email is already registered, the System displays an error toast and remains on the Sign-Up page.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1:} System error occurs during account creation → System shows an error toast, and the user remains on the Sign-Up page.
+    \item \textbf{E-2:} Network timeout during submission → System displays a retry message.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{Use Case UC-3: Primary User Account Registration}
+\end{table}

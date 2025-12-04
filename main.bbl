@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{atlassian_microservices_vs_monolith}
+{Atlassian}.
+\newblock Microservices vs monolith.
+\newblock \url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}, n.d.
+\newblock Accessed: 2025-12-02.
+
 \bibitem{firecracker2025}
 {AWS Firecracker Team}.
 \newblock Firecracker: Lightweight virtualization for serverless computing.

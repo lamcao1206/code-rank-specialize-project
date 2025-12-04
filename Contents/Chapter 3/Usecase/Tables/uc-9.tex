@@ -1,0 +1,102 @@
+\begin{longtable}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-9. Participate in a Contest \\ \hline
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User participates in an active programming contest.  
+The user can view problems, solve them within the contest duration, submit solutions, and receive real-time contest scoring and ranking updates.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User selects an active contest and clicks \textit{Enter Contest}.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item The contest is currently active (between start and end time).
+    \item The contest has at least one published problem.
+    \item The user is eligible to participate (not banned, not restricted).
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item User submissions are recorded as part of the contest scoring.
+    \item The System updates the contest scoreboard with the user's results.
+    \item Contest ranking is finalized once the contest ends.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User opens an active contest page and selects \textit{Enter Contest}.
+    \item The System displays contest rules, timer, and the problem list.
+    \item The User selects a problem from the list.
+    \item The System displays the problem statement and code editor.
+    \item The User writes code and clicks \textit{Run Code} to test it locally on sample test cases.
+    \item The User clicks \textit{Submit}.
+    \item The System evaluates the submission using the contest's judging system.
+    \item The System updates the user's contest score and standing on the leaderboard.
+    \item The User returns to the problem list and continues solving other problems until the contest ends.
+\end{enumerate}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Late Entry} — If the user enters after the official start time, the System adjusts the user’s available time to match remaining contest time.
+    \item \textbf{AF-2: Wrong Answer Penalty} — Incorrect submissions may apply time penalties or reduce score, depending on contest rules.
+    \item \textbf{AF-3: Contest Timeout} — When the contest timer expires, the System prevents further submissions.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1: Submission System Failure} — The judging service fails and the System temporarily blocks submissions.
+    \item \textbf{E-2: Network Disconnection} — If the user loses internet access, the System warns that submissions cannot be processed.
+    \item \textbf{E-3: Contest Paused or Cancelled} — Admin action pauses or cancels the contest; the user is notified and interaction is restricted.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\caption{UC-9: Participate in a Contest}
+\end{longtable}

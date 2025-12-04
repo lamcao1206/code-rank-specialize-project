@@ -1,0 +1,96 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-4. Problem Browsing and Searching \\ \hline
+
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User browses the list of available algorithmic problems. Users can view problems in a paginated or scrollable list, search by keywords, filter by tags or difficulty, and sort by attributes such as popularity, difficulty, or newest updates.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User navigates to the \textit{Problem List} page.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated as a Primary User.
+    \item The problem database contains published problems.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item A filtered or sorted list of problems is displayed.
+    \item The user may select a problem to view full details.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User opens the Problem List page.
+    \item The System displays a list of all published problems in default order (e.g., newest first).
+    \item The User enters text in the search bar.
+    \item The System filters and displays problems matching the search keyword.
+    \item The User applies optional filters (e.g., tags, difficulty, status).
+    \item The System updates the displayed list based on selected filters.
+    \item The User selects a sorting option (e.g., difficulty, popularity, newest).
+    \item The System sorts and refreshes the list.
+    \item The User may click on a problem to view its full details.
+\end{enumerate}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: No Search Results} — If no problem matches the search keyword, the System displays an empty list with a message.
+    \item \textbf{AF-2: No Filter Results} — If no problem matches selected filters, the System shows ``No problems found''.
+    \item \textbf{AF-3: Reset Filters} — The User clicks \textit{Reset Filters}, and the System returns to default problem list.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1}: Network or server error prevents loading the problem list → System shows an error message.
+    \item \textbf{E-2}: Search API request fails → System keeps previous results and displays a retry option.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-4: Problem Browsing \& Searching}
+\end{table}

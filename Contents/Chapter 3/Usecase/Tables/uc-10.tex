@@ -1,0 +1,94 @@
+\begin{table}[h!]
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-10. Chatbot Interview Conversation \\ \hline
+
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (Chatbot Module) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User practices interview skills through an interactive chatbot conversation.  
+The chatbot begins by asking the user which topic they want to practice, then continues the interview based on the selected topic.
+\\ \hline
+
+\textbf{Trigger} &
+The user opens the Chatbot Interview page and selects \textit{"Start Conversation"}.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep,leftmargin=*]
+\setlength\itemsep{0pt}
+\item The user is authenticated.
+\item The chatbot conversation interface is accessible.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep,leftmargin=*]
+\setlength\itemsep{0pt}
+\item A full or partial interview conversation is completed.
+\item Feedback or a summary may be displayed to the user.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep,leftmargin=*]
+\setlength\itemsep{0pt}
+    \item The user starts the chatbot conversation.
+    \item The chatbot sends the first message:  
+          \textit{“Which topic would you like to practice?”}
+    \item The user types a topic (e.g., algorithms, system design, behavioral).
+    \item The chatbot sends the first interview question for that topic.
+    \item The user replies with an answer.
+    \item The chatbot analyzes the answer and responds with:  
+          \begin{itemize}[nosep,leftmargin=*]
+          \setlength\itemsep{0pt}
+            \item feedback, or
+            \item a follow-up question, or
+            \item the next question
+          \end{itemize}
+    \item Steps 5–6 repeat until the conversation ends.
+    \item The chatbot concludes the session and may provide a summary.
+\end{enumerate}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep,leftmargin=*]
+\setlength\itemsep{0pt}
+    \item \textbf{AF-1: User Changes Topic} — The user requests a new topic; the chatbot restarts with a new topic question.
+    \item \textbf{AF-2: User Asks for Hint} — The chatbot provides a hint instead of moving to the next question.
+    \item \textbf{AF-3: User Skips Question} — The chatbot loads the next question for the same topic.
+    \item \textbf{AF-4: User Ends Conversation} — The chatbot ends the session and displays partial feedback.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep,leftmargin=*]
+\setlength\itemsep{0pt}
+    \item \textbf{E-1: No User Response} — If the user is inactive, the chatbot prompts again or ends the session after a timeout.
+    \item \textbf{E-2: Invalid Topic} — The chatbot asks the user to choose or type a valid topic.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-10: Chatbot Interview Conversation}
+\end{table}

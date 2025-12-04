@@ -1,0 +1,98 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-2. Contest Management \\ \hline
+
+\textbf{Date Created} & 20th September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User, Superadmin, Moderator \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how users create and submit contests, allow administrators to review and approve them, and make contests available for participation once published.
+\\ \hline
+
+\textbf{Trigger} &
+A Primary User submits a new contest request.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item Contest details (title, description, rules, problems) are provided.
+    \item The contest submission form is valid.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item Contest status is updated (pending, approved, or published).
+    \item Notifications are sent to users and admins.
+    \item Users can participate in contests once published.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item Primary User submits a contest request.
+    \item The System saves the contest as \textit{Pending Review}.
+    \item Moderators review and approve the contest.
+    \item If at least 3 moderator approvals are received, the contest qualifies for publishing.
+    \item Alternatively, a Superadmin may approve and publish with a single approval.
+    \item The System updates the contest status to \textbf{Published}.
+    \item Notifications are sent to the contest creator and relevant moderators.
+    \item Primary Users may now participate in the contest.
+\end{enumerate}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Insufficient Approvals}: If fewer than 3 moderator approvals are received, the contest remains in \textit{Pending Review}.
+    \item \textbf{AF-2: Superadmin Override}: A Superadmin may publish directly, bypassing moderator approvals.
+    \item \textbf{AF-3: Invalid Submission}: If contest data is incomplete or invalid, the submission is rejected with an error message.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1}: Database error when saving or updating the contest request.
+    \item \textbf{E-2}: Approval action references a contest that does not exist.
+    \item \textbf{E-3}: Notification delivery fails (system logs error, but contest status remains updated).
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-2: Contest Management}
+\end{table}

@@ -1,0 +1,99 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-7. Participate in a Discussion Thread \\ \hline
+
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User interacts within an existing discussion thread.  
+The user may read comments, post replies, quote other users.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User opens an existing discussion thread.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item The selected discussion thread exists and is not locked.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user’s reply, comment, or reaction is saved and added to the thread.
+    \item The thread updates to display the new interaction.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User opens a discussion thread.
+    \item The System displays all posts, replies, and thread structure.
+    \item The User types a reply in the text editor.
+    \item The User submits the reply.
+    \item The System validates the reply content.
+    \item The System saves the reply and assigns it a timestamp and unique ID.
+    \item The System refreshes the thread to show the new reply.
+    \item Other users can now view the new interaction.
+\end{enumerate}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: Reply to a Specific Comment} — The user clicks \textit{Reply} on a comment; the System nests the reply under that comment.
+    \item \textbf{AF-2: Quote a Comment} — The user selects \textit{Quote}; the System inserts the original text into the editor.
+    \item \textbf{AF-3: No Content Entered} — If the reply box is empty, the System shows an error and prevents posting.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1: Thread Locked} — A moderator locks the thread; the user cannot post replies.
+    \item \textbf{E-2: Submission Failure} — System cannot save reply due to server/database error.
+    \item \textbf{E-3: Reply Deleted During Interaction} — If a referenced comment is removed, the System notifies the user.
+\end{itemize}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-7: Participate in a Discussion Thread}
+\end{table}

@@ -1,0 +1,99 @@
+\begin{table}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|p{4cm}|p{11cm}|}
+\hline
+\textbf{ID and Name} & UC-8. Edit Profile \\ \hline
+\textbf{Date Created} & 21st September, 2025 \\ \hline
+
+\textbf{Primary Actor} & Primary User \\ \hline
+
+\textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
+
+\textbf{Description} &
+This use case describes how a Primary User updates their personal profile information, such as name, profile picture, or other optional fields. Changes take effect immediately after validation and confirmation.
+\\ \hline
+
+\textbf{Trigger} &
+The Primary User navigates to the \textit{Profile} page and selects \textit{Edit Profile}.
+\\ \hline
+
+\textbf{Preconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The user is authenticated.
+    \item The profile editing interface is accessible.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Postconditions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item Updated profile information is saved to the system.
+    \item The changes are displayed immediately on the user’s profile.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Normal Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{enumerate}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item The Primary User opens the Profile page.
+    \item The User clicks \textit{Edit Profile}.
+    \item The System displays editable fields (e.g., name, bio, avatar).
+    \item The User updates one or more fields.
+    \item The User clicks \textit{Save Changes}.
+    \item The System validates the updated information.
+    \item The System saves the changes and shows a success toast message.
+    \item The System reloads the Profile page with updated values.
+\end{enumerate}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Alternative Flow} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{AF-1: No Changes Made} — If the user makes no edits and clicks \textit{Save}, the System shows “No changes detected.”
+    \item \textbf{AF-2: Cancel Edit} — The user clicks \textit{Cancel}; the System discards edits and returns to the Profile page.
+    \item \textbf{AF-3: Invalid Image Upload} — If an unsupported file is uploaded as an avatar, the System rejects it and requests a valid format.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\textbf{Exceptions} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[nosep, leftmargin=*]
+\setlength\itemsep{0pt}
+\setlength\topsep{0pt}
+\setlength\partopsep{0pt}
+\setlength\parsep{0pt}
+    \item \textbf{E-1: Save Failure} — System error prevents saving updates; the System shows a technical error toast.
+    \item \textbf{E-2: Session Expired} — User session ends mid-edit; System redirects to login page.
+\end{itemize}
+\vspace{2pt}
+\end{minipage}
+\\ \hline
+
+\end{tabular}
+\caption{UC-8: Edit Profile}
+\end{table}
