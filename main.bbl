@@ -1,0 +1,15 @@
+\begin{thebibliography}{1}
+
+\bibitem{firecracker2025}
+{AWS Firecracker Team}.
+\newblock Firecracker: Lightweight virtualization for serverless computing.
+\newblock \url{https://firecracker-microvm.github.io/}, 2025.
+\newblock Accessed: 2025-12-02.
+
+\bibitem{proofpoint_sandbox}
+{Proofpoint, Inc.}
+\newblock What is a sandbox?
+\newblock \url{https://www.proofpoint.com/us/threat-reference/sandbox}, n.d.
+\newblock Accessed: 2025-12-02.
+
+\end{thebibliography}

@@ -1,0 +1,292 @@
+\documentclass[a4paper,12pt]{report}
+%\usepackage[english,vietnam]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{mathptmx}[ptm]
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage[normalem]{ulem}
+\usepackage{indentfirst}
+\usepackage[makeroom]{cancel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage{tikz}
+\usetikzlibrary{arrows,snakes,backgrounds,calc}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{subcaption}
+\usepackage[export]{adjustbox}
+\usepackage{rotating}
+
+
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{epsfig}
+
+\usepackage{enumitem}
+\setlist[itemize]{nosep}
+\setlist[enumerate]{nosep,leftmargin=*}
+\usepackage[unicode]{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+
+\usepackage{listings}
+
+\usepackage[normalem]{ulem}
+
+\newtheorem{theorem}{{\bf Theorem}}
+\newtheorem{property}{{\bf Property}}
+\newtheorem{proposition}{{\bf Proposition}}
+\newtheorem{corollary}[proposition]{{\bf Corollary}}
+\newtheorem{lemma}[proposition]{{\bf Lemma}}
+\theoremstyle{definition}
+\newtheorem{exer}{Exercise}
+
+\def\thesislayout{
+	\geometry{
+		a4paper,
+		total={160mm,240mm},
+		left=30mm,
+		top=12mm,
+        right=20mm,
+        bottom=20mm,
+	}
+}
+
+\def\thesisheadlayout{
+	\geometry{
+		a4paper,
+		total={160mm,240mm},
+		left=30mm,
+		top=20mm,
+	}
+}
+\thesislayout
+
+\lstset{
+language=R,
+basicstyle=\footnotesize\sffamily,
+commentstyle=\ttfamily\color{black},
+numbers=left,
+numberstyle=\ttfamily\color{black}\footnotesize,
+stepnumber=1,
+numbersep=5pt,
+backgroundcolor=\color{white},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=single,
+tabsize=2,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+title=\lstname,
+escapeinside={},
+keywordstyle={},
+morekeywords={}
+}
+
+\setlength{\headheight}{60pt}
+\pagestyle{fancy}
+\fancyhead{}
+\renewcommand{\footruleskip}{1mm}
+
+\fancyhead[L]{%
+\begin{tabular}{@{}m{1cm} m{12cm}@{}}
+\includegraphics[width=1.2cm]{Images/hcmut.png} &
+\begin{tabular}{l}
+\textbf{Ho Chi Minh City University of Technology} \\
+\textbf{Faculty of Computer Science and Engineering}
+\end{tabular}
+\end{tabular}%
+}
+
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+	\end{tabular} }
+
+\fancyfoot{}
+\fancyfoot[L]{\scriptsize  Specialized Project Report (CO3335) - Semester-241 2024 - 2025}
+\fancyfoot[R]{\scriptsize  Page {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+                                     {-3.25ex\@plus -1ex \@minus -.2ex}%
+                                     {1.5ex \@plus .2ex}%
+                                     {\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\pagestyle{fancy} 
+% Override plain style (được dùng ở chapter, TOC, LoF, LoT)
+\fancypagestyle{plain}{%
+  \fancyhf{} 
+  % Header
+  \fancyhead[L]{%
+    \begin{tabular}{@{}m{1cm} m{12cm}@{}}
+      \includegraphics[width=1.2cm]{Images/hcmut.png} &
+      \begin{tabular}{l}
+        \textbf{Ho Chi Minh City University of Technology} \\
+        \textbf{Faculty of Computer Science and Engineering}
+      \end{tabular}
+    \end{tabular}%
+  }
+  \fancyhead[R]{%
+    \begin{tabular}{l}
+      \tiny \bf \\
+      \tiny \bf 
+    \end{tabular}%
+  }
+  % Footer
+  \fancyfoot[L]{\scriptsize Specialized Project Report (CO3335) - Semester-241 2024 - 2025}
+  \fancyfoot[R]{\scriptsize Page {\thepage}/\pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0.3pt}
+  \renewcommand{\footrulewidth}{0.3pt}
+}
+
+\thesislayout
+
+\everymath{\color{black}}
+
+\sloppy
+
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+
+
+\begin{document}
+\begin{titlepage}
+\begin{tikzpicture}[remember picture, overlay]
+
+  \draw[line width = 4pt] ($(current page.north west) + (0.4in,-0.5in)$) rectangle ($(current page.south east) + (-0.4in,0.5in)$);
+  \draw[line width=1.5pt]
+    ($ (current page.north west) + (0.45in,-0.55in) $)
+    rectangle
+    ($ (current page.south east) + (-0.45in,0.55in) $);
+\end{tikzpicture}
+
+\begin{center}
+\large \textbf{VIETNAM NATIONAL UNIVERSITY, HO CHI MINH CITY} \\
+\vspace{0.2cm}
+\large \textbf{HO CHI MINH CITY UNIVERSITY OF TECHNOLOGY} \\
+\vspace{0.2cm}
+\large \textbf{FACULTY OF COMPUTER SCIENCE AND ENGINEERING}
+\end{center}
+
+\vspace{0.3cm}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=4cm]{Images/hcmut.png}
+\end{center}
+\end{figure}
+
+\begin{center}
+\begin{tabular}{c}
+\multicolumn{1}{c}{\textbf{{\Large REPORT}}}\\[0.8cm]
+\multicolumn{1}{c}{\textbf{\Large SPECIALIZED PROJECT}}\\[0.8cm]
+\textbf{\large SEMESTER 241 ACADEMIC YEAR 2024-2025}\\[0.5cm]
+\hline
+\\[0.5cm]
+\textbf{\large\textcolor{blue}{CODERANK SYSTEM}}\\[0.5cm]
+\textbf{\large\textcolor{blue}{ONLINE PLATFORM FOR ALGORITHM PRACTICE}}\\[0.2cm]
+\textbf{\large\textcolor{blue}{AND PROGRAMMING CONTEST}}\\[0.2cm]
+\textbf{\large\textcolor{blue}{FOR VIETNAMESE IT STUDENT}}\\[0.5cm]
+\hline
+\\[0.5cm]
+\textbf{\large MAJOR: COMPUTER SCIENCE}
+\end{tabular}
+
+\end{center}
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{l l l}
+\textbf{\large THESIS COMMITTEE} & : & \text{\large SOFTWARE ENGINEERING - 08 CLC} \\
+\\[0.3cm] 
+\textbf{\large SUPERVISOR(s)} & : & \text{\large ASSOC. PROF. QUAN THANH THO} \\
+\\[0.3cm] 
+\textbf{\large STUDENT 1} & : & \text{\large NGUYEN CHAU HOANG LONG (2252444)} \\
+\\[-0.5em] 
+\textbf{\large STUDENT 2} & : & \text{\large CAO NGOC LAM (2252419)} \\
+\end{tabular}
+\end{center}
+
+
+
+\vspace{1cm}
+\begin{center}
+{ HO CHI MINH CITY, DECEMBER 2025}
+\end{center}
+
+\end{titlepage}
+
+\newgeometry{
+    a4paper,
+    total={160mm,240mm},
+    left=30mm,
+    top=30mm,
+    right=20mm,
+    bottom=20mm,
+}
+\newpage
+
+
+
+\input{Intro/LoiCamOn}
+\newpage
+
+\setcounter{page}{2}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+
+\begingroup
+\onehalfspacing
+\input{Contents/Chapter 1/Introduction.tex}
+\input{Contents/Chapter 2/index.tex}
+\input{Contents/Chapter 3/index.tex}
+\input{Contents/Chapter 4/index.tex}
+
+% \input{Outro/TaiLieuThamKhao}
+% \newpage
+% \input{Outro/PhuLuc}
+
+\endgroup
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

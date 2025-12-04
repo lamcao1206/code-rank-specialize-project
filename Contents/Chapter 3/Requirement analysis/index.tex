@@ -1,0 +1,98 @@
+\section{Requirement analysis}
+\subsection{Stakeholders}
+In any software system, understanding the stakeholders is essential for defining responsibilities, ensuring smooth operation, and aligning the platform with user needs. This project identifies three main groups of stakeholders, each playing a critical role in the development, management, and effective use of the platform. The following sections describe these groups in detail: Primary Users, Moderators, and Superadmin.
+\begin{enumerate}
+    \item \textbf{Primary Users}\\
+    Primary users consist of students, programming contestants, and job seekers who utilize the platform to enhance their coding abilities and evaluate their technical proficiency. These users engage with the system by practicing programming challenges, submitting solutions for automated evaluation, and participating in online contests that allow them to monitor their progress and compare performance with peers. Additionally, they may take part in discussion forums to exchange ideas and seek guidance. The platform also provides access to an integrated virtual assistant designed to support interview preparation, enabling users to develop both competitive and career-readiness skills.
+    \item \textbf{Moderators}\\
+    Moderators serve as the quality control and management layer of the platform. Their responsibilities include reviewing problem statements, validating test cases, and monitoring ongoing contests to ensure fairness and a seamless experience for all participants. Moreover, moderators oversee the integrity of the system by detecting plagiarism, resolving disputes, and upholding community standards within discussion forums. Their involvement is essential for maintaining a trustworthy, transparent, and academically honest environment.
+    \item \textbf{Superadmin}\\
+    The Superadmin holds the highest level of authority within the system and is responsible for overarching platform management. In addition to performing all moderator functions, the Superadmin oversees system-wide operations, configures platform policies, and supervises both moderators and regular users. Their core duties include creating and managing moderator accounts, managing roles, addressing escalated issues, and monitoring system performance through analytics and operational metrics. This role ensures that the platform remains stable, secure, and aligned with organizational objectives.
+\end{enumerate}
+
+\subsection{Functional requirements}
+\vspace{0.3cm}
+\noindent \textbf{\Large Primary Users}
+\vspace{0.3cm}
+\begin{enumerate}[label=\arabic*.]
+    \item \textit{Authentication:}
+        \begin{itemize}
+            \item The system shall allow users to create an account using email and password or third-party authentication providers (e.g., Google, GitHub).
+            \item The system shall support secure login and logout functionality.
+            \item The system shall provide password recovery and reset options.
+            \item The system shall enforce role-based access control to differentiate between standard users, moderators, and superadmins.
+        \end{itemize}
+    \item \textit{Problem Solving and Submission:}
+        \begin{itemize}
+            \item The system shall allow users to browse and search algorithmic problems by difficulty, topic, tags, and status (solved, attempted).
+            \item The system shall provide an integrated code editor supporting multiple programming languages (C++, Java, Python), enabling users to write, compile, and execute their code against provided example test cases.
+            \item The system shall display immediate feedback on submitted solutions, indicating success/failure, execution time, memory usage, and specific error messages (e.g., Wrong Answer, Time Limit Exceeded, Runtime Error).
+            \item The system shall allow users to view their past submissions and their results.
+        \end{itemize}
+    \item \textit{Contest Participation:}
+        \begin{itemize}
+            \item The system shall enable users to create or participate in online programming contests. In case the users want to create an online contest, they can enforce the contest rules, such as time limits per problem and penalty for incorrect submissions.
+            \item The system shall display a leaderboard after the contests finish.
+        \end{itemize}
+    \item \textit{Community forum:}
+        \begin{itemize}
+            \item The system shall provide a shared discussion forum where users can exchange ideas, ask questions, and discuss solutions for all problems, similar to a general online community forum.
+            \item The system shall allow users to upvote/downvote comments and report inappropriate content.
+        \end{itemize}
+    \item \textit{Ranking System:}
+        \begin{itemize}
+            \item The system shall assign points to users upon successfully solving problems, with points varying according to the difficulty of each problem.
+            \item The ranking system shall update user scores and global rankings every 15 minutes, reflecting users’ latest achievements and progress.
+        \end{itemize}
+    \item \textit{Interview Preparation (Virtual Assistant):}
+        \begin{itemize}
+            \item The system shall offer a virtual assistant feature for practicing interview questions (e.g., mock interviews with predefined scenarios).
+            \item The system shall provide hints and feedback on interview responses.
+        \end{itemize}
+\end{enumerate}
+\vspace{0.3cm}
+\noindent \textbf{\Large Moderators}
+\vspace{0.3cm}
+\begin{enumerate}
+    \item \textit{Problems Management:}
+        \begin{itemize}
+            \item The system shall allow moderators to create, edit, and publish new algorithmic problems.
+            \item The system shall enable moderators to define problem statements, input/output formats, constraints, and sample test cases.
+            \item The system shall allow moderators to upload and manage hidden test cases for problem evaluation.
+        \end{itemize}
+    \item \textit{Contest Management:}
+        \begin{itemize}
+            \item The system shall allow moderators to receive and review requests from users for creating new contests. Moderators shall have the ability to either approve or reject these contest creation demands, providing a reason for rejection if applicable. Upon approval, the system shall notify the requesting user and enable the moderator to proceed with configuring and publishing the contest.
+        \end{itemize}
+    \item \textit{Community Moderation:}
+        \begin{itemize}
+            \item The system shall allow moderators to review and manage content in discussion forums, including deleting inappropriate posts or comments.
+            \item The system shall enable moderators to warn or ban users who violate community guidelines.
+        \end{itemize}
+\end{enumerate}
+\vspace{0.3cm}
+\noindent \textbf{\Large Superadmin}
+\vspace{0.3cm}\\
+The Superadmin shall possess all the functional capabilities and permissions granted to a moderator.
+\begin{enumerate}
+    \item \textit{User and Moderator Account Management:}
+        \begin{itemize}
+            \item The system shall allow the Superadmin to create, edit, suspend, and delete user and moderator accounts.
+            \item The system shall enable moderators to warn or ban users who violate community guidelines.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Non-functional requirements}
+\noindent \textit{Performance:} The system shall support at least 1,000 concurrent users while maintaining minimal latency during contests. Code submissions must be evaluated and feedback returned within 3 seconds for standard test cases, ensuring a responsive and smooth user experience.\\
+
+\noindent \textit{Scalability:} The system shall be designed to support horizontal scaling, allowing it to handle increasing numbers of users and higher workloads by adding additional servers or computational resources as needed.\\
+
+\noindent \textit{Reliability:} The system shall maintain high availability, particularly during contests and peak usage periods. Mechanisms for fault tolerance and recovery shall be implemented to minimize downtime and ensure continuous operation.\\
+
+\noindent \textit{Security:} The system shall safeguard user accounts, code submissions, and any sensitive data (including payment information) through industry-standard security measures, such as encryption, secure authentication, and role-based access control.\\
+
+\noindent \textit{Usability:} The system shall provide an intuitive and user-friendly interface suitable for both beginners and advanced users. Users should be able to quickly locate problems by difficulty or topic, join contests with minimal steps, and utilize the integrated code editor without additional setup.\\
+
+\noindent \textit{Maintainability:} The system shall be designed for ease of maintenance, allowing developers to update features, fix bugs, and enhance functionality with minimal effort and disruption.\\
+
+\noindent \textit{Internationalization \& Localization:} The system shall support multiple languages and provide seamless switching between them, ensuring accessibility and usability for a diverse, global user base.
