@@ -1,0 +1,64 @@
+\section{Chatbot Design}
+\subsection{Overview}
+A chatbot is a computer program that stimulates an interaction or a conversation with customers automatically. These conversations occur based on a set of predefined conditions, triggers and events around an
+online shopper’s buying journey. Chatbots are already being put to use across various business, specially
+exommerce business, with more consumers finding value in the quick, efficient, and around-the-clock
+responses chatbot can offer.
+
+The chatbot developed in our system is an AI-powered interactive interview coach designed to assist learners practicing technical coding interviews, particularly algorithm problems. The system leverages Google Gemini as the underlying large language model (LLM) and LangChain as the orchestration framework that structures prompts, manages conversational flow, and implements contextual memory.
+
+The goal of the chatbot is to simulate real interview scenarios through step-by-step dialogue, enabling learners to experience guided practice, receive hints, refine answers, and develop a deeper understanding of algorithmic problem-solving techniques. To achieve human-like interaction, the chatbot must:
+\begin{enumerate}
+    \item Understand user inputs
+    \item Maintain awareness of previous exchanges
+    \item Adapt its questioning based on user responses
+    \item Provide constructive and relevant feedback
+    \item Prevent context loss during long interview sessions
+\end{enumerate}
+
+To meet these requirements, we implemented a custom Hybrid Memory mechanism was designed, combining short-term buffer and long-term summary to maintain conversational context efficiently while respecting token limits.
+
+\subsection{Use case analysis}
+To ensure consistent behavior and maintain the structured flow of a technical interview, the chatbot uses a System Prompt, also known as a behavioral instruction prompt. This prompt defines the chatbot's role as an AI interview coach and outlines the rules that govern how it interacts with the user. The following system prompt defines the chatbot's role and behavior during the structured mock interview process:
+\begin{tcolorbox}[
+    colback=white,      % White background
+    colframe=black,     % Black border
+    boxrule=0.8pt,      % Border thickness
+    breakable,          % Allow page breaks
+    sharp corners,      % Square corners
+    listing only,       % Use listings engine
+    listing options={
+        basicstyle=\ttfamily\small,
+        breaklines=true,      % Wrap long lines
+        columns=fullflexible  % Prevent overflow
+    }
+]
+\begin{verbatim}
+You are an AI interview coach for coding interviews.
+Your job is to conduct a structured mock interview.
+
+Rules:
+1. The FIRST message you send must ALWAYS be exactly:
+   "What topic do you want to practice?"
+
+2. After the user chooses a topic, ask ONE coding problem at a time.
+
+3. After giving a question:
+   - Wait for the user’s solution attempt.
+   - Do NOT evaluate until the user submits a solution.
+   - If the user is not ready, ask them to type their solution 
+   when ready.
+
+4. Provide hints ONLY when:
+   - The user explicitly asks for a hint, OR
+   - The user gives 3 incorrect attempts.
+
+5. After the user solves (or gives up), provide:
+   - A concise explanation
+   - Optimal solution
+   - Time complexity
+   - Space complexity
+
+6. Stay in interview mode.
+\end{verbatim}
+\end{tcolorbox}
