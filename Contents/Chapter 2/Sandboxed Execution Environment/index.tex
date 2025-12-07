@@ -3,7 +3,57 @@ In the world of cybersecurity, a \textbf{sandbox environment} is an isolated vir
 
 In the context of CodeRank System, this mechanism is essential because the platform allows users to submit arbitrary source code for compilation and execution as part of algorithm practice and programming contests. Without sandboxing, user submissions could intentionally or accidentally access the file system, overload system resources, execute harmful commands, or interfere with other users’ submissions. By running each submission inside a sandbox, CodeRank ensures that all code is contained, resource-restricted, and prevented from performing dangerous operations. This guarantees fair evaluation, protects the platform’s infrastructure, and maintains a secure environment for all Vietnamese IT students using the system.
 
-By considering the requirements for securely running user-submitted code, it is essential to evaluate different execution sandbox technologies used in modern online judge systems. In the following section, three representative tools will be introduced and compared in terms of security, performance, isolation level, and ease of integration.
+By considering the requirements for securely running user-submitted code, it is essential to evaluate different execution sandbox technologies used in modern online judge systems. In the following section, three representative tools will be introduced and compared in terms of security, performance, isolation level, and ease of integration for CodeRank system.
 
 \subsection{Firecracker MicroVMs}
 Firecracker is an open source virtualization technology that is purpose-built for creating and managing secure, multi-tenant container and function-based services. Firecracker enables you to deploy workloads in lightweight virtual machines, called microVMs, which provide enhanced security and workload isolation over traditional VMs, while enabling the speed and resource efficiency of containers. Firecracker was developed at Amazon Web Services to improve the customer experience of services like AWS Lambda and AWS Fargate. \cite{firecracker2025}
+
+\subsection{Docker}
+Docker is one of the most widely adopted containerization technologies, providing lightweight, portable, and reproducible environments \cite{docker2025}. Unlike full virtual machines, Docker containers share the host OS kernel, allowing very fast startup times and low overhead. Each container packages the runtime environment, dependencies, and libraries needed to compile and execute a user's code submission. 
+
+Although Docker does not provide the same isolation guarantees as a hypervisor-based microVM, it supports Linux namespaces, control groups (cgroups), and seccomp profiles, which can significantly limit the capabilities of executed programs. Docker-based sandboxes are commonly used in competitive programming judges due to their speed, ease of deployment, and flexible configuration. This makes Docker a practical choice for educational and performance-sensitive platforms like CodeRank.
+
+\subsection{Nsjail}
+Nsjail is a process isolation tool for Linux. It utilizes Linux namespace subsystem, resource limits, and the seccomp-bpf syscall filters of the Linux kernel \cite{nsjail2025}. Nsjail provides fine-grained control over CPU and memory limits, filesystem visibility, network isolation, and system call whitelisting.  
+
+Compared to Docker, nsjail offers stronger syscall-level security and is more lightweight, but it requires manual configuration and is less user-friendly for integration into distributed or containerized infrastructure. This makes nsjail suitable for high-security environments but less convenient for teams prioritizing maintainability and scalability.
+
+\subsection{Comparison of Sandboxing Tools}
+To choose an appropriate sandbox mechanism for CodeRank System, the three technologies were compared in terms of isolation level, performance, security features, and ease of integration.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{3cm}|p{3.5cm}|p{3.5cm}|p{3.5cm}|}
+\hline
+\textbf{Criteria} & \textbf{Firecracker MicroVMs} & \textbf{Docker Containers} & \textbf{nsjail} \\
+\hline
+Isolation Level & Very strong (VM-based isolation) & Moderate (namespace + cgroups) & Strong (syscall-level restrictions) \\
+\hline
+Startup Time & Slower than containers (tens of ms) & Very fast (milliseconds) & Fast (milliseconds) \\
+\hline
+Security & Excellent, hardware-backed isolation & Good, configurable security profiles & Excellent, syscall filtering and strict jail controls \\
+\hline
+Performance & Near native & Near native & Near native \\
+\hline
+Resource Usage & Higher (each microVM is heavier) & Low & Very low \\
+\hline
+Ease of Integration & Moderate (requires orchestration layer) & Very easy (excellent tooling and ecosystem) & Moderate (requires manual jail configuration) \\
+\hline
+Infrastructure Compatibility & Best for cloud-scale deployments & Works on most Linux systems & Requires Linux with namespace support \\
+\hline
+Typical Use Cases & Serverless computing (Lambda, Fargate) & Web apps, CI/CD, OJ execution sandboxes & Online judges, security research \\
+\hline
+\end{tabular}
+\caption{Comparison of Execution Sandboxing Technologies}
+\end{table}
+
+Based on the comparison above, Docker is selected as the execution sandbox for the CodeRank System. While Firecracker offers superior isolation and nsjail provides more fine-grained security control, Docker achieves the best balance for our platform’s needs:
+
+\begin{itemize}
+    \item \textbf{Fast startup time}, enabling responsive code execution during algorithm practice and contests.
+    \item \textbf{Low resource consumption}, allowing multiple submissions to be processed concurrently.
+    \item \textbf{Mature tooling and ecosystem}, simplifying deployment, scaling, and maintenance.
+    \item \textbf{Good security guarantees} through namespaces, cgroups, and seccomp profiles.
+    \item \textbf{Reproducible, portable environments} for compiling and running code consistently across different languages.
+    \item \textbf{Ease of use}, as Docker offers intuitive commands, extensive documentation, and seamless integration with our platform. This significantly reduces development time and lowers the barrier for configuring secure execution environments.
+\end{itemize}
