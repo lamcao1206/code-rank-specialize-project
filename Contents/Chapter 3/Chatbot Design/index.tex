@@ -1,11 +1,8 @@
 \section{Chatbot Design}
 \subsection{Overview}
-A chatbot is a computer program that stimulates an interaction or a conversation with customers automatically. These conversations occur based on a set of predefined conditions, triggers and events around an
-online shopper’s buying journey. Chatbots are already being put to use across various business, specially
-exommerce business, with more consumers finding value in the quick, efficient, and around-the-clock
-responses chatbot can offer.
+A chatbot, short for "chat robot", is an artificial intelligence (AI) software designed to simulate conversations with human users, especially over the internet. They interact with humans in their natural languages, typically through messaging applications, mobile apps or through a website. Chatbots can be programmed to respond the same way each time, to respond differently to messages containing specific keywords, or to use machine learning to adapt their responses to fit the situation. \cite{chatbot_definition}
 
-The chatbot developed in our system is an AI-powered interactive interview coach designed to assist learners practicing technical coding interviews, particularly algorithm problems. The system leverages Google Gemini as the underlying large language model (LLM) and LangChain as the orchestration framework that structures prompts, manages conversational flow, and implements contextual memory.
+In the context of CodeRank System, the chatbot is an AI-powered interactive interview coach designed to assist learners practicing technical coding interviews, particularly algorithm problems. The system leverages Google Gemini as the underlying large language model (LLM) and LangChain as the orchestration framework that structures prompts, manages conversational flow, and implements contextual memory.
 
 The goal of the chatbot is to simulate real interview scenarios through step-by-step dialogue, enabling learners to experience guided practice, receive hints, refine answers, and develop a deeper understanding of algorithmic problem-solving techniques. To achieve human-like interaction, the chatbot must:
 \begin{enumerate}
@@ -15,8 +12,6 @@ The goal of the chatbot is to simulate real interview scenarios through step-by-
     \item Provide constructive and relevant feedback
     \item Prevent context loss during long interview sessions
 \end{enumerate}
-
-To meet these requirements, we implemented a custom Hybrid Memory mechanism was designed, combining short-term buffer and long-term summary to maintain conversational context efficiently while respecting token limits.
 
 \subsection{Use case analysis}
 To ensure consistent behavior and maintain the structured flow of a technical interview, the chatbot uses a System Prompt, also known as a behavioral instruction prompt. This prompt defines the chatbot's role as an AI interview coach and outlines the rules that govern how it interacts with the user. The following system prompt defines the chatbot's role and behavior during the structured mock interview process:
@@ -38,8 +33,8 @@ You are an AI interview coach for coding interviews.
 Your job is to conduct a structured mock interview.
 
 Rules:
-1. The FIRST message you send must ALWAYS be exactly:
-   "What topic do you want to practice?"
+1. The FIRST message you receive from the user is the topic they want
+to practice (e.g., arrays, dynamic programming, graphs).
 
 2. After the user chooses a topic, ask ONE coding problem at a time.
 
@@ -62,3 +57,116 @@ Rules:
 6. Stay in interview mode.
 \end{verbatim}
 \end{tcolorbox}
+
+To support a smooth and structured technical interview experience, the chatbot must be able to recognize different categories of user intentions. For the interview practice module of the CodeRank System, we classify user intents into three primary types: topic selection, problem-solving intent, and hint-seeking behavior. Each intent triggers a specific dialogue pattern that aligns with the structured mock interview workflow.
+
+\textbf{Topic Selection Intent:} When users explicitly mention an interview topic, 
+such as arrays, graphs, or dynamic programming, the system interprets this as an 
+intention to begin or switch an interview topic. The chatbot should confirm the 
+topic and proceed to present an appropriate coding problem. The possible questions are “Let’s practice arrays.”, “I want to try a dynamic 
+programming problem.”, “Graphs.”, ...
+
+\textit{For example when the user wants to find a topic to practice:}
+
+\begin{quote}
+\textbf{User:} Find me an array problem.\\
+\textbf{Chatbot:} Sure! We'll practice arrays. Here is your first problem: 
+\textit{Given an integer array…} Please let me know when you're ready to 
+provide your solution.
+\end{quote}
+
+If the user provides additional details, the chatbot refines the difficulty:
+
+\begin{quote}
+\textbf{User:} Give me an easy array problem.\\
+\textbf{Chatbot:} Great! Here is an easy-level array problem for you…
+\end{quote}
+
+\textbf{Problem-Solving Intent:} Once a coding problem has been presented, the user may 
+respond with a complete solution, partial reasoning, or follow-up questions. This indicates 
+the intention to solve the problem. The chatbot should acknowledge the attempt, avoid 
+evaluating prematurely, and respond only after the user explicitly submits their solution. Possible user messages include “Here is my solution…”, “Does this approach work?”, 
+or “I think we can use two pointers.”
+
+\textit{For example when the user wants to submit a solution:}
+
+\begin{quote}
+\textbf{User:} Here is my solution: \texttt{...code...}\\
+\textbf{Chatbot:} Thanks! Let me review your solution.
+\end{quote}
+
+If the user is still thinking:
+
+\begin{quote}
+\textbf{User:} I'm not ready yet.\\
+\textbf{Chatbot:} No problem—take your time. Let me know when you're ready to submit 
+your solution.
+\end{quote}
+
+If the attempt is incorrect, the chatbot guides without revealing too much:
+
+\begin{quote}
+\textbf{Chatbot:} This is not fully correct. Try again—pay attention to the edge case 
+where the array may contain duplicates.
+\end{quote}
+
+\textbf{Hint-Seeking Intent:} When the user explicitly asks for help or expresses that they 
+are stuck, the system recognizes this as an intention to request a hint. According to the 
+interview rules, hints should only be provided when requested or after three unsuccessful 
+attempts. Possible user messages include “Give me a hint.”, “I’m stuck.”, or “Can you guide me?”
+
+\textit{For example when the user requests assistance:}
+
+\begin{quote}
+\textbf{User:} I’m stuck. Give me a hint.\\
+\textbf{Chatbot:} Sure! Here’s a hint: Try using a hash map to store the frequencies of 
+elements before making your decision.
+\end{quote}
+
+If the user is unclear about what type of hint they need:
+
+\begin{quote}
+\textbf{User:} I need help.\\
+\textbf{Chatbot:} Of course. Would you like a conceptual hint, or guidance on improving 
+your current approach?
+\end{quote}
+
+\subsection{Chatbot Service Architecture}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Contents/Chapter 3/Chatbot Design/chatbot_architecture.pdf}
+    \caption{Entity Relationship Diagram}
+\end{figure}
+
+\begin{enumerate}
+   \item \textbf{Chatbot Service}
+The Chatbot Service represents the entire operational boundary of the AI interview coach. It contains all the core logic, memory systems, agent tools, and integrations required to facilitate technical interview-style conversations.
+   \item \textbf{Context Base}
+The Context Base is responsible for storing and retrieving conversational context during an interview session. It uses LangChain’s built-in short-term memory mechanism, which relies on a checkpointer to save and load the recent conversation state for each thread.
+
+\textbf{Short-Term Context Manager}
+\begin{itemize}
+   \item Maintains the latest messages in the conversation (short-term only).
+   \item Prevents the prompt from growing too large by only storing recent turns.
+   \item Uses LangChain’s state-based memory, managed through a checkpointer \texttt{PostgresSaver}
+\end{itemize}
+This ensures the agent has “active context” for follow-up questions and code explanation steps.
+
+   \item \textbf{Prompt Builder}
+\begin{itemize}
+   \item Constructs structured prompts according to interview rules defined in the System Prompt.
+   \item Integrates: user input, interview mode instructions and short-term context from the Context Base.
+   \item Uses LangChain’s \textit{PromptTemplate} and \textit{ChatPromptTemplate} to dynamically shape the prompt.
+\end{itemize}
+
+   \item \textbf{Response Processor}
+\begin{itemize}
+   \item Receives the raw output from the LLM and converts it into a clean, structured reply appropriate for interview interaction.
+   \item Applies LangChain output parsers if needed.
+\end{itemize}
+   \item \textbf{Service Consumers, Publishers}
+
+   This intermediary layer links the Chatbot Service with main backend systems. It handles incoming requests from the Backend Application and routes them to the Chatbot Service. It also publishes the chatbot’s responses back to the Backend Application.
+
+\end{enumerate}
