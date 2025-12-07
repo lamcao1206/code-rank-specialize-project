@@ -1,0 +1,45 @@
+\section{Artifical Intelligence}
+\subsection{Gemini models from Google AI}
+Gemini is Google’s family of state-of-the-art multimodal large language models designed to understand and generate text, code, and visual content with high efficiency. The Gemini 2.5 series represents a major evolution of the platform, offering improved reasoning, faster inference, and significantly reduced computational overhead. Gemini models are trained on diverse datasets and optimized for real-world applications such as software development, conversational agents, educational tools, and knowledge retrieval systems.  
+
+
+\textbf{Key Concepts of Gemini for Software Development:}
+\begin{itemize}
+    \item \textbf{Multimodal Input Support:} Gemini accepts text, code, images, and other structured inputs, though CodeRank primarily utilizes its text and code understanding capabilities.
+    \item \textbf{Tokens and Context Window:} Similar to Azure OpenAI models, Gemini processes input as tokens. Gemini 2.5 Flash offers an extended context window (up to 1 million tokens in some tiers), enabling long conversational history and detailed problem analysis.
+    \item \textbf{Function Calling:} Gemini supports structured function calling, allowing developers to integrate model outputs into application logic, such as triggering code evaluation, retrieving problem metadata, or interacting with student performance data.
+\end{itemize}
+
+For the CodeRank system, we selected the \textbf{Gemini 2.5 Flash} model due to its strong performance on coding tasks and optimization for latency-sensitive applications. The model excels in:
+\begin{itemize}
+    \item Understanding programming questions and competitive programming prompts,
+    \item Generating helpful explanations and hints for algorithm problems,
+    \item Assisting users through conversational interactions within the platform’s chatbot,
+    \item Performing reasoning tasks such as step-by-step code review or guidance on debugging.
+\end{itemize}
+
+Additionally, one significant advantage of Gemini 2.5 Flash is the availability of a \textbf{free-tier quota} in Google AI Studio, making it a highly cost-effective choice for our system. This enables the platform to deliver AI-powered features without incurring substantial operational expenses, which is especially valuable during development, prototyping, and early deployment stages. Furthermore, the free-tier support makes Gemini 2.5 Flash particularly suitable for building an MVP prototype and demonstrating a reliable proof of concept (POC) before scaling the solution.
+
+\subsubsection{LangChain Integration}
+LangChain is the platform for agent engineering. AI teams at Replit, Clay, Rippling, Cloudflare, Workday, and more trust LangChain’s products to engineer reliable agents \cite{langchain2025}. For the context of CodeRank, LangChain provides a flexible abstraction layer for working with Gemini. This combination allows CodeRank to leverage LLM capabilities while simplifying application logic.
+
+\textbf{LangChain integrates with Gemini through:}
+\begin{itemize}
+    \item \textbf{LLM Wrappers:} A standardized interface for sending prompts and receiving model outputs from Gemini 2.5 Flash.
+    \item \textbf{Prompt Templates:} Templates for constructing system messages, examples, and user queries—important for consistent chatbot behavior across different interactions.
+    \item \textbf{Chains:} The LangChain Expression Language (LCEL) enables us to build workflows such as:
+    \begin{itemize}
+        \item multi-turn conversational chatbots with memory,
+        \item code explanation or problem-solving assistants,
+        \item agents capable of interacting with internal CodeRank APIs.
+    \end{itemize}
+    \item \textbf{Agents:} Gemini acts as a reasoning engine to determine the next action (e.g., make algorithmic questions, evaluate user's answer, suggest improvements).
+\end{itemize}
+
+Combining Gemini 2.5 Flash with LangChain enables CodeRank to deliver AI-powered features such as:
+\begin{itemize}
+    \item A conversational chatbot that remembers user context and provides personalized guidance.
+    \item A problem-solving assistant capable of explaining algorithms, suggesting improvements, and helping beginners understand key concepts.
+    \item Intelligent agents that can interact with the system’s backend, retrieve the conversation history to provide context-aware responses.
+\end{itemize}
+
