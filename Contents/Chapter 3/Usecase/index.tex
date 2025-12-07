@@ -16,6 +16,7 @@ Our system contains 5 main submodules:
     \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage the problem creation, test cases, contests management and global user accounts.
 Contest: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
     \item \textbf{Submission}: This core module handles the presentation of the coding challenge and the automatic evaluation of the user's submitted solution.
+    \item \textbf{Interview Practice}: Provides a simulated coding interview environment where users can practice solving problems with instant feedback, mimicking real-world technical interviews.
 \end{itemize}
 
 \subsection{Use-case diagrams for each submodule}
@@ -67,6 +68,24 @@ To ensure that discussions remain constructive and aligned with community guidel
     \caption{Submission Use Case}
 \end{figure}
 The \textbf{Submission} submodule is the core execution engine and interaction point for all coding activities within the CodeRank system. Its primary function is to facilitate the practice and assessment workflow for the Primary User. Users begin by accessing the \textbf{View Problem} function, which presents the algorithmic challenge and requirements. The fundamental action in this module is the \textbf{Submit Solution} function, which securely receives the user's code, initiates the automatic grading process in a sandboxed environment, and returns the execution verdict. For oversight and quality assurance, both the Superadmin and Moderators are granted the ability to Monitor Submissions. This administrative function is vital for diagnosing issues with test cases, tracking potential cases of plagiarism, and ensuring the overall stability and fairness of the automated grading system.
+
+\clearpage
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/ContestUsecase.png}
+    \vspace{0.6cm}
+    \caption{Contest Use Case}
+\end{figure}
+The Contest submodule is integral to the CodeRank platform, managing the entire lifecycle of competitive programming events. It provides the mechanism for the primary user to participate in a contest, engaging in time-constrained coding challenges with real-time feedback and ranking. The module also handles the initiation of new events, allowing primary users to submit contest creation requests. To maintain content quality and system integrity, all requests must undergo a review process conducted by both the Moderator and Superadmin roles.
+\clearpage
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/InterviewUsecase.png}
+    \vspace{0.6cm}
+    \caption{Interview Practice Use Case}
+\end{figure}
+The \textbf{Interview Practice} submodule is designed to simulate real-world coding interviews, providing users with a platform to practice and refine their problem-solving skills under conditions that mimic actual technical interviews. There will be a Conversation History leftside bar that allows users to easily navigate between previous interview sessions. Users can initiate a new practice session by selecting the \textbf{New Conversation} button, which start a new interview session specified time frame. The Chatbot will first asking the user to choose the topic that he/she wants to practice. After that, user can start the interview practice by solving the coding problems presented by the chatbot. Once the user submits their solution, the system will automatically evaluate the code and provide instant feedback, including correctness, efficiency, and potential improvements. This immediate response helps users learn from their mistakes and understand best practices in coding interviews.
+
 \subsection{Use-case description tables}
 \input{Contents/Chapter 3/Usecase/Tables/uc-1.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-2.tex}
