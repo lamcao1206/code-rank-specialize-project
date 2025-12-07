@@ -2,26 +2,49 @@
 \subsection{Overview}
 \textbf{Code Runner} Component is a core component of Submission Worker Service, responsible for executing user-submitted programs against predefined test cases. It serves as a bridge between the user’s solution and the problem’s input–output data, ensuring fair and consistent evaluation. 
 For each programming language supported by the platform (C++, Java, Python), a specific implementation of the \textbf{Code Runner} will be developed to handle language-specific compilation, execution, and output parsing. This ensures that user code is run correctly and consistently, regardless of the language chosen.
-\subsection{Class Diagram}
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/CodeRunner.jpg}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/code_runner_flow.pdf}
     \vspace{0.6cm}
-    \caption{Class Diagram for Code Runner}
-    \label{fig:leetcode-system}
+    \caption{Overall execution flow for submission}
 \end{figure}
 
+\subsection{Class diagram}
+The CodeRunner components are structured into several key classes bellow:
+
 \begin{itemize}
-    \item \textbf{ISerialization \& Implementations}: ISerialization defines a common interface for converting data between raw test inputs/outputs and program variables. Its implementations — IntSerialization, FloatSerialization, StringSerialization, ListSerialization, and VoidSerialization — handle serialization for different data types, ensuring test cases are interpreted correctly regardless of format.
-    \item \textbf{TestRunnerContext}: TestRunnerContext stores the configuration and metadata needed to execute a user’s function, including parameter types, serializers, and the function reference itself. It prepares the environment for test execution and delegates the actual running to the Executor.
-    \item \textbf{Executor}: Executor manages controlled execution of user-submitted functions. It enforces time limits, measures execution duration using Timer, and handles potential runtime issues like timeouts or errors during function calls.
-    \item \textbf{Timer}: Timer measures how long each test case takes to execute. It provides simple start, stop, and duration tracking methods to record performance metrics for user solutions.
-    \item \textbf{TestOutput}: TestOutput captures the results of a single test execution, storing both the runtime duration and any performance metrics. It is used to report how efficiently and accurately a user’s code performed.
-    \item \textbf{TestException}: TestException represents errors or mismatches that occur during test execution. It stores details such as expected versus actual results and additional context through TestProperty objects.
-    \item \textbf{TestProperty \& TestPropertyName}: TestProperty stores metadata about a test, such as a description or result comparison, identified by a TestPropertyName enum. These properties provide structured details for debugging failed test cases.
-    \item \textbf{TestRunner}: TestRunner is the main controller responsible for running user code against predefined test cases. It coordinates between the TestRunnerContext, Executor, and ISerialization system to execute tests and produce final TestResult outcomes.
-    \item \textbf{Solution}: Solution is the submission for the problem from the user.
+    \item \textbf{ISerialization \& Implementations}: 
+    The \texttt{ISerialization} interface provides a unified mechanism for converting raw JSON inputs and outputs into Python values. Its concrete implementations — \texttt{IntSerialization}, \texttt{FloatSerialization}, \texttt{StringSerialization}, \texttt{ListSerialization}, and \texttt{VoidSerialization} — handle serialization for specific data types, ensuring that test arguments and expected results are correctly interpreted before execution.
+
+    \item \textbf{TestExecutor}: 
+    The \texttt{TestExecutor} prepares and invokes the user’s \texttt{solve()} function for each test case. It maintains parameter serializers (\texttt{param\_traits}), return value serializers (\texttt{ret\_trait}), and parameter names. Its responsibilities include parsing the function signature, deserializing inputs, executing the function, validating outputs, and reporting mismatches with detailed context.
+
+    \item \textbf{TimedExecutor}: 
+    The \texttt{TimedExecutor} ensures safe and controlled execution of user code by applying time and memory limits. It internally uses a \texttt{Timer} to measure runtime duration and memory consumption. If a function exceeds time or memory constraints, or encounters an error, \texttt{TimedExecutor} reports the incident back to the \texttt{TestExecutor}.
+
+    \item \textbf{Timer}: 
+    The \texttt{Timer} class records performance metrics for each test case. It captures start and end timestamps, execution duration in microseconds, and memory usage. These measurements are later incorporated into the final test result records.
+
+    \item \textbf{CodeRunner}: 
+    The \texttt{CodeRunner} coordinates the overall testing process. It holds a \texttt{TestConfig} instance describing execution parameters and a \texttt{TestExecutor} instance responsible for running individual test cases. For each test case, \texttt{CodeRunner} delegates execution to the executor and collects the results.
+
+    \item \textbf{TestConfig}: 
+    The \texttt{TestConfig} class stores configuration data for the testing session, including the test data directory, test file name, timeout limit (milliseconds), and memory limit (MB). This configuration is used by both \texttt{CodeRunner} and \texttt{TimedExecutor} during execution.
+
+    \item \textbf{TestResult \& TestResultStatus}: 
+    The \texttt{TestResult} class aggregates the outcomes of all executed test cases. For each case, it records the test index, execution duration, memory usage, status code, and any raised exceptions. The \texttt{TestResultStatus} enumeration defines possible outcomes such as \texttt{PASSED}, \texttt{FAILED}, \texttt{TIMEOUT}, \texttt{STACK\_OVERFLOW}, and \texttt{RUNTIME\_ERROR}.
+
+    \item \textbf{Solution}: 
+    The \texttt{Solution} class represents the user submission and provides a single entry point, \texttt{solve(args)}, which is executed by the \texttt{TestExecutor} for each test case after deserialization.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \rotatebox{90}{\includegraphics[width=0.9\textheight]{Contents/Chapter 3/Code Runner/code_runner_diagram.pdf}}
+\vspace{0.6cm}
+    \caption{Code Runner Class Diagram}
+\end{figure}
+
 \subsection{Testcase Format}
 Each problem in the Online Judging System is accompanied by a test case file, named \textit{problem\_slug.csv}. This file defines a structured list of input–output test pairs used by the Test Runner of Worker Service to evaluate user submissions automatically.Moderators or superadmin upload this file when creating or updating a problem. The judging system parses the CSV, runs user code against each test case, and compares the output with the expected result.
 
@@ -49,6 +72,6 @@ list(type) & A collection of elements of a specified type (e.g., list(int)). \\ 
 \end{tabular}
 \caption{Data Types for Testcase Fields}
 \end{table}
-Each problem’s test case file will contain both type definitions for input, expected output and test data. The first line of the file specifies the data types for all inputs and outputs, helping the Test Runner correctly parse and validate values before running tests.
+Each problem’s test case file will contain both type definitions for input, expected output and test data. The first line of the file specifies the data types for all inputs and outputs, helping the Code Runner correctly parse and validate values before running tests.
 
 After executing all test cases for a user’s submission, the Test Runner generates a structured JSON result file summarizing the outcomes of each test. This file serves as the standardized output for the judging system and can be used by other services (such as the Result Service or API Gateway) to record, display, or analyze user performance. The JSON format ensures that results are machine-readable, language-independent, and easy to integrate into the overall online judging pipeline. The exported JSON file contains both metadata (e.g., problem name, language, execution status) and detailed per-test results (e.g., input, output, expected result, duration, and status).
