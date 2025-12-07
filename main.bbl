@@ -1,9 +1,81 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
-\bibitem{atlassian_microservices_vs_monolith}
-{Atlassian}.
-\newblock Microservices vs monolith.
-\newblock \url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}, n.d.
+\bibitem{lambdatest_web_application_developement}
+{Nazneen Ahmad}.
+\newblock Web application development: A detail guide with best practices.
+\newblock \url{https://www.lambdatest.com/learning-hub/web-application-development}, 2025.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{client_side_vs_server_side}
+{Nefe Emadamerho-Atori}.
+\newblock Client-side rendering (csr) vs. server-side rendering (ssr).
+\newblock \url{https://prismic.io/blog/client-side-vs-server-side-rendering}, 2024.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{angularJS}
+{AngularJS}.
+\newblock Official website.
+\newblock \url{https://angularjs.org/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{ReactJS}
+{ReactJS}.
+\newblock Official website.
+\newblock \url{https://react.dev/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{VueJS}
+{VueJS}.
+\newblock Official website.
+\newblock \url{https://vuejs.org/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{asp_net}
+{ASP.NET}.
+\newblock Official website.
+\newblock \url{https://dotnet.microsoft.com/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{nestJS}
+{NestJS}.
+\newblock Official website.
+\newblock \url{https://nestjs.com/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{spring_boot}
+{Spring Boot}.
+\newblock Official website.
+\newblock \url{https://spring.io/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{mysql}
+{MySQL}.
+\newblock Official website.
+\newblock \url{https://www.mysql.com/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{postgresql}
+{PostgreSQL}.
+\newblock Official website.
+\newblock \url{https://www.postgresql.org/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{mongodb}
+{MongoDB}.
+\newblock Official website.
+\newblock \url{https://www.mongodb.com/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{cassandra}
+{Cassandra}.
+\newblock Official website.
+\newblock \url{https://cassandra.apache.org/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{proofpoint_sandbox}
+{Proofpoint, Inc.}
+\newblock What is a sandbox?
+\newblock \url{https://www.proofpoint.com/us/threat-reference/sandbox}, n.d.
 \newblock Accessed: 2025-12-02.
 
 \bibitem{firecracker2025}
@@ -12,10 +84,10 @@
 \newblock \url{https://firecracker-microvm.github.io/}, 2025.
 \newblock Accessed: 2025-12-02.
 
-\bibitem{proofpoint_sandbox}
-{Proofpoint, Inc.}
-\newblock What is a sandbox?
-\newblock \url{https://www.proofpoint.com/us/threat-reference/sandbox}, n.d.
+\bibitem{atlassian_microservices_vs_monolith}
+{Atlassian}.
+\newblock Microservices vs monolith.
+\newblock \url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}, n.d.
 \newblock Accessed: 2025-12-02.
 
 \end{thebibliography}

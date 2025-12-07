@@ -1,0 +1,329 @@
+\section{ Web application development}
+
+\textbf{\large Web Application Development}
+
+The rapid evolution of technology has significantly increased the demand for web applications across various industries. A web application is a software program that is hosted on a remote server and delivered to users via the Internet. Unlike traditional desktop applications which is installed locally on a device, web applications are accessible through web browsers such as Google Chrome, Safari, Microsoft Edge, and others. Depending on the purpose and scale, web applications can range from simple tools, like a to-do list application, to a more complex and robust systems such as online coding platforms or enterprise resource management systems.\cite{lambdatest_web_application_developement}\\
+
+\textbf{\large Components of Web Applications}
+
+Most web applications are composed of two primary components: frontend and backend.
+
+\begin{enumerate}
+    \item \textbf{Frontend Development}\\
+    The frontend, also known as the client-side, refers to the part of the application that interacts directly with users. JavaScript is the predominant programming language for frontend development. At a basic level, developers use HTML, CSS, and JavaScript to build interactive pages. For applications at a larger scale, frameworks like AngularJS, ReactJS, or VueJS provide pre-built components and structured architectures, enabling scalable and dynamic user interfaces.
+
+    \item \textbf{Backend Development}\\
+    The backend, or server-side, handles business logic, database operations, authentication, and server communication. Popular technologies for backend development include Node.js, ASP.NET, Golang, Python (with Django or Flask), and Ruby on Rails. The backend is responsible for processing client requests, interacting with databases, and returning responses to the frontend.
+\end{enumerate}
+
+\vspace{1.5em}
+
+\textbf{\large Rendering Approaches}
+
+Rendering is a crucial aspect of web application development, determining how content is delivered and displayed to users. There are two primary rendering strategies: Client-Side Rendering (CSR) and Server-Side Rendering (SSR).
+
+In CSR, the server sends a minimal HTML document along with JavaScript bundles. The JavaScript executes in the browser to render the user interface dynamically. While CSR enables highly interactive applications and enhances user experience, it may introduce a slight delay during the initial page load, resulting in a temporary empty page. Moreover, CSR is less favorable for search engine optimization (SEO), as crawlers may not immediately access the fully rendered content.\cite{client_side_vs_server_side}
+
+In SSR, the server generates a complete HTML page before sending it to the client. This allows browsers to display fully rendered pages immediately, improving the initial user experience and SEO performance. Pre-rendered HTML is easier for search engines like Google or Bing to crawl and index, which can positively affect the website’s ranking in search results.\cite{client_side_vs_server_side}
+
+\section{Front-end development}
+
+Frontend development, also known as client-side development, focuses on creating the part of a web application that users directly interact with. It encompasses the design, layout, and interactivity of web pages, ensuring a responsive and user-friendly experience across different devices and browsers. Modern frontend development relies heavily on JavaScript as the primary programming language, complemented by HTML and CSS for structuring and styling content. Additionally, powerful frameworks and libraries such as ReactJS, AngularJS, and VueJS provide structured architectures, reusable components, and advanced features that enable developers to build dynamic, maintainable, and scalable user interfaces.
+
+\subsection{AngularJS}
+
+AngularJS is a widely used open-source JavaScript framework developed by Google, primarily designed to build dynamic and single-page web applications (SPAs). Unlike traditional web development, AngularJS allows developers to extend HTML syntax and implement rich client-side functionality in a structured and maintainable way.\cite{angularJS}
+
+One of the key strengths of AngularJS is its two-way data binding, which synchronizes the model (JavaScript objects) and the view (HTML) automatically. This reduces the amount of boilerplate code required for updating the user interface and ensures that changes in the data are immediately reflected in the view, and vice versa.
+
+AngularJS also employs a Model-View-Controller (MVC) architecture, separating the application into three interconnected components:
+\begin{itemize}
+    \item \textbf{Model}: Represents the application data and business logic.
+    \item \textbf{View}: Defines the presentation layer and user interface.
+    \item \textbf{Controller}: Acts as an intermediary between the Model and View, handling user input and manipulating the model accordingly.
+\end{itemize}
+
+Additional key technologies and features in AngularJS include:
+\begin{enumerate}
+    \item \textbf{Dependency Injection}: A design pattern that facilitates modularity, testability, and easier management of components.
+    \item \textbf{Services}: Singleton objects or functions used to organize and share code across the application.
+    \item \textbf{Routing and Navigation}: Built-in support for client-side navigation between different views without reloading the entire page.
+    \item \textbf{Directives}: Custom HTML attributes and elements that extend HTML functionality, enabling reusable components.
+\end{enumerate}
+
+Overall, AngularJS provides a comprehensive framework for building scalable, maintainable, and highly interactive web applications, making it a preferred choice for many modern frontend development projects.
+
+\subsection{ReactJS}
+
+ReactJS is a widely adopted open-source JavaScript library developed by Facebook, primarily used for building dynamic and high-performance user interfaces, especially for single-page applications (SPAs). React focuses on the view layer and provides a component-based architecture that promotes modularity and reusability.\cite{ReactJS}
+
+Key technologies and concepts in ReactJS include:
+\begin{enumerate}
+    \item \textbf{Components}: Reusable building blocks that encapsulate both UI and behavior, enabling modular development.
+    \item \textbf{JSX (JavaScript XML)}: Allows HTML-like syntax within JavaScript for clearer and more maintainable code.
+    \item \textbf{Virtual DOM}: Optimizes rendering performance by updating only the necessary parts of the actual DOM.
+    \item \textbf{State and Props}: Manage component data (state) and pass data between components (props) with a unidirectional data flow.
+    \item \textbf{Hooks}: Hooks allow functional components to use state and other React features without writing class components. 
+\end{enumerate}
+
+ReactJS provides a flexible and efficient approach to building interactive web applications, making it one of the most popular choices in modern frontend development.
+
+\subsection{VueJS}
+
+VueJS is an open-source JavaScript framework designed for building user interfaces and single-page applications (SPAs). It emphasizes a progressive approach, allowing developers to adopt its features incrementally, from enhancing existing HTML pages to developing complex applications. VueJS provides a reactive and component-based architecture that promotes modularity, maintainability, and efficient rendering.\cite{VueJS}
+
+Key technologies and concepts in VueJS include:
+\begin{enumerate}
+    \item \textbf{Reactive Data Binding}: Automatically synchronizes the data model and the view, ensuring efficient updates and reducing boilerplate code.
+    \item \textbf{Components}: Reusable building blocks that encapsulate structure, behavior, and styles, enabling modular development.
+    \item \textbf{Directives}: Special HTML attributes that provide dynamic behavior and allow developers to extend HTML functionality.
+    \item \textbf{Vue Router}: A powerful routing library that facilitates client-side navigation and enables the creation of single-page applications with multiple views.
+    \item \textbf{Vuex}: A state management library for VueJS applications, providing a centralized store for managing application state in a predictable manner.
+\end{enumerate}
+
+VueJS provides a flexible, performant, and approachable framework for building modern web applications, making it a popular choice among frontend developers.
+
+\subsection{Pros and Cons}
+
+\begin{longtable}{|l|p{6cm}|p{6cm}|}
+\caption{Frontend Technology Pros and Cons} \\
+\hline
+\textbf{Technology} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+
+\textbf{AngularJS} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Full-featured framework with built-in routing, dependency injection, and form handling.
+    \item Strong typing with TypeScript improves code maintainability.
+    \item Two-way data binding simplifies UI updates.
+\end{itemize}
+\end{minipage} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Steeper learning curve due to complex concepts and TypeScript requirement.
+    \item Verbose syntax and larger bundle size can affect performance.
+\end{itemize}
+\end{minipage} \\
+\hline
+
+\textbf{ReactJS} & 
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Component-based architecture promotes modularity and reusability.
+    \item Virtual DOM improves rendering performance.
+    \item Large ecosystem and community support.
+    \item Easy integration with other libraries and existing projects.
+\end{itemize}
+\end{minipage} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Only handles the view layer, requires additional libraries for full MVC structure.
+    \item Learning curve for state management libraries like Redux.
+\end{itemize}
+\end{minipage} \\
+\hline
+
+\textbf{VueJS} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Lightweight and flexible framework.
+    \item Easy to learn and integrate into existing projects.
+    \item Reactive data binding and component-based architecture.
+    \item Clear and concise syntax.
+\end{itemize}
+\end{minipage} &
+\begin{minipage}[t]{\linewidth}
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Smaller ecosystem and fewer enterprise-scale resources compared to React or Angular.
+    \item Community-driven plugins may vary in quality.
+\end{itemize}
+\end{minipage} \\
+\hline
+
+\end{longtable}
+
+
+In the context of CodeRank, ReactJS was selected as the frontend framework primarily because it provides a balanced combination of performance, flexibility, and a mature ecosystem. While AngularJS offers a comprehensive framework with built-in features such as routing, dependency injection, and two-way data binding, it comes with a steeper learning curve, verbose syntax, and larger bundle sizes, which can impact development speed and performance for the Coderank online platform. On the other hand, VueJS is lightweight and easy to learn, but its smaller ecosystem and limited enterprise-scale resources could pose challenges for long-term scalability and integration with third-party libraries. ReactJS, with its component-based architecture, Virtual DOM optimization, and extensive community support, enables modular, maintainable, and high-performance development. Moreover, React is one of the leading frontend technologies with a vast and active community, providing a wide range of tools, libraries, and resources that facilitate rapid development, integration, and problem-solving. Its flexibility and robust ecosystem make ReactJS the most suitable choice for building a dynamic, interactive, and scalable web application in this project.
+
+\section{Back-end development}
+
+Backend development, or server-side development, involves the implementation of business logic, data processing, and communication between the client and the server. It is responsible for handling database operations, authentication, authorization, and the overall functionality of the application behind the scenes. Backend frameworks such as NestJS, Spring Boot, and ASP.NET Core provide structured and scalable solutions, offering modular architectures, dependency injection, and extensive integration with databases and third-party services. By leveraging these frameworks, developers can create high-performance, maintainable, and enterprise-grade applications capable of supporting complex business requirements and large user bases.
+
+\subsection{ASP.NET Core}
+
+ASP.NET Core is a modern, open-source, and cross-platform web framework developed by Microsoft for building high-performance, secure, and scalable server-side applications. Running on the .NET runtime, ASP.NET Core provides a unified platform for developing web APIs, MVC applications, and microservices with consistent architecture and tooling. It emphasizes modularity, flexibility, and maintainability, allowing developers to structure large-scale applications efficiently.\cite{asp_net}
+
+ASP.NET Core includes an integrated dependency injection system, middleware pipeline for request handling, and a comprehensive set of libraries for authentication, authorization, and security. It supports multiple architectural patterns, including MVC, Razor Pages, and minimal APIs, enabling developers to choose the most suitable approach for their project requirements. With built-in support for Entity Framework Core, ASP.NET Core simplifies database interactions and object-relational mapping, while its cross-platform capabilities ensure applications can be deployed on Windows, Linux, or macOS environments.  
+
+Additionally, ASP.NET Core facilitates the development of microservices and cloud-native applications, with seamless integration to modern tools such as Docker, Kubernetes, and Azure services. Its extensive tooling ecosystem, combined with a large and active community, ensures rapid development, debugging, and deployment of enterprise-grade applications.
+
+\subsection{NestJS}
+
+NestJS is a progressive and extensible Node.js framework designed for building efficient, scalable, and maintainable server-side applications. It is developed with TypeScript and takes full advantage of modern JavaScript features, enabling developers to write clean, type-safe, and highly modular code. NestJS follows an opinionated architectural pattern inspired by Angular, incorporating concepts such as modules, controllers, services, and dependency injection, which promote separation of concerns and testable code. While Node.js provides the runtime environment and handles non-blocking, event-driven I/O operations, NestJS adds a structured framework that simplifies the development of enterprise-grade backend applications.\cite{nestJS}
+
+Key features of NestJS include a modular architecture for organized and reusable code, a robust dependency injection system for managing service lifecycles, seamless integration with popular libraries such as TypeORM or Mongoose for database access, and compatibility with Express or Fastify as the underlying HTTP server. Furthermore, NestJS supports the development of microservices and real-time applications using WebSockets or gRPC, making it a versatile choice for projects requiring high performance, scalability, and maintainability.
+
+\subsection{Spring Boot}
+
+Spring Boot is a Java-based, open-source framework built on top of the Spring ecosystem, designed to simplify the creation of production-ready, stand-alone, and enterprise-grade server-side applications. Running on the Java Virtual Machine (JVM), Spring Boot abstracts complex configurations and provides a convention-over-configuration approach, enabling developers to focus on application logic rather than boilerplate setup.\cite{spring_boot}
+
+It integrates seamlessly with the broader Spring ecosystem, including Spring Data for simplified database access, Spring Security for authentication and authorization, and Spring Cloud for building microservices with distributed configuration, service discovery, and fault tolerance. Spring Boot features an embedded server, such as Tomcat or Jetty, for easy deployment, and includes production-ready capabilities like health checks, metrics, and logging out-of-the-box.  
+
+Key strengths of Spring Boot include its modular architecture, support for microservices, automatic dependency management, and extensive integration with enterprise-grade tools and libraries. These features make Spring Boot a robust and scalable framework for developing complex backend systems, RESTful APIs, and large-scale applications that require maintainability, high performance, and long-term support.
+
+\subsection{Backend Technology Pros and Cons}
+
+\begin{longtable}{|l|p{6cm}|p{6cm}|}
+\caption{Backend Technology Pros and Cons} \\
+\hline
+\textbf{Framework} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+
+\textbf{ASP.NET Core} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item High performance: Kestrel server ensures top-tier backend performance.
+    \item Modern C\# language: Offers flexibility, modern features (LINQ, async/await, Record Types), and strong enterprise orientation.
+    \item Cross-platform development: Fully open-source and runs on Windows, Linux, and macOS.
+\end{itemize} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Legacy perception: Some still associate it with Windows-only or Microsoft-only ecosystem.
+    \item External library ecosystem: Although improved, third-party libraries are less diverse than Java or Node.js ecosystems.
+\end{itemize} \\
+\hline
+
+\textbf{NestJS} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Modern architecture: Applies well-established design patterns and principles (Dependency Injection, Modules), facilitating organized and maintainable code.
+    \item TypeScript support: Provides static typing, allowing early error detection and better maintainability for large-scale projects.
+    \item Rapid development: Integrated CLI streamlines project setup and accelerates development.
+    \item High I/O performance: Non-blocking I/O model of Node.js suits real-time and I/O-intensive applications.
+\end{itemize} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Node.js dependency: Single-threaded by default, which may be less efficient for CPU-intensive tasks.
+    \item Enterprise maturity: Node.js ecosystem, while large, may have fewer enterprise-grade solutions compared to Java/Spring or .NET.
+\end{itemize} \\
+\hline
+
+\textbf{Spring Boot} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Industry standard: Widely adopted for enterprise applications and microservices architecture.
+    \item Mature ecosystem: Offers numerous modules (Spring Data, Spring Security, Spring Cloud) covering a wide range of backend needs.
+    \item High performance and scalability: JVM with optimized garbage collection delivers strong CPU performance.
+    \item Excellent support: Extensive documentation and community support for enterprise projects.
+\end{itemize} &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+    \item Slower startup: Traditional Spring Boot applications may have longer initialization times due to IoC container setup.
+    \item Resource consumption: JVM-based applications generally require more RAM memory.
+    \item Verbose syntax: Java code can be more verbose and less expressive than C\# or TypeScript.
+\end{itemize} \\
+\hline
+
+\end{longtable}
+
+
+In this project, NestJS was chosen as the backend framework primarily because it provides a structured and scalable architecture while leveraging the same language used in frontend development—JavaScript/TypeScript. This alignment allows the development team to maintain consistency across the full stack, reduce context switching, and promote code reusability. While Spring Boot and ASP.NET Core are mature frameworks with strong enterprise support, they require knowledge of Java and C\# respectively, which introduces additional complexity for a team primarily working with JavaScript. NestJS, with its modular design, built-in dependency injection, and seamless integration with the Node.js ecosystem, enables efficient development of high-performance, maintainable, and scalable server-side applications. Furthermore, NestJS supports microservices, WebSockets, and real-time features, making it a versatile choice for the dynamic and interactive requirements of the Coderank online platform.
+
+\section{Database}
+
+Databases are a critical component of web applications, providing a structured way to store, retrieve, and manage data. There are several types of databases used in web development, each with its own strengths and use cases.
+
+\subsection{Relational Databases}
+
+Relational databases, such as MySQL and PostgreSQL, organize data into tables with predefined schemas. They use Structured Query Language (SQL) for data manipulation and are known for their ACID (Atomicity, Consistency, Isolation, Durability) properties, ensuring reliable transactions. Relational databases are ideal for applications with complex queries and relationships between data entities.\\
+
+\textbf{\large MySQL}
+
+MySQL is a widely adopted relational database management system known for its high performance, ease of use, and strong community support. It follows a traditional SQL-based approach and is optimized for read-heavy workloads, making it suitable for web applications, content management systems, and e-commerce platforms. MySQL provides efficient indexing, replication capabilities, and supports various storage engines—most notably InnoDB, which offers ACID compliance and foreign-key constraints. Although MySQL handles standard SQL operations effectively, it has more limited support for advanced features such as complex joins, window functions (in earlier versions), and full transactional consistency across certain operations.\cite{mysql} \\
+
+\textbf{\large PostgreSQL}
+
+PostgreSQL is an advanced, open-source relational database system distinguished by its strong emphasis on standards compliance, extensibility, and robustness. It supports sophisticated SQL features, including window functions, common table expressions (CTEs), full-text search, and advanced indexing methods such as GiST and GIN. PostgreSQL is highly suitable for applications requiring complex queries, strict data integrity, and transactional reliability. Additionally, its extensible architecture allows developers to define custom data types, operators, and functions, making it a popular choice for enterprise systems, analytical workloads, and applications requiring both relational and semi-structured data handling (e.g., via its powerful JSONB support).\cite{postgresql}
+
+\subsection{NoSQL Databases}
+
+NoSQL databases, like MongoDB and Cassandra, offer a more flexible schema design, allowing for unstructured or semi-structured data storage. They are designed to scale horizontally, making them suitable for handling large volumes of data and high-velocity workloads. NoSQL databases are commonly used in applications requiring rapid development and iteration, such as content management systems and real-time analytics.\\
+
+\textbf{\large MongoDB}
+
+MongoDB is a document-oriented NoSQL database that stores data in flexible JSON-like documents, allowing developers to handle unstructured and semi-structured data with ease. Its dynamic schema makes it highly suitable for agile development, where data models evolve frequently. MongoDB supports rich querying capabilities, indexing, aggregation pipelines, and geospatial operations, enabling both transactional and analytical use cases. Additionally, its built-in horizontal scaling through sharding allows the system to handle massive datasets and high read/write throughput efficiently. MongoDB is often preferred for applications such as content management platforms, user-generated content systems, mobile backends, and event-driven architectures.\cite{mongodb} \\
+
+\textbf{\large Cassandra}
+
+Cassandra is a highly scalable, distributed NoSQL database designed for handling large volumes of data across multiple commodity servers. It employs a wide-column store model, allowing for flexible schema design and efficient storage of sparse data. Cassandra's architecture is built for high availability and fault tolerance, with no single point of failure, making it ideal for applications requiring continuous uptime and resilience. It uses a peer-to-peer distributed system and supports eventual consistency, which allows for high write throughput and low latency reads. Cassandra is particularly well-suited for use cases such as real-time analytics, IoT data management, recommendation engines, and large-scale messaging systems.\cite{cassandra}
+
+\subsection{Database Technology Pros and Cons}
+
+\newpage
+
+\begin{longtable}{|p{3cm}|p{6cm}|p{6cm}|}
+\caption{Database Technology Pros and Cons} \\
+\hline
+\textbf{Database} & \textbf{Pros} & \textbf{Cons} \\
+\hline
+
+MySQL &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Very widely used, strong community \& ecosystem.
+  \item High performance for read-heavy workloads.
+  \item Mature, stable, easy to integrate with many platforms
+  \item Free and open-source (core version).
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Limited advanced SQL features compared to PostgreSQL.
+  \item Handles concurrent writes less efficiently.
+  \item Not ideal for very complex queries.
+\end{itemize}
+\\ \hline
+
+PostgreSQL &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Full ACID compliance and advanced SQL features.
+  \item Highly extensible (custom types, functions, etc.).
+  \item Strong concurrency control for write-heavy applications.
+  \item Fully open-source without proprietary licensing.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Slightly slower for simple read-heavy workloads.
+  \item More resource-intensive; requires tuning.
+  \item More complex to set up and manage.
+\end{itemize}
+\\ \hline
+
+MongoDB &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Flexible schema; great for unstructured/semi-structured data.
+  \item Horizontally scalable; built-in sharding.
+  \item JSON-like documents (developer-friendly).
+  \item High performance for real-time apps \& analytics.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Weaker ACID guarantees; multi-document transactions are limited.
+  \item Easier to create inconsistent data if schema is not managed well.
+  \item Memory-heavy for large datasets.
+\end{itemize}
+\\ \hline
+
+Cassandra &
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Highly scalable for very large datasets.
+  \item Designed for high availability and fault tolerance.
+  \item Excellent write performance for heavy workloads.
+  \item Supports flexible schema with column-family model.
+  \item Distributed architecture with no single point of failure.
+\end{itemize}
+&
+\begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+  \item Not fully ACID compliant; eventual consistency model.
+  \item Complex to query compared to SQL databases.
+  \item Limited support for joins and aggregations.
+  \item Requires careful schema design for performance.
+\end{itemize}
+\\ \hline
+
+\end{longtable}
+
+Based on the comparison of popular database systems, PostgreSQL was chosen for the CodeRank project due to its strong support for ACID-compliant transactions and advanced SQL features, ensuring data consistency and integrity across user records, scores, and activity history. Its high extensibility, including support for custom data types and functions, allows the implementation of complex logic such as ranking algorithms and analytics. Additionally, PostgreSQL offers robust concurrency control, making it well-suited for our online coding platform with multiple simultaneous users. Although it requires more resources and careful configuration than simpler databases, PostgreSQL is stable with multiple useful features, which makes it an optimal choice for building database for CodeRank that can grow and stay reliable.
