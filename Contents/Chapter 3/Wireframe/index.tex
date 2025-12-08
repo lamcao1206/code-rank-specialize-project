@@ -127,3 +127,45 @@ After logging in as a Moderator/Admin, the user will be directed to the Moderato
     \vspace{0.6cm}
     \caption{Moderator Dashboard}
 \end{figure}
+
+Moderators/Admins can manage problem create requests submitted by another Moderator by navigating to the Problems sidebar, where a list of all problem requests is displayed along with their Difficulty level, color-coded for quick reference (Easy, Medium, Hard). In addition, this list is paginated, showing 10 items per page to ensure clear and efficient navigation.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Wireframe/Admin/Problem_request_list.png}
+    \vspace{0.6cm}
+    \caption{Problem Request List}
+\end{figure}
+
+
+A “Create Problem” button is positioned at the top-right corner of the interface, allowing users to quickly submit a new problem request. When this button is clicked, a creation modal appears centered on the screen, enabling Moderators/Admins to input all necessary details, in which user is required to fill in fields such as Problem Name, Difficulty level, Topic, and any other relevant information needed to define the problem.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Wireframe/Admin/Problem_request_modal.png}
+    \vspace{0.6cm}
+    \caption{Problem Request Create Modal}
+\end{figure}
+
+Users can also review any problem request by clicking on its corresponding row, which navigates them to the detailed view of that request. This page displays the full information of the problem request. All Moderators can view these details, but only Admins have permission to take action. At the bottom of the page, Admins can choose to Approve or Deny the request via two dedicated buttons.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Wireframe/Admin/Problem_detail_1.png}
+    \vspace{0.6cm}
+    \caption{Problem Request Detail \#1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Wireframe/Admin/Problem_detail_2.png}
+    \vspace{0.6cm}
+    \caption{Problem Request Detail \#2}
+\end{figure}
+
+If an Admin selects Deny, a confirmation modal appears, requiring them to provide a mandatory explanation for the denial before the action can be confirmed.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Wireframe/Admin/Problem_confirm_modal.png}
+    \vspace{0.6cm}
+    \caption{Problem Request Confirm Modal}
+\end{figure}
+
