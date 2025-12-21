@@ -1,0 +1,38 @@
+\section{Ranking System}
+
+The ranking system is a core component of the platform, designed to motivate users, reflect individual learning progress, and encourage healthy competition among participants. It provides a transparent and consistent mechanism for evaluating user performance based on problem-solving activities.
+
+\subsection*{Overall Ranking Mechanism}
+
+The platform maintains a global leaderboard that ranks all registered users based on their accumulated points obtained from solving programming problems. This leaderboard is dynamic and reflects the relative standing of users across the entire system. To balance data freshness and system performance, the displayed ranking is updated periodically rather than in real time.
+
+A background scheduling mechanism is implemented using a cron job that runs continuously 24/7. Every 30 minutes, the cron job retrieves the latest submission data of all users, recalculates their total scores, and updates the global leaderboard accordingly. This approach prevents excessive real-time updates that could lead to unnecessary resource consumption while still ensuring that the ranking remains sufficiently up to date for competitive and learning purposes.
+
+Although the public leaderboard is updated at fixed intervals, each user can always view their exact and up-to-date official rank and total score in their personal profile. This ensures transparency and allows users to accurately track their own progress regardless of the leaderboard refresh cycle.
+
+\subsection*{Point Allocation per Problem}
+
+Points are awarded based on the difficulty level of each problem. The platform categorizes problems into three difficulty levels, each associated with a predefined base score:
+\begin{itemize}
+    \item \textbf{Easy}: 100 points
+    \item \textbf{Medium}: 150 points
+    \item \textbf{Hard}: 200 points
+\end{itemize}
+
+This scoring scheme encourages users to challenge themselves with more complex problems while still recognizing achievements at all difficulty levels.
+
+\subsection*{Penalty for Failed Submissions}
+
+To promote code quality and thoughtful problem-solving, the system applies a penalty for unsuccessful submissions. A submission is considered failed if it does not pass all predefined test cases. For each failed submission attempt, a penalty of 10 points is deducted from the base score of the corresponding problem.
+
+If the total penalty incurred from failed submissions exceeds the base score of the problem, the final score awarded for that problem is capped at 0 points. Negative scores are not applied. This mechanism discourages excessive trial-and-error submissions while still allowing users to continue practicing without additional penalties once the minimum score is reached.
+
+\subsection*{First Successful Submission Policy}
+
+Points are awarded only for the first successful submission of a problem, defined as the first submission that passes all test cases. Any subsequent successful submissions for the same problem are treated strictly as practice attempts and do not contribute additional points to the user’s total score.
+
+This policy ensures fairness in the ranking system and prevents users from inflating their scores by repeatedly submitting solutions to the same problem. It also emphasizes learning progression through solving new problems rather than optimizing repeated submissions for ranking purposes.
+
+\subsection*{Summary}
+
+In summary, the ranking system combines a difficulty-based scoring model, penalties for failed submissions, and a periodic leaderboard update mechanism to provide a fair, efficient, and motivating evaluation framework. By separating real-time personal progress tracking from scheduled public leaderboard updates, the system achieves a balance between accuracy, performance efficiency, and user engagement.

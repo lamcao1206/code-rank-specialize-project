@@ -1,10 +1,9 @@
 \section{Web application development}
 
-\textbf{\large Web Application Development}
+\subsection*{Web Application Development}
 
 The rapid evolution of technology has significantly increased the demand for web applications across various industries. A web application is a software program that is hosted on a remote server and delivered to users via the Internet. Unlike traditional desktop applications which is installed locally on a device, web applications are accessible through web browsers such as Google Chrome, Safari, Microsoft Edge, and others. Depending on the purpose and scale, web applications can range from simple tools, like a to-do list application, to a more complex and robust systems such as online coding platforms or enterprise resource management systems.\cite{lambdatest_web_application_developement}\\
-
-\textbf{\large Components of Web Applications}
+\subsection*{Components of Web Applications}
 
 Most web applications are composed of two primary components: frontend and backend.
 
@@ -17,8 +16,7 @@ Most web applications are composed of two primary components: frontend and backe
 \end{enumerate}
 
 \vspace{1.5em}
-
-\textbf{\large Rendering Approaches}
+\subsection*{Rendering Approaches}
 
 Rendering is a crucial aspect of web application development, determining how content is delivered and displayed to users. There are two primary rendering strategies: Client-Side Rendering (CSR) and Server-Side Rendering (SSR).
 
@@ -85,6 +83,8 @@ VueJS provides a flexible, performant, and approachable framework for building m
 
 \subsection{Pros and Cons}
 
+\clearpage
+
 \begin{longtable}{|l|p{6cm}|p{6cm}|}
 \caption{Frontend Technology Pros and Cons} \\
 \hline
@@ -143,6 +143,7 @@ VueJS provides a flexible, performant, and approachable framework for building m
 
 \end{longtable}
 
+\FloatBarrier
 
 In the context of CodeRank, ReactJS was selected as the frontend framework primarily because it provides a balanced combination of performance, flexibility, and a mature ecosystem. While AngularJS offers a comprehensive framework with built-in features such as routing, dependency injection, and two-way data binding, it comes with a steeper learning curve, verbose syntax, and larger bundle sizes, which can impact development speed and performance for the Coderank online platform. On the other hand, VueJS is lightweight and easy to learn, but its smaller ecosystem and limited enterprise-scale resources could pose challenges for long-term scalability and integration with third-party libraries. ReactJS, with its component-based architecture, Virtual DOM optimization, and extensive community support, enables modular, maintainable, and high-performance development. Moreover, React is one of the leading frontend technologies with a vast and active community, providing a wide range of tools, libraries, and resources that facilitate rapid development, integration, and problem-solving. Its flexibility and robust ecosystem make ReactJS the most suitable choice for building a dynamic, interactive, and scalable web application in this project.
 
@@ -173,6 +174,8 @@ It integrates seamlessly with the broader Spring ecosystem, including Spring Dat
 Key strengths of Spring Boot include its modular architecture, support for microservices, automatic dependency management, and extensive integration with enterprise-grade tools and libraries. These features make Spring Boot a robust and scalable framework for developing complex backend systems, RESTful APIs, and large-scale applications that require maintainability, high performance, and long-term support.
 
 \subsection{Backend Technology Pros and Cons}
+
+\clearpage 
 
 \begin{longtable}{|l|p{6cm}|p{6cm}|}
 \caption{Backend Technology Pros and Cons} \\
@@ -232,11 +235,11 @@ Databases are a critical component of web applications, providing a structured w
 
 Relational databases, such as MySQL and PostgreSQL, organize data into tables with predefined schemas. They use Structured Query Language (SQL) for data manipulation and are known for their ACID (Atomicity, Consistency, Isolation, Durability) properties, ensuring reliable transactions. Relational databases are ideal for applications with complex queries and relationships between data entities.\\
 
-\textbf{\large MySQL}
+\subsection*{MySQL}
 
 MySQL is a widely adopted relational database management system known for its high performance, ease of use, and strong community support. It follows a traditional SQL-based approach and is optimized for read-heavy workloads, making it suitable for web applications, content management systems, and e-commerce platforms. MySQL provides efficient indexing, replication capabilities, and supports various storage engines—most notably InnoDB, which offers ACID compliance and foreign-key constraints. Although MySQL handles standard SQL operations effectively, it has more limited support for advanced features such as complex joins, window functions (in earlier versions), and full transactional consistency across certain operations.\cite{mysql} \\
 
-\textbf{\large PostgreSQL}
+\subsection*{PostgreSQL}
 
 PostgreSQL is an advanced, open-source relational database system distinguished by its strong emphasis on standards compliance, extensibility, and robustness. It supports sophisticated SQL features, including window functions, common table expressions (CTEs), full-text search, and advanced indexing methods such as GiST and GIN. PostgreSQL is highly suitable for applications requiring complex queries, strict data integrity, and transactional reliability. Additionally, its extensible architecture allows developers to define custom data types, operators, and functions, making it a popular choice for enterprise systems, analytical workloads, and applications requiring both relational and semi-structured data handling (e.g., via its powerful JSONB support).\cite{postgresql}
 
@@ -244,11 +247,11 @@ PostgreSQL is an advanced, open-source relational database system distinguished 
 
 NoSQL databases, like MongoDB and Cassandra, offer a more flexible schema design, allowing for unstructured or semi-structured data storage. They are designed to scale horizontally, making them suitable for handling large volumes of data and high-velocity workloads. NoSQL databases are commonly used in applications requiring rapid development and iteration, such as content management systems and real-time analytics.\\
 
-\textbf{\large MongoDB}
+\subsection*{MongoDB}
 
 MongoDB is a document-oriented NoSQL database that stores data in flexible JSON-like documents, allowing developers to handle unstructured and semi-structured data with ease. Its dynamic schema makes it highly suitable for agile development, where data models evolve frequently. MongoDB supports rich querying capabilities, indexing, aggregation pipelines, and geospatial operations, enabling both transactional and analytical use cases. Additionally, its built-in horizontal scaling through sharding allows the system to handle massive datasets and high read/write throughput efficiently. MongoDB is often preferred for applications such as content management platforms, user-generated content systems, mobile backends, and event-driven architectures.\cite{mongodb} \\
 
-\textbf{\large Cassandra}
+\subsection*{Cassandra}
 
 Cassandra is a highly scalable, distributed NoSQL database designed for handling large volumes of data across multiple commodity servers. It employs a wide-column store model, allowing for flexible schema design and efficient storage of sparse data. Cassandra's architecture is built for high availability and fault tolerance, with no single point of failure, making it ideal for applications requiring continuous uptime and resilience. It uses a peer-to-peer distributed system and supports eventual consistency, which allows for high write throughput and low latency reads. Cassandra is particularly well-suited for use cases such as real-time analytics, IoT data management, recommendation engines, and large-scale messaging systems.\cite{cassandra}
 
