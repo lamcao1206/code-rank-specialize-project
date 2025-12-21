@@ -1,15 +1,70 @@
-\section{Code Runner}
-\subsection{Overview}
+\section{Submission Evaluation}
+
+\subsection{Submission Service}
+\subsubsection{Overview}
+Submission Service is the a core backend component responsible for managing the lifecycle of user submissions, from initial reception to execution orchestration and result collection. It acts as an intermediary between the API Server and the execution infrastructure, ensuring that all submitted code is processed securely, efficiently, and in isolation.
+
+When a user submits a solution through the Web Client, the request is first handled by the API Server and forwarded to the Submission Service. The service validates the submission metadata, including the programming language, problem identifier, and execution constraints. After validation, the submission is serialized and enqueued into a message queue, allowing asynchronous and scalable processing by worker services.
+
+This queue-based architecture decouples submission handling from execution, improving system reliability under high load and preventing execution delays from affecting user-facing services.
+
+\subsubsection{Execution Orchestration and Container Control}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/code_runner_service_flow.pdf}
+    \vspace{0.6cm}
+    \caption{Overall execution flow for submission}
+\end{figure}
+
+The Submission Service is responsible for orchestrating the execution of user-submitted code within sandboxed Docker containers. Instead of executing code directly on the host system, all runtime operations are delegated to controlled containers instantiated from predefined, language-specific Docker images.
+
+Upon initialization, the Submission Service proactively creates a fixed number of idle container instances for each supported programming language and stores them in a managed container pool. In the proposed system, the pool is initialized with \textbf{five container instances per language}. These pre-initialized containers remain in a ready state, allowing the system to handle incoming submissions with minimal startup latency.
+
+For each submission, the Submission Service performs the following actions:
+
+\begin{itemize}
+\item Selects an appropriate Docker image based on the submission’s programming language.
+\item Attempts to acquire an idle container instance from the corresponding language-specific container pool.
+\item If an idle container is available, assigns it to the submission; otherwise, dynamically creates a new container instance to handle the request.
+\item Injects the user’s solution file into an isolated workspace mounted inside the container.
+\item Applies strict execution constraints, including CPU time, memory usage, and process limits.
+\item Triggers the Code Runner inside the container to execute the submission against predefined test cases.
+\end{itemize}
+
+After execution completes, the container produces a structured JSON result file and is returned to the pool after workspace cleanup, or destroyed if pool capacity thresholds are exceeded. This pooling mechanism enables efficient reuse of execution environments while maintaining strong isolation guarantees between submissions.
+
+\subsubsection{Security Enforcement and Attack Mitigation}
+
+Security enforcement in the submission evaluation pipeline is achieved through a clear separation of responsibilities between system components. Docker containers used for code execution are managed exclusively by the \textbf{Submission Service}, which acts as the sole authority for container creation, allocation, and lifecycle management. User-facing components and external clients have no direct access to the container runtime.
+
+By centralizing container control within the Submission Service, the system ensures that untrusted user code is executed only within strictly confined sandbox environments. All containers are launched with restricted privileges, isolated file systems, and predefined resource limits. This design prevents user submissions from interacting with the host operating system or with other concurrent executions.
+
+Common attack vectors targeting CodeRank platforms are mitigated as follows:
+
+\begin{itemize}
+\item \textbf{Resource exhaustion attacks}: CPU time, memory usage, and process count are constrained at the container level, preventing infinite loops and fork bombs from degrading system stability.
+\item \textbf{Unauthorized file system access}: Containers operate within isolated workspaces with read-only root file systems, ensuring that sensitive host files and judge infrastructure remain inaccessible.
+\item \textbf{Privilege escalation attempts}: All container processes run as non-privileged users with restricted system capabilities, reducing the risk of kernel-level attacks.
+\item \textbf{Cross-submission interference}: Containers are either destroyed or fully cleaned before reuse, preventing data leakage and persistent malicious state.
+\end{itemize}
+
+Distributed denial-of-service (DDoS) attacks are addressed at the system boundary rather than at the execution layer. The API Server applies request rate limiting, authentication checks, and input validation to regulate incoming submission traffic. By filtering excessive or malicious requests before they reach the Submission Service, the system prevents execution resources from being overwhelmed by high-volume attack patterns.
+
+This layered security approach ensures that each component enforces protections appropriate to its role: the API Server defends against external traffic-based attacks, while the Submission Service enforces strict execution isolation for untrusted code. Together, these mechanisms provide defense-in-depth for the overall CodeRank system.
+
+\subsection{Code Runner}
+\subsubsection{Overview}
 \textbf{Code Runner} Component is a core component of Submission Worker Service, responsible for executing user-submitted programs against predefined test cases. It serves as a bridge between the user’s solution and the problem’s input–output data, ensuring fair and consistent evaluation. 
 For each programming language supported by the platform (C++, Java, Python), a specific implementation of the \textbf{Code Runner} will be developed to handle language-specific compilation, execution, and output parsing. This ensures that user code is run correctly and consistently, regardless of the language chosen.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/code_runner_flow.pdf}
     \vspace{0.6cm}
-    \caption{Overall execution flow for submission}
+    \caption{Overal Code Runner participation flow}
 \end{figure}
 
-\subsection{Class diagram}
+
+\subsubsection{Class diagram}
 The CodeRunner components are structured into several key classes bellow:
 
 \begin{itemize}
@@ -45,7 +100,7 @@ The CodeRunner components are structured into several key classes bellow:
     \caption{Code Runner Class Diagram}
 \end{figure}
 
-\subsection{Testcase Format}
+\subsubsection{Testcase Format}
 Each problem in the Online Judging System is accompanied by a test case file, named \textit{problem\_slug.csv}. This file defines a structured list of input–output test pairs used by the Test Runner of Worker Service to evaluate user submissions automatically.Moderators or superadmin upload this file when creating or updating a problem. The judging system parses the CSV, runs user code against each test case, and compares the output with the expected result.
 
 To ensure accurate and consistent evaluation of user submissions, each input and output value in the \textit{problem\_slug.csv}file is associated with a data type. The type system defines how each field should be parsed, validated, and compared during the judging process.This mechanism helps the Test Framework interpret user program outputs correctly, whether they are numbers, strings, booleans, or lists. The following table describes the type.Here is the content for the "Problem Storages" section, including the table about type format:
