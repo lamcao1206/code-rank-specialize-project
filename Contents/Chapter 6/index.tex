@@ -1,0 +1,82 @@
+\chapter {Future Plan and Work Evaluation}
+\noindent
+\rule{\textwidth}{0.4pt}
+
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\textit{In Chapter 6, the authors will elucidate forthcoming plans and intentions for the
+next phase as well as evaluate the quality of the team’s efforts.}
+\end{minipage}
+\end{center}
+
+\newpage
+\section{Future Plan}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 6/gantt_chart.png}
+    \vspace{0.6cm}
+    \caption{Future Plan Gantt Chart}
+    \label{fig:gantt-chart}
+\end{figure}
+
+\noindent \textbf{Sprint 1} (12/01/2026 - 25/01/2026)
+\begin{itemize}
+    \item Database implementation.
+    \item Populate database with mock data.
+\end{itemize}
+
+\noindent \textbf{Sprint 2} (26/01/2026 - 08/02/2026)
+\begin{itemize}
+    \item Implement user authentication and Role-based access control.
+    \item Authorize API access based on user roles.
+    \item Implement CRUD APIs as well as UI for managing discussions.
+\end{itemize}
+
+\noindent \textbf{Sprint 3} (23/02/2026 - 08/03/2026)
+\begin{itemize}
+    \item Implement real-time comments and reactions for discussions.
+    \item Implement CRUD APIs as well as UI for managing problems.
+\end{itemize}
+
+\noindent \textbf{Sprint 4} (09/03/2026 - 22/03/2026)
+\begin{itemize}
+    \item Implement Sandbox Execution for problem submission.
+    \item Implement ranking system for users.
+\end{itemize}
+
+\noindent \textbf{Sprint 5} (23/03/2026 - 05/04/2026)
+\begin{itemize}
+    \item Extract and load data for chatbot training.
+    \item Implement UI for chatbot interaction.
+\end{itemize}
+
+\noindent \textbf{Sprint 6} (06/04/2026 - 19/04/2026)
+\begin{itemize}
+    \item Implement API endpoints for chatbot(Websocket)
+    \item Implement moderator page for managing discussions and problems in the platform.
+\end{itemize}
+
+\noindent \textbf{Sprint 7} (20/04/2026 - 03/05/2026)
+\begin{itemize}
+    \item Write Unit Test for all implemented features.
+    \item Perform Integration Testing.
+    \item Deploy the application to production environment.
+\end{itemize}
+
+\noindent \textbf{Sprint 8} (04/05/2026 - 17/05/2026)
+\begin{itemize}
+    \item Review the entire system for bugs and issues.
+    \item Review report and prepare for Thesis Defense Day
+\end{itemize}
+
+\section{Work Evaluation}
+
+Throughout the development process, the team has successfully implemented most of the core functionalities originally defined in the project scope. Compared to the initial project goals, the team was able to design and deliver the essential features of an online coding platform for Vietnamese students. However, the project still has some weaknesses that can be improved in the foreseeable future: 
+\begin{itemize}
+    \item Contest management has not been implemented due to its high complexity and limited development time. This module requires scheduling problems, handling time-limited submissions, calculating rankings, and managing access control, which could be addressed in future development phases.
+    \item The chatbot can respond to basic user prompts, but its capability remains limited. Currently, it relies on simple keyword matching or scripted responses and uses a short-term memory mechanism, taking only the 20 most recent messages as context. As a result, it cannot fully understand the current conversation context. In future phases, the context memory mechanism can be improved to maintain longer conversation history and handle multi-turn interactions more effectively, providing a more coherent and helpful user experience.
+    \item Limited programming language support is another limitation of the current system. At present, the platform mainly focuses on a small set of popular programming languages and does not support a wider range of modern or emerging languages, including Rust, Go(Golang), etc. Expanding language support in future versions would enhance the platform’s flexibility, better reflect current industry trends, and provide Vietnamese students with broader learning opportunities
+\end{itemize}
+
+These limitations are mainly due to the high complexity of the advanced features and the limited time and resources during development. Currently, the chatbot uses a short-term memory mechanism, considering only the 20 most recent messages as context, which prevents it from fully understanding the ongoing conversation. In future iterations, the team plans to enhance both the contest management module and the chatbot’s context memory, as well as expand the supported programming languages. This will allow the platform to handle longer conversation history, support multi-turn interactions more effectively, and provide a more comprehensive and engaging experience for Vietnamese students.
+\newpage
