@@ -1,0 +1,113 @@
+\newpage
+
+\section{System Evaluation}
+
+System evaluation is conducted to verify that the implemented system satisfies the main functional requirements and provides an acceptable level of reliability, maintainability, and user experience. For CodeRank, the evaluation focuses on three main aspects: unit testing for backend and frontend logic, code coverage analysis using the V8 coverage provider, and frontend quality evaluation using Lighthouse. These evaluation methods are selected because they cover both internal implementation correctness and external user-facing quality.
+
+\subsection{Unit Testing Strategy}
+
+Unit testing is used to validate individual modules of the system in isolation. Instead of testing the whole application through the user interface, unit tests focus on smaller software units such as services, controllers, hooks, utility functions, and data transformation logic. This approach helps detect defects early and makes the implementation more maintainable because developers can verify whether a modification breaks existing behavior.
+
+For the backend, Jest is used as the main testing framework. The backend is implemented with NestJS, and its modular structure allows domain services and controllers to be tested independently. The unit tests cover important business logic such as authentication, user management, problem management, problem request review, and submission status updates. Mock repositories and mocked service dependencies are used to isolate each unit from external systems such as the database and message broker.
+
+For the frontend, Vitest is used as the testing framework. It is suitable for Vite-based React applications and supports fast execution in a JavaScript runtime environment. Frontend unit tests focus on reusable logic, service functions, route behavior, state management, form validation, and selected UI components. Since frontend behavior often depends on API responses, mock data and mocked HTTP clients are used to test components without requiring a live backend service.
+
+The testing commands used in the project are shown below:
+
+\begin{itemize}
+    \item Backend unit testing: \texttt{npm run test}
+    \item Backend coverage testing: \texttt{npm run test:coverage}
+    \item Frontend unit testing: \texttt{npm run test}
+    \item Frontend coverage testing: \texttt{npm run test:coverage}
+\end{itemize}
+
+\subsection{V8 Coverage and Branch Coverage}
+
+Code coverage is used to measure how much of the source code is executed by the automated test suite. The project uses the V8 coverage provider for JavaScript and TypeScript tests. V8 is Google's open-source JavaScript and WebAssembly engine used by Chrome and Node.js \cite{v8docs2026}. The V8 coverage provider collects coverage information directly from the JavaScript runtime instead of requiring a separate source instrumentation step. Vitest supports native V8 coverage and notes that the V8 provider can execute source files without pre-instrumentation while still producing remapped coverage reports for source files \cite{vitest_coverage2026}.
+
+Coverage is reported using four main metrics:
+
+\begin{itemize}
+    \item Statement coverage: measures how many executable statements are executed by tests.
+    \item Line coverage: measures how many source lines are executed by tests.
+    \item Function coverage: measures how many functions are called by tests.
+    \item Branch coverage: measures how many decision paths are executed, such as \texttt{if}/\texttt{else}, conditional expressions, and switch cases.
+\end{itemize}
+
+Among these metrics, branch coverage is especially important for evaluating business logic. A function may be executed during testing, but only one branch of its decision logic may be covered. For example, a submission service may have separate paths for accepted submissions, wrong answers, runtime errors, and missing submissions. High branch coverage indicates that tests exercise more alternative paths and error cases, not only the successful path.
+
+\subsection{Unit Testing Result}
+
+The current coverage reports were generated from the existing backend and frontend test suites. Table \ref{tab:unit-test-coverage} summarizes the collected coverage results.
+
+\begin{table}[H]
+\centering
+\caption{Unit Testing Coverage Result}
+\label{tab:unit-test-coverage}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Component} & \textbf{Statements} & \textbf{Branches} & \textbf{Functions} & \textbf{Lines} \\
+\hline
+Backend & 97.85\% & 90.05\% & 98.88\% & 97.85\% \\
+\hline
+Frontend & 49.84\% & 86.63\% & 88.63\% & 49.84\% \\
+\hline
+\end{tabular}
+\end{table}
+
+The backend coverage result is high across all measured categories. Statement coverage and line coverage both reach 97.85\%, function coverage reaches 98.88\%, and branch coverage reaches 90.05\%. This indicates that most backend service logic and important decision paths are exercised by the current test suite. The high branch coverage is particularly useful for backend validation because backend modules contain many conditional paths related to authentication, authorization, request validation, and domain state transitions.
+
+The frontend result shows a different pattern. Function coverage reaches 88.63\% and branch coverage reaches 86.63\%, which indicates that many tested frontend functions and conditional paths are exercised. However, statement and line coverage are 49.84\%, showing that a significant amount of frontend source code is still not executed by the test suite. This is common in frontend projects when many pages, layout components, and UI states are implemented but not yet covered by component or integration tests. Therefore, frontend testing should be improved by adding tests for page-level components, form interactions, routing behavior, API error states, and authenticated user flows.
+
+\subsection{Frontend Evaluation Using Lighthouse}
+
+In addition to unit testing, the deployed frontend should be evaluated from the user's perspective. Lighthouse is an open-source automated tool from Chrome for improving the quality of web pages. It can audit public or authenticated pages and provides reports for performance, accessibility, best practices, SEO, and other categories \cite{lighthouse2026}. Lighthouse can be run from Chrome DevTools, the command line, PageSpeed Insights, or as part of continuous integration.
+
+For CodeRank, Lighthouse can be used to evaluate the deployed Vercel frontend after connecting it to the Google Cloud backend. The recommended evaluation pages are:
+
+\begin{itemize}
+    \item Landing or welcome page.
+    \item Login and sign-up pages.
+    \item Problem list page.
+    \item Problem detail and code editor page.
+    \item Submission detail or result page.
+    \item Moderator dashboard and problem management pages.
+\end{itemize}
+
+The evaluation should be performed using the following process:
+
+\begin{enumerate}
+    \item Deploy the frontend to Vercel and configure the production backend API URL.
+    \item Open the deployed page in Google Chrome.
+    \item Open Chrome DevTools and select the Lighthouse panel.
+    \item Select the audit categories: Performance, Accessibility, Best Practices, and SEO.
+    \item Run the audit for both desktop and mobile modes.
+    \item Record the score of each category and note the failed audits.
+    \item Apply improvements such as image optimization, code splitting, reduced unused JavaScript, semantic HTML, improved color contrast, and metadata optimization.
+    \item Re-run Lighthouse and compare the improved scores with the baseline.
+\end{enumerate}
+
+The result can be reported using a table similar to Table \ref{tab:lighthouse-template}. The values should be filled after running Lighthouse on the deployed Vercel application.
+
+\begin{table}[H]
+\centering
+\caption{Suggested Lighthouse Evaluation Result Table}
+\label{tab:lighthouse-template}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Page} & \textbf{Performance} & \textbf{Accessibility} & \textbf{Best Practices} & \textbf{SEO} \\
+\hline
+Welcome Page & -- & -- & -- & -- \\
+\hline
+Problem List Page & -- & -- & -- & -- \\
+\hline
+Problem Detail Page & -- & -- & -- & -- \\
+\hline
+Submission Result Page & -- & -- & -- & -- \\
+\hline
+Moderator Dashboard & -- & -- & -- & -- \\
+\hline
+\end{tabular}
+\end{table}
+
+The expected goal is to keep Accessibility, Best Practices, and SEO scores close to 90 or above. Performance may vary depending on network conditions, page complexity, and the size of JavaScript bundles, especially on pages that include the code editor. If the Problem Detail page receives a lower performance score, the most likely causes are the Monaco code editor bundle size, markdown rendering, and API-dependent page loading. Possible improvements include lazy-loading the editor, splitting route bundles, compressing static assets, caching API responses, and reducing unused dependencies.
