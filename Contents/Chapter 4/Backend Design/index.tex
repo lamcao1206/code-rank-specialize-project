@@ -1,0 +1,110 @@
+\section{Backend Structure}
+
+The backend is implemented in TypeScript using a modular, Domain-Driven Design (DDD) approach built on a NestJS-style module pattern. The codebase is organized to reflect clear bounded contexts, a shared kernel for cross-cutting concerns, and an internals layer for platform services and infrastructure. This separation improves maintainability, testability, and team ownership.
+
+\subsection{Architecture Overview}
+
+At the highest level, the project is split into three logical layers:
+
+\begin{enumerate}
+	\item \textbf{Domain Layer}
+	\item \textbf{Shared / Kernel Layer}
+	\item \textbf{Internals / Infrastructure Layer}
+\end{enumerate}
+
+\subsection{Domain Layer}
+
+This layer contains the core business logic and domain models, organized by bounded contexts under \texttt{domains}.
+
+Each domain (for example: \texttt{auth}, \texttt{problem}, \texttt{submission}, \texttt{thread}, \texttt{user}) typically includes:
+
+\begin{itemize}
+	\item Controllers
+	\item Services (use-case / application services)
+	\item DTOs (Data Transfer Objects)
+	\item Mappers
+	\item Interfaces
+	\item Domain-specific utilities
+\end{itemize}
+
+\subsection{Shared / Kernel Layer}
+
+The shared layer contains reusable, domain-agnostic building blocks under \texttt{shared} and acts as a shared kernel to ensure reuse while keeping domain logic decoupled from framework specifics.
+
+It includes:
+
+\begin{itemize}
+	\item Aggregate root patterns (e.g. \texttt{shared/aggregate})
+	\item Base entities (e.g. \texttt{shared/entity})
+	\item Common exceptions and constants
+	\item Generic mappers
+\end{itemize}
+
+\subsection{Internals / Infrastructure Layer}
+
+This layer contains platform-level concerns and infrastructure adapters under \texttt{internals}.
+
+Common responsibilities:
+
+\begin{itemize}
+	\item Configuration (for example, \texttt{configuration.ts})
+	\item Database setup and entity wiring (\texttt{database})
+	\item Core framework services (\texttt{core})
+	\item Infrastructure integrations (message brokers, external systems)
+\end{itemize}
+
+\subsection{Bounded Contexts and Module Responsibilities}
+
+Each domain module represents a bounded context with clear ownership of its business logic.
+
+\subsubsection{Auth Module}
+\begin{itemize}
+    \item Register and authenticate users (sign-up / sign-in).
+    \item Issue, refresh, and revoke tokens / sessions.
+    \item Validate and authorize requests based on roles/permissions.
+    \item Enforce authentication-related business rules (e.g., account linking, password policies).
+\end{itemize}
+
+
+\subsubsection{Chatbot Module}
+\begin{itemize}
+    \item Intended to handle CRUD for AI conversation lifecycle (messages, sessions, histories).
+    \item Acts as an adapter between HTTP controllers and an AI agent service (conversation orchestration).
+    \item Stores or references conversation state and metadata for retrieval and continuation.
+    \item Handle async processing and retries for AI responses.
+    \item Integrates with infrastructure for calling external AI APIs and with message brokers for async tasks.
+\end{itemize}
+
+\subsubsection{Problem Module}
+\begin{itemize}
+    \item Create, update, publish, and archive problems.
+    \item Manage problem metadata (tags, testcases, difficulty, reviews).
+    \item Provide read models for public consumption and management views for editors.
+    \item Validate problem inputs and maintain consistency of testcases and constraints.
+\end{itemize}
+
+\subsubsection{Submission Module}
+\begin{itemize}
+    \item Accept and record solution submissions from users.
+    \item Queue and coordinate evaluation / judging workflows.
+    \item Store and expose submission results, logs, and execution metadata.
+    \item Handle retries, timeouts, and result aggregation for judging.
+\end{itemize}
+
+\subsubsection{Thread Module}
+\begin{itemize}
+    \item Create and manage discussions and comment threads.
+    \item Support reactions/likes and moderation actions (edit/delete/report).
+    \item Query and paginate discussions, comments, and thread metadata.
+    \item Enforce posting rules and notification triggers for thread activity.
+\end{itemize}
+
+\subsubsection{User Module}
+\begin{itemize}
+    \item Manage user profiles, settings, and preferences.
+    \item Handle user registration, authentication, and authorization.
+    \item Provide user listing, search, and administrative controls.
+    \item Enforce privacy, role-based access, and moderation policies.
+\end{itemize}
+
+\break

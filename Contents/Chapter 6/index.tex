@@ -1,82 +1,39 @@
-\chapter {Future Plan and Work Evaluation}
+\chapter {Work Evaluation and Future Improvement}
 \noindent
 \rule{\textwidth}{0.4pt}
 
 \begin{center}
 \begin{minipage}{0.8\textwidth}
-\textit{In Chapter 6, the authors will elucidate forthcoming plans and intentions for the
-next phase as well as evaluate the quality of the team’s efforts.}
+\textit{In Chapter 6, the study examines the key principles and practices that underpin continuous improvement, while also assessing the outcomes of the project within the context of an evolving technological landscape.}
 \end{minipage}
 \end{center}
 
 \newpage
-\section{Future Plan}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 6/gantt_chart.png}
-    \vspace{0.6cm}
-    \caption{Future Plan Gantt Chart}
-    \label{fig:gantt-chart}
-\end{figure}
 
-\noindent \textbf{Sprint 1} (12/01/2026 - 25/01/2026)
-\begin{itemize}
-    \item Database implementation.
-    \item Populate database with mock data.
-\end{itemize}
-
-\noindent \textbf{Sprint 2} (26/01/2026 - 08/02/2026)
-\begin{itemize}
-    \item Implement user authentication and Role-based access control.
-    \item Authorize API access based on user roles.
-    \item Implement CRUD APIs as well as UI for managing discussions.
-\end{itemize}
-
-\noindent \textbf{Sprint 3} (23/02/2026 - 08/03/2026)
-\begin{itemize}
-    \item Implement real-time comments and reactions for discussions.
-    \item Implement CRUD APIs as well as UI for managing problems.
-\end{itemize}
-
-\noindent \textbf{Sprint 4} (09/03/2026 - 22/03/2026)
-\begin{itemize}
-    \item Implement Sandbox Execution for problem submission.
-    \item Implement ranking system for users.
-\end{itemize}
-
-\noindent \textbf{Sprint 5} (23/03/2026 - 05/04/2026)
-\begin{itemize}
-    \item Extract and load data for chatbot training.
-    \item Implement UI for chatbot interaction.
-\end{itemize}
-
-\noindent \textbf{Sprint 6} (06/04/2026 - 19/04/2026)
-\begin{itemize}
-    \item Implement API endpoints for chatbot(Websocket)
-    \item Implement moderator page for managing discussions and problems in the platform.
-\end{itemize}
-
-\noindent \textbf{Sprint 7} (20/04/2026 - 03/05/2026)
-\begin{itemize}
-    \item Write Unit Test for all implemented features.
-    \item Perform Integration Testing.
-    \item Deploy the application to production environment.
-\end{itemize}
-
-\noindent \textbf{Sprint 8} (04/05/2026 - 17/05/2026)
-\begin{itemize}
-    \item Review the entire system for bugs and issues.
-    \item Review report and prepare for Thesis Defense Day
-\end{itemize}
 
 \section{Work Evaluation}
 
-Throughout the development process, the team has successfully implemented most of the core functionalities originally defined in the project scope. Compared to the initial project goals, the team was able to design and deliver the essential features of an online coding platform for Vietnamese students. However, the project still has some weaknesses that can be improved in the foreseeable future: 
-\begin{itemize}
-    \item Contest management has not been implemented due to its high complexity and limited development time. This module requires scheduling problems, handling time-limited submissions, calculating rankings, and managing access control, which could be addressed in future development phases.
-    \item The chatbot can respond to basic user prompts, but its capability remains limited. Currently, it relies on simple keyword matching or scripted responses and uses a short-term memory mechanism, taking only the 20 most recent messages as context. As a result, it cannot fully understand the current conversation context. In future phases, the context memory mechanism can be improved to maintain longer conversation history and handle multi-turn interactions more effectively, providing a more coherent and helpful user experience.
-    \item Limited programming language support is another limitation of the current system. At present, the platform mainly focuses on a small set of popular programming languages and does not support a wider range of modern or emerging languages, including Rust, Go(Golang), etc. Expanding language support in future versions would enhance the platform’s flexibility, better reflect current industry trends, and provide Vietnamese students with broader learning opportunities
-\end{itemize}
+Throughout the implementation process, the team organized the workflow in a clearly modular manner, ensuring effective task allocation among members and maintaining steady progress through short development cycles (sprints). An iterative approach was adopted to decompose complex requirements—such as the code runner, sandboxed execution, ranking system, AI chatbot, backend/API, and user interface—into manageable components. Each component was incrementally developed and reviewed at the end of every sprint to refine priorities and address issues. Design documentation and visual artefacts—including architectural diagrams, ERD, service flows, mockups, and progress charts—were thoroughly prepared, enabling instructors and stakeholders to effectively monitor progress and provide constructive feedback.
 
-These limitations are mainly due to the high complexity of the advanced features and the limited time and resources during development. Currently, the chatbot uses a short-term memory mechanism, considering only the 20 most recent messages as context, which prevents it from fully understanding the ongoing conversation. In future iterations, the team plans to enhance both the contest management module and the chatbot’s context memory, as well as expand the supported programming languages. This will allow the platform to handle longer conversation history, support multi-turn interactions more effectively, and provide a more comprehensive and engaging experience for Vietnamese students.
+From a technical perspective, the team explored and implemented several system design techniques, including component decomposition, API design with formal documentation (Swagger/OpenAPI), and the development of a secure code execution environment (sandbox) with resource constraints and isolation mechanisms. The integration of an AI chatbot to enhance user experience provided valuable insights into incorporating NLP models within real-world application workflows. Mockups and prototypes facilitated early-stage usability testing, while architectural diagrams and flow representations ensured consistency between the design and implementation phases.
+
+Continuous testing and evaluation (unit and integration testing, code runner execution flows, and API validation) were conducted in parallel with feature development to maintain system quality. The team also gained important experience in time management, team coordination, and resource allocation—particularly when addressing challenges related to execution environment security and performance optimization. In conclusion, the project successfully achieved its initial design objectives and demonstrated the system’s operational feasibility, while also establishing a solid foundation for further refinement, scalability, and real-world deployment.
+
+\section{Future Improvement}
+
+Due to time and resource constraints, the system has reached a functional and stable state, providing a solid foundation for further development. However, there remain several opportunities for improvement that can enhance overall system capability, user experience, and scalability in future iterations.
+
+\textbf{Chatbot Context Awareness Improvement:} The current chatbot utilizes short-term memory by considering only the 20 most recent messages as conversational context. While this approach ensures efficiency, it may limit the chatbot’s ability to maintain deeper, long-term interactions. A potential improvement is to incorporate a more advanced memory mechanism, such as hierarchical context management or vector-based memory retrieval, allowing the chatbot to retain and reference relevant past interactions beyond the immediate message window. This enhancement would significantly improve response coherence and provide a more personalized and context-aware user experience.
+
+\textbf{User-Created Contest Feature:} At present, the platform does not support user-generated contests. Introducing a feature that allows users to create and customize their own contests would greatly enhance engagement and flexibility. Users could define parameters such as problem sets, time limits, and participation rules. This would foster a more competitive and collaborative environment, enabling peer-driven learning and practice scenarios tailored to individual or group needs.
+
+\textbf{Code Runner Optimization and Scalability:} The current code execution system can be improved in terms of performance and scalability. Enhancements such as distributed execution, job queuing mechanisms, and more efficient resource allocation would allow the system to handle a larger number of concurrent submissions. This is particularly important as the user base grows and the demand for real-time feedback increases.
+
+\textbf{Sandbox Security Enhancement:} Ensuring secure code execution remains a critical concern. Future improvements may include stricter isolation mechanisms, enhanced monitoring of resource usage, and protection against malicious code patterns. Strengthening the sandbox environment will help maintain system integrity and protect underlying infrastructure.
+
+\textbf{Discussion System Enhancement:} While the platform supports CRUD operations for discussions and comments, additional features such as tagging, advanced search functionality, and content moderation can be introduced. In particular, enhancing the search mechanism with keyword indexing, filtering options (e.g., by topic, popularity, or recency), and relevance ranking would significantly improve information retrieval. These improvements would enable users to more easily locate related threads, explore previously discussed topics, and engage with content that aligns with their interests, thereby fostering a more organized and accessible knowledge-sharing environment.
+
+\textbf{Multi-language Support Expansion:} The current system supports a limited set of programming languages, including C/C++, JavaScript, Java and Python. Expanding support to a wider range of languages—such as Go, Rust, and others—would significantly enhance the platform’s accessibility and appeal to a broader audience. This improvement would allow users with different programming backgrounds to practice more effectively and better reflect real-world scenarios where multiple languages are commonly used. Additionally, supporting diverse languages would increase the system’s flexibility and position it as a more comprehensive coding practice platform.
+
+In summary, these proposed improvements aim to enhance the platform across multiple dimensions, including user engagement, system performance, security, and intelligent features. Collectively, they provide a clear direction for evolving the system into a more robust, scalable, and user-centric coding practice platform.
 \newpage
