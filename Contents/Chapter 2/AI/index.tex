@@ -1,4 +1,4 @@
-\section{Artifical Intelligence}
+\section{Artificial Intelligence}
 \subsection{Gemini models from Google AI}
 Gemini is Google’s family of state-of-the-art multimodal large language models designed to understand and generate text, code, and visual content with high efficiency. Gemini models are trained on diverse datasets and optimized for real-world applications such as software development, conversational agents, educational tools, and knowledge retrieval systems.  
 
@@ -19,27 +19,4 @@ For the CodeRank system, we selected the \textbf{Gemini 2.5 Flash} model due to 
 \end{itemize}
 
 Additionally, one significant advantage of Gemini 2.5 Flash is the availability of a \textbf{free-tier quota} in Google AI Studio, making it a highly cost-effective choice for our system. This enables the platform to deliver AI-powered features without incurring substantial operational expenses, which is especially valuable during development, prototyping, and early deployment stages. Furthermore, the free-tier support makes Gemini 2.5 Flash particularly suitable for building an MVP prototype and demonstrating a reliable proof of concept (POC) before scaling the solution.
-
-\subsubsection{LangChain Integration}
-LangChain is the platform for agent engineering. AI teams at Replit, Clay, Rippling, Cloudflare, Workday, and more trust LangChain’s products to engineer reliable agents \cite{langchain2025}. For the context of CodeRank, LangChain provides a flexible abstraction layer for working with Gemini. This combination allows CodeRank to leverage LLM capabilities while simplifying application logic.
-
-\textbf{LangChain integrates with Gemini through:}
-\begin{itemize}
-    \item \textbf{LLM Wrappers:} A standardized interface for sending prompts and receiving model outputs from Gemini 2.5 Flash.
-    \item \textbf{Prompt Templates:} Templates for constructing system messages, examples, and user queries—important for consistent chatbot behavior across different interactions.
-    \item \textbf{Chains:} The LangChain Expression Language (LCEL) enables us to build workflows such as:
-    \begin{itemize}
-        \item multi-turn conversational chatbots with memory,
-        \item code explanation or problem-solving assistants,
-        \item agents capable of interacting with internal CodeRank APIs.
-    \end{itemize}
-    \item \textbf{Agents:} Gemini acts as a reasoning engine to determine the next action (e.g., make algorithmic questions, evaluate user's answer, suggest improvements).
-\end{itemize}
-
-Combining Gemini 2.5 Flash with LangChain enables CodeRank to deliver AI-powered features such as:
-\begin{itemize}
-    \item A conversational chatbot that remembers user context and provides personalized guidance.
-    \item A problem-solving assistant capable of explaining algorithms, suggesting improvements, and helping beginners understand key concepts.
-    \item Intelligent agents that can interact with the system’s backend, retrieve the conversation history to provide context-aware responses.
-\end{itemize}
 

@@ -2,7 +2,7 @@
 
 \subsection{Submission Service}
 \subsubsection{Overview}
-Submission Service is the a core backend component responsible for managing the lifecycle of user submissions, from initial reception to execution orchestration and result collection. It acts as an intermediary between the API Server and the execution infrastructure, ensuring that all submitted code is processed securely, efficiently, and in isolation.
+Submission Service is a core backend component responsible for managing the lifecycle of user submissions, from initial reception to execution orchestration and result collection. It acts as an intermediary between the API Server and the execution infrastructure, ensuring that all submitted code is processed securely, efficiently, and in isolation.
 
 When a user submits a solution through the Web Client, the request is first handled by the API Server and forwarded to the Submission Service. The service validates the submission metadata, including the programming language, problem identifier, and execution constraints. After validation, the submission is serialized and enqueued into a message queue, allowing asynchronous and scalable processing by worker services.
 
@@ -60,12 +60,12 @@ For each programming language supported by the platform (C++, Java, Python), a s
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/code_runner_flow.pdf}
     \vspace{0.6cm}
-    \caption{Overal Code Runner participation flow}
+    \caption{Overall Code Runner participation flow}
 \end{figure}
 
 
 \subsubsection{Class diagram}
-The CodeRunner components are structured into several key classes bellow:
+The CodeRunner components are structured into several key classes below:
 
 \begin{itemize}
     \item \textbf{ISerialization \& Implementations}: 
@@ -101,9 +101,9 @@ The CodeRunner components are structured into several key classes bellow:
 \end{figure}
 
 \subsubsection{Testcase Format}
-Each problem in the Online Judging System is accompanied by a test case file, named \textit{problem\_slug.csv}. This file defines a structured list of input–output test pairs used by the Test Runner of Worker Service to evaluate user submissions automatically.Moderators or superadmin upload this file when creating or updating a problem. The judging system parses the CSV, runs user code against each test case, and compares the output with the expected result.
+Each problem in the Online Judging System is accompanied by a test case file named \textit{problem\_slug.csv}. This file defines a structured list of input–output test pairs used by the Test Runner of the Worker Service to evaluate user submissions automatically. Moderators or superadmins upload this file when creating or updating a problem. The judging system parses the CSV, runs user code against each test case, and compares the output with the expected result.
 
-To ensure accurate and consistent evaluation of user submissions, each input and output value in the \textit{problem\_slug.csv}file is associated with a data type. The type system defines how each field should be parsed, validated, and compared during the judging process.This mechanism helps the Test Framework interpret user program outputs correctly, whether they are numbers, strings, booleans, or lists. The following table describes the type.Here is the content for the "Problem Storages" section, including the table about type format:
+To ensure accurate and consistent evaluation of user submissions, each input and output value in the \textit{problem\_slug.csv} file is associated with a data type. The type system defines how each field should be parsed, validated, and compared during the judging process. This mechanism helps the Test Framework interpret user program outputs correctly, whether they are numbers, strings, booleans, or lists. The following table describes the supported type tokens.
 
 \begin{table}[h!]
 \centering
