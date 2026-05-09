@@ -9,13 +9,6 @@ When a user submits a solution through the Web Client, the request is first hand
 This queue-based architecture decouples submission handling from execution, improving system reliability under high load and preventing execution delays from affecting user-facing services.
 
 \subsubsection{Execution Orchestration and Container Control}
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Code Runner/code_runner_service_flow.pdf}
-    \vspace{0.6cm}
-    \caption{Overall execution flow for submission}
-\end{figure}
-
 In the deployed architecture, execution orchestration is implemented as an asynchronous pipeline across the Backend API, RabbitMQ, and Worker Service running on Google Kubernetes Engine (GKE). User code is never executed inside the API process. Instead, each submission is evaluated in a short-lived, isolated runner container created on demand as a Kubernetes Job.
 
 The orchestration flow for each submission is as follows:
