@@ -16,22 +16,21 @@ This queue-based architecture decouples submission handling from execution, impr
     \caption{Overall execution flow for submission}
 \end{figure}
 
-The Submission Service is responsible for orchestrating the execution of user-submitted code within sandboxed Docker containers. Instead of executing code directly on the host system, all runtime operations are delegated to controlled containers instantiated from predefined, language-specific Docker images.
+In the deployed architecture, execution orchestration is implemented as an asynchronous pipeline across the Backend API, RabbitMQ, and Worker Service running on Google Kubernetes Engine (GKE). User code is never executed inside the API process. Instead, each submission is evaluated in a short-lived, isolated runner container created on demand as a Kubernetes Job.
 
-Upon initialization, the Submission Service proactively creates a fixed number of idle container instances for each supported programming language and stores them in a managed container pool. In the proposed system, the pool is initialized with \textbf{five container instances per language}. These pre-initialized containers remain in a ready state, allowing the system to handle incoming submissions with minimal startup latency.
-
-For each submission, the Submission Service performs the following actions:
+The orchestration flow for each submission is as follows:
 
 \begin{itemize}
-\item Selects an appropriate Docker image based on the submission’s programming language.
-\item Attempts to acquire an idle container instance from the corresponding language-specific container pool.
-\item If an idle container is available, assigns it to the submission; otherwise, dynamically creates a new container instance to handle the request.
-\item Injects the user’s solution file into an isolated workspace mounted inside the container.
-\item Applies strict execution constraints, including CPU time, memory usage, and process limits.
-\item Triggers the Code Runner inside the container to execute the submission against predefined test cases.
+\item The Backend API validates the submission request, stores initial submission metadata, and publishes an evaluation message to RabbitMQ.
+\item The Worker Service consumes the message, resolves the testcase source, and generates a runner configuration file containing timeout, memory limit, entry function, and submission identifier.
+\item The worker selects the language-specific runner image (Python, Java, or C\#) from Artifact Registry.
+\item A Kubernetes ConfigMap is created to provide execution inputs (submitted source code, testcase file, and runner configuration) to the runner.
+\item The worker creates a Kubernetes Job in the runner namespace; Kubernetes schedules a fresh Pod to execute the selected runner image.
+\item The runner compiles/interprets the submission, executes all testcases under configured resource limits, and emits a structured JSON result.
+\item The worker reads Job output from Pod logs, transforms the result into the system message format, and publishes it back to RabbitMQ for backend persistence.
 \end{itemize}
 
-After execution completes, the container produces a structured JSON result file and is returned to the pool after workspace cleanup, or destroyed if pool capacity thresholds are exceeded. This pooling mechanism enables efficient reuse of execution environments while maintaining strong isolation guarantees between submissions.
+This Job-based model matches the production deployment: runners are not long-running services and no fixed container pool is maintained. Every submission is executed in an ephemeral container context, which improves isolation, supports horizontal scaling through Kubernetes scheduling, and simplifies lifecycle management by terminating execution environments after completion.
 
 \subsubsection{Security Enforcement and Attack Mitigation}
 
