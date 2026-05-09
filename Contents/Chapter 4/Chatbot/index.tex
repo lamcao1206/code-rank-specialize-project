@@ -1,0 +1,80 @@
+\section{Chatbot Implementation}
+
+This section describes the detailed implementation of the chatbot subsystem in the CodeRank system. The implementation focuses on enabling real-time, streaming-based conversational interaction between the user and the AI assistant.
+
+The chatbot is implemented using a multi-layer architecture consisting of the frontend client, backend API server, n8n workflow engine, and Gemini large language model. A key feature of the system is the use of Server-Sent Events (SSE) to support streaming responses, providing a real-time chat experience similar to modern AI assistants.
+
+\subsection{End-to-End Chatbot Request Flow}
+
+When a user interacts with the chatbot, the system processes the request through the following sequence:
+
+\begin{enumerate}
+    \item The user submits a message from the frontend chatbot interface.
+    
+    \item The frontend immediately sends the message to the backend API server using an HTTP request.
+    
+    \item The backend receives the request and initiates a processing pipeline by calling an internal chatbot service.
+    
+    \item The backend triggers an n8n workflow via a webhook, passing the user input and conversation metadata.
+    
+    \item n8n processes the request and communicates with the Gemini model to generate a response.
+    
+    \item The response is streamed back from n8n to the backend.
+    
+    \item The backend forwards the streamed response to the frontend using Server-Sent Events (SSE).
+    
+    \item The frontend renders the response incrementally in real time as tokens are received.
+\end{enumerate}
+
+This architecture ensures low-latency interaction and improves user experience by allowing the response to appear progressively instead of waiting for the full output.
+
+\subsection{Backend Processing and Streaming Architecture}
+
+The backend plays a critical role in managing request orchestration and enabling real-time response streaming.
+
+After receiving the request from the frontend, the backend does not wait for the full response from the AI pipeline. Instead, it establishes a Server-Sent Events (SSE) connection with the client and acts as a streaming proxy between n8n and the frontend.
+
+The backend performs the following tasks:
+
+\begin{itemize}
+    \item Validates incoming chatbot requests
+    \item Forwards the request to the n8n webhook endpoint
+    \item Receives streamed response chunks from n8n
+    \item Forwards each chunk to the frontend via SSE channel
+\end{itemize}
+
+This streaming mechanism allows the system to handle long AI-generated responses efficiently while maintaining responsiveness.
+
+\subsection{n8n Workflow Execution and Streaming Response}
+
+Within the n8n workflow, the chatbot request is processed through multiple stages including context retrieval, prompt construction, and LLM inference.
+
+Unlike traditional synchronous APIs, the integration is designed to support incremental response generation. As the Gemini model produces output, n8n streams partial results back to the backend instead of waiting for the full completion.
+
+This streaming behavior is essential for enabling real-time chat experiences and reducing perceived latency.
+
+The workflow acts as an intermediate layer that:
+\begin{itemize}
+    \item Receives user input from the backend via webhook
+    \item Processes conversational context and memory
+    \item Sends structured prompts to the Gemini model
+    \item Streams generated tokens or response chunks back to the backend
+\end{itemize}
+
+\subsection{Frontend Streaming with Server-Sent Events (SSE)}
+
+On the frontend side, the chatbot interface establishes a persistent SSE connection with the backend.
+
+When a user sends a message, the frontend immediately displays a loading state and begins listening for streamed response events.
+
+As the backend receives chunks of data from n8n, it forwards them to the frontend incrementally. The frontend then appends each received chunk to the chat interface in real time.
+
+This results in a typewriter-like effect where the response appears progressively, significantly improving user experience compared to traditional request-response models.
+
+The SSE-based approach provides the following benefits:
+\begin{itemize}
+    \item Low latency response rendering
+    \item Improved perceived system performance
+    \item Smooth real-time interaction experience
+    \item Reduced waiting time for long AI outputs
+\end{itemize}

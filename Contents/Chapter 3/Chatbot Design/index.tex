@@ -130,3 +130,157 @@ If the user is unclear about what type of hint they need:
 \textbf{Chatbot:} Of course. Would you like a conceptual hint, or guidance on improving 
 your current approach?
 \end{quote}
+
+\section{Chatbot Design}
+
+This chapter presents the detailed architecture, design decisions, and implementation of the chatbot subsystem in the CodeRank system. The chatbot is designed as an AI-powered coding interview assistant capable of simulating real-world technical interview scenarios.
+
+Unlike traditional rule-based chatbots, the proposed system leverages a large language model combined with a workflow orchestration layer to enable adaptive reasoning, contextual memory, and dynamic response generation. This allows the system to behave as an intelligent interviewer that can guide users through structured problem-solving processes.
+
+\subsection{N8N Integration Architecture}
+
+The chatbot subsystem is implemented on top of \textbf{n8n}, which acts as a central orchestration layer connecting the frontend interface, backend services, and the Gemini large language model.
+
+Instead of establishing a direct communication channel between the frontend and the LLM provider, all chatbot requests are routed through n8n workflows. This architectural decision introduces a middleware layer responsible for handling request processing, prompt management, memory retrieval, and response generation logic.
+
+By decoupling AI logic from application layers, the system achieves better separation of concerns and improves maintainability in large-scale development.
+
+\textbf{System Benefits:}
+\begin{itemize}
+    \item \textbf{Separation of Concerns:} AI logic is isolated from frontend and backend business logic, reducing system coupling.
+    
+    \item \textbf{Centralized Workflow Management:} All chatbot-related logic is managed in a single workflow system, making it easier to modify prompts, behaviors, and processing rules.
+    
+    \item \textbf{Improved Maintainability:} Changes in AI behavior do not require modifications in frontend or backend codebases.
+    
+    \item \textbf{Observability:} n8n provides execution logs at each node level, enabling easier debugging and monitoring of AI interactions.
+\end{itemize}
+
+\textbf{Chatbot Communication Flow:}
+\begin{enumerate}
+    \item The user interacts with the chatbot through the CodeRank frontend interface.
+    
+    \item The frontend sends the user message along with metadata to a backend API endpoint.
+    
+    \item The backend validates the request and triggers an n8n workflow via a webhook.
+    
+    \item The n8n workflow processes the request through a series of structured nodes.
+    
+    \item The workflow communicates with the Gemini model to generate context-aware responses.
+    
+    \item The final response is returned through the backend API and rendered in the frontend interface.
+\end{enumerate}
+
+This layered architecture enables independent evolution of system components, allowing AI logic, backend services, and frontend interfaces to be updated without affecting each other significantly.
+
+\subsection{AI Agent Workflow Design in n8n}
+
+The chatbot workflow is designed as an AI agent pipeline that simulates structured human-like reasoning during technical interview sessions. The workflow is composed of multiple modular stages, where each stage is responsible for a specific transformation or processing step.
+
+This design follows a pipeline-based architecture, ensuring that input processing, context management, reasoning, and output generation are clearly separated.
+
+\textbf{Workflow Stages:}
+\begin{enumerate}
+    \item User input reception
+    \item Context and memory retrieval
+    \item Prompt construction
+    \item LLM processing
+    \item Response post-processing
+    \item Response delivery
+\end{enumerate}
+
+Each stage plays a critical role in ensuring that the chatbot maintains coherence, contextual awareness, and domain-specific behavior during long interview sessions.
+
+\subsubsection{Webhook Trigger}
+
+The workflow begins with a \textbf{Webhook Trigger Node}, which serves as the entry point for all incoming chatbot requests.
+
+This node receives HTTP requests from the backend containing structured data such as:
+\begin{itemize}
+    \item User message content
+    \item Conversation identifier for session tracking
+    \item Interview context or selected topic
+    \item User-related metadata (e.g., difficulty level, session state)
+\end{itemize}
+
+The webhook ensures that every interaction is properly initialized within the workflow execution context, enabling traceability and session continuity.
+
+\subsubsection{Context and Memory Management}
+
+One of the key challenges in conversational AI systems is maintaining context across multiple turns of interaction. To address this, the system implements a memory management mechanism within the workflow.
+
+Before generating a response, the system retrieves relevant historical data including:
+\begin{itemize}
+    \item Previously asked interview questions
+    \item User-submitted solutions or attempts
+    \item Feedback and hints provided by the system
+    \item Current interview progression state
+\end{itemize}
+
+This memory mechanism allows the chatbot to maintain consistency across long sessions and avoid treating each message as an isolated input. As a result, the AI behaves more like a continuous interviewer rather than a stateless response generator.
+
+\subsubsection{Prompt Construction}
+
+After retrieving contextual information, the system constructs a structured prompt that will be sent to the large language model.
+
+The prompt construction process combines multiple sources of information:
+\begin{itemize}
+    \item System-level instructions defining chatbot behavior
+    \item Current user input message
+    \item Conversation history retrieved from memory
+    \item Interview state and difficulty configuration
+\end{itemize}
+
+This step is crucial because prompt quality directly impacts the performance and consistency of the LLM output. By explicitly structuring the prompt, the system ensures that Gemini follows the expected interview logic and generates responses aligned with the CodeRank learning objectives.
+
+\subsubsection{LLM Processing with Gemini}
+
+The constructed prompt is passed to the \textbf{Google Gemini Chat Model node} within n8n. This node is responsible for interacting with the Gemini API and generating the final response based on the provided context.
+
+The Gemini model performs multiple reasoning tasks simultaneously, including:
+\begin{itemize}
+    \item Understanding user intent in a programming context
+    \item Generating coding interview questions dynamically
+    \item Providing step-by-step hints for problem-solving
+    \item Evaluating user approaches and suggesting optimizations
+\end{itemize}
+
+Depending on the state of the conversation, the model can act as an interviewer, tutor, or evaluator, allowing flexible adaptation to different learning scenarios.
+
+\subsubsection{Response Post-processing}
+
+After receiving the output from the LLM, the system performs a post-processing stage to ensure that the response is suitable for frontend rendering.
+
+This includes:
+\begin{itemize}
+    \item Formatting output into Markdown-compatible structure
+    \item Removing unnecessary tokens or artifacts
+    \item Validating response completeness and structure
+    \item Logging interaction data for debugging and analytics
+\end{itemize}
+
+This step ensures that the final response is clean, consistent, and user-friendly when displayed in the chatbot interface.
+
+\subsubsection{Frontend Delivery}
+
+The final processed response is returned through the backend API to the frontend application. The frontend then renders the response in real time within the chat interface.
+
+This completes the full request-response cycle, enabling an interactive and low-latency conversational experience for users during coding interview sessions.
+
+\subsection{System Design Benefits}
+
+The proposed chatbot architecture provides several important system-level advantages:
+
+\begin{itemize}
+    \item \textbf{Modular Architecture:} Each stage of the workflow is independently defined, allowing easy modification and extension without affecting the entire system.
+    
+    \item \textbf{Scalability:} The system can be extended to support additional AI features such as retrieval-augmented generation (RAG), multi-agent collaboration, or external knowledge integration.
+    
+    \item \textbf{Maintainability:} Centralized workflow logic reduces code duplication and simplifies long-term maintenance.
+    
+    \item \textbf{Flexibility:} New AI behaviors can be introduced by modifying workflow nodes without changing core application code.
+    
+    \item \textbf{Observability:} Built-in execution tracking in n8n provides transparency in each step of the AI pipeline, facilitating debugging and system optimization.
+\end{itemize}
+
+Overall, the architecture enables the development of a robust, extensible, and production-ready AI chatbot system that is suitable for technical interview training and educational purposes.
