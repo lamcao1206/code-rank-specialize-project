@@ -36,7 +36,8 @@ Among these metrics, branch coverage is especially important for evaluating busi
 
 \subsection{Unit Testing Result}
 
-The current coverage reports were generated from the existing backend and frontend test suites. Table \ref{tab:unit-test-coverage} summarizes the collected coverage results.
+The current coverage reports were generated from the existing backend and frontend test suites. The table below \ref{tab:unit-test-coverage} summarizes the collected coverage results.
+
 
 \begin{table}[H]
 \centering
@@ -46,16 +47,16 @@ The current coverage reports were generated from the existing backend and fronte
 \hline
 \textbf{Component} & \textbf{Statements} & \textbf{Branches} & \textbf{Functions} & \textbf{Lines} \\
 \hline
-Backend & 97.85\% & 90.05\% & 98.88\% & 97.85\% \\
+Backend & 86.28\% & 87.00\% & 89.11\% & 86.28\% \\
 \hline
-Frontend & 49.84\% & 86.63\% & 88.63\% & 49.84\% \\
+Frontend & 91.93\% & 69.66\% & 97.05\% & 94.78\% \\
 \hline
 \end{tabular}
 \end{table}
 
-The backend coverage result is high across all measured categories. Statement coverage and line coverage both reach 97.85\%, function coverage reaches 98.88\%, and branch coverage reaches 90.05\%. This indicates that most backend service logic and important decision paths are exercised by the current test suite. The high branch coverage is particularly useful for backend validation because backend modules contain many conditional paths related to authentication, authorization, request validation, and domain state transitions.
+The backend coverage result shows broad automated validation of the service layer and domain behavior. Statement and line coverage both reach 86.28\%, branch coverage reaches 87.00\%, and function coverage reaches 89.11\%. The current Jest suite covers authentication, problem management, contest logic, submission processing, user operations, thread functions, mappers, guards, and infrastructure helpers. The remaining backend coverage gaps are concentrated in modules such as analytics, upload handling, gateway behavior, and selected contest, ranking, and public-problem paths that are less completely exercised by the current unit tests.
 
-The frontend result shows a different pattern. Function coverage reaches 88.63\% and branch coverage reaches 86.63\%, which indicates that many tested frontend functions and conditional paths are exercised. However, statement and line coverage are 49.84\%, showing that a significant amount of frontend source code is still not executed by the test suite. This is common in frontend projects when many pages, layout components, and UI states are implemented but not yet covered by component or integration tests. Therefore, frontend testing should be improved by adding tests for page-level components, form interactions, routing behavior, API error states, and authenticated user flows.
+The frontend result shows strong statement, line, and function coverage for the source areas included in the Vitest coverage configuration. Statement coverage reaches 91.93\%, line coverage reaches 94.78\%, and function coverage reaches 97.05\%. Branch coverage is lower at 69.66\%, indicating that more alternative UI paths, error branches, fallback states, and conditional service paths should still be exercised. Therefore, frontend testing should continue to expand around page-level interactions, API failure handling, authenticated workflows, and conditional rendering paths even though the currently measured functions and lines are well covered.
 
 \subsection{Frontend Evaluation Using Lighthouse}
 
@@ -123,5 +124,3 @@ Moderator Dashboard & 55 & 94 & 96 & 82 \\
 \end{table}
 
 The Lighthouse results show that CodeRank performs well in Best Practices, with all evaluated pages scoring 96. Accessibility is also strong on most pages, ranging from 93 to 100, although the sign-up page received a lower score of 87 because Lighthouse detected missing or insufficient accessible labels and image alternative text. SEO scores range from 75 to 83. The main SEO issue is the absence of complete page metadata, especially a meta description and route-specific document metadata.
-
-Performance is the weakest category in the current frontend baseline. Desktop performance ranges from 35 to 43, while mobile performance ranges from 49 to 60. Lighthouse reported delayed First Contentful Paint and Largest Contentful Paint, moderate Total Blocking Time, and a high amount of unused JavaScript. During the Vite production build, the generated JavaScript bundle was approximately 2,328.95 KB before gzip compression and 684.81 KB after gzip compression. This confirms that the application currently ships a large initial bundle. The problem detail page is especially affected because it includes heavier problem-solving UI dependencies such as the code editor and markdown rendering.

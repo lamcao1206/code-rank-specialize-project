@@ -29,7 +29,7 @@ This Job-based model matches the production deployment: runners are not long-run
 
 Security enforcement in the submission evaluation pipeline is achieved through a clear separation of responsibilities between system components. Docker containers used for code execution are managed exclusively by the \textbf{Submission Service}, which acts as the sole authority for container creation, allocation, and lifecycle management. User-facing components and external clients have no direct access to the container runtime.
 
-By centralizing container control within the Submission Service, the system ensures that untrusted user code is executed only within strictly confined sandbox environments. All containers are launched with restricted privileges, isolated file systems, and predefined resource limits. This design prevents user submissions from interacting with the host operating system or with other concurrent executions.
+By centralizing container control within the Submission Service, the system ensures that untrusted user code is executed only within strictly confined sandbox environments. All containers are launched with restricted privileges, isolated file systems, disabled outbound and inbound network access and predefined resource limits. This design prevents user submissions from interacting with the host operating system or with other concurrent executions.
 
 Common attack vectors targeting CodeRank platforms are mitigated as follows:
 
@@ -38,9 +38,8 @@ Common attack vectors targeting CodeRank platforms are mitigated as follows:
 \item \textbf{Unauthorized file system access}: Containers operate within isolated workspaces with read-only root file systems, ensuring that sensitive host files and judge infrastructure remain inaccessible.
 \item \textbf{Privilege escalation attempts}: All container processes run as non-privileged users with restricted system capabilities, reducing the risk of kernel-level attacks.
 \item \textbf{Cross-submission interference}: Containers are either destroyed or fully cleaned before reuse, preventing data leakage and persistent malicious state.
+\item \textbf{Network-based attacks}: Execution containers are deployed with all inbound and outbound network communication disabled through Kubernetes network isolation policies. This prevents malicious submissions from interacting with external services, scanning internal infrastructure, or abusing execution pods to launch distributed denial-of-service (DDoS) attacks against third-party systems.
 \end{itemize}
-
-Distributed denial-of-service (DDoS) attacks are addressed at the system boundary rather than at the execution layer. The API Server applies request rate limiting, authentication checks, and input validation to regulate incoming submission traffic. By filtering excessive or malicious requests before they reach the Submission Service, the system prevents execution resources from being overwhelmed by high-volume attack patterns.
 
 This layered security approach ensures that each component enforces protections appropriate to its role: the API Server defends against external traffic-based attacks, while the Submission Service enforces strict execution isolation for untrusted code. Together, these mechanisms provide defense-in-depth for the overall CodeRank system.
 
@@ -122,3 +121,29 @@ list(type) & A collection of elements of a specified type (e.g., list(int)). \\ 
 Each problem’s test case file will contain both type definitions for input, expected output and test data. The first line of the file specifies the data types for all inputs and outputs, helping the Code Runner correctly parse and validate values before running tests.
 
 After executing all test cases for a user’s submission, the Test Runner generates a structured JSON result file summarizing the outcomes of each test. This file serves as the standardized output for the judging system and can be used by other services (such as the Result Service or API Gateway) to record, display, or analyze user performance. The JSON format ensures that results are machine-readable, language-independent, and easy to integrate into the overall online judging pipeline. The exported JSON file contains both metadata (e.g., problem name, language, execution status) and detailed per-test results (e.g., input, output, expected result, duration, and status).
+
+\subsubsection{Code Execution Security Constraints}
+
+Because the platform executes untrusted user-submitted programs, the Code Runner also applies multiple security constraints to ensure safe and stable evaluation. These protections are enforced at both the container orchestration layer and the runtime execution layer.
+
+\begin{itemize}
+
+\item \textbf{Execution timeout enforcement}: 
+Each testcase execution is associated with a predefined time limit. Programs that exceed the configured execution duration are automatically terminated by the \texttt{TimedExecutor}. This prevents infinite loops and intentionally long-running computations from monopolizing system resources.
+
+\item \textbf{Memory usage limitation}: 
+Memory consumption is continuously monitored during execution. If a submission exceeds the allowed memory threshold, the runner immediately stops the process and reports a memory limit violation. This protection mitigates memory exhaustion attacks and prevents unstable runner behavior.
+
+\item \textbf{Restricted library access}: 
+User submissions are executed under a guarded runtime environment where only approved standard library modules are permitted. Potentially dangerous functionality such as operating system access, subprocess creation, dynamic code execution, reflection-based system inspection, and external package installation is restricted or blocked entirely.
+
+\item \textbf{Isolated process execution}: 
+Each submission runs inside a dedicated ephemeral execution container with isolated storage and process namespaces. User code cannot access processes, files, or runtime states belonging to other submissions or to the host system.
+
+\item \textbf{Disabled network communication}: 
+Execution containers are deployed with all inbound and outbound network access disabled. This prevents malicious code from communicating with external services, performing network scanning, exfiltrating data, or leveraging execution resources for distributed denial-of-service (DDoS) attacks.
+
+\item \textbf{Deterministic execution environment}: 
+All runner containers are created from predefined language-specific images containing fixed compiler and runtime versions. This guarantees consistent execution behavior across submissions and reduces risks caused by environment manipulation or dependency injection.
+
+\end{itemize}

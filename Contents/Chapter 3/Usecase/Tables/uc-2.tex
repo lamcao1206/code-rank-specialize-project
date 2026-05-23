@@ -1,4 +1,4 @@
-\begin{table}
+\begin{table}[H]
 \renewcommand{\arraystretch}{1.4}
 \begin{tabular}{|p{4cm}|p{11cm}|}
 \hline
@@ -6,16 +6,16 @@
 
 \textbf{Date Created} & 20th September, 2025 \\ \hline
 
-\textbf{Primary Actor} & Primary User, Superadmin, Moderator \\ \hline
+\textbf{Primary Actor} & Moderator, Superadmin \\ \hline
 
 \textbf{Secondary Actor} & System (CodeRank Platform) \\ \hline
 
 \textbf{Description} &
-This use case describes how users create and submit contests, allow administrators to review and approve them, and make contests available for participation once published.
+This use case describes how moderators create and submit contests, allow administrators to review and approve them, and make contests available for participation once published.
 \\ \hline
 
 \textbf{Trigger} &
-A Primary User submits a new contest request.
+A Moderator submits a new contest request.
 \\ \hline
 
 \textbf{Preconditions} &
@@ -53,7 +53,7 @@ A Primary User submits a new contest request.
 \setlength\topsep{0pt}
 \setlength\partopsep{0pt}
 \setlength\parsep{0pt}
-    \item Primary User submits a contest request.
+    \item Moderator submits a contest request.
     \item The System saves the contest as \textit{Pending Review}.
     \item Moderators review and approve the contest.
     \item If at least 3 moderator approvals are received, the contest qualifies for publishing.

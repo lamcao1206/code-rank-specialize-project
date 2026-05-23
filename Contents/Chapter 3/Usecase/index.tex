@@ -9,25 +9,26 @@
 \end{figure}
 
 
-Our system contains 5 main submodules:
+Our system contains 6 main submodules:
 \begin{itemize}
     \item \textbf{Authentication \& Authorization}: Responsible for managing secure login and enforces Role-Based Access Control for 3 types of user.
     \item \textbf{Discussion}: Facilitates community interaction, allowing primary users to share solutions and ask questions related to problems. 
     \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage the problem creation, test cases, contests management and global user accounts.
 Contest: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
     \item \textbf{Submission}: This core module handles the presentation of the coding challenge and the automatic evaluation of the user's submitted solution.
+    \item \textbf{Contest}: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
     \item \textbf{Interview Practice}: Provides a simulated coding interview environment where users can practice solving problems with instant feedback, mimicking real-world technical interviews.
 \end{itemize}
 
 \subsection{Use-case diagrams for each submodule}
-
+\clearpage
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/GeneralUsecase-Authentication.drawio.png}
     \vspace{0.6cm}
     \caption{Authentication \& Authorization Use Case}
 \end{figure}
-This submodule serves as the primary security gate for the entire system. Its core responsibility is to handle all user authentication (logging in) and authorization (managing access rights). This is crucial for protecting users' personal information, ensuring data privacy, and securing sensitive actions within the platform. By strictly controlling access, the module prevents unauthorized entry and maintains system integrity.
+The \textbf{Authentication \& Authorization Module} serves as the primary security gate for the entire system. Its core responsibility is to handle all user authentication (logging in) and authorization (managing access rights). This is crucial for protecting users' personal information, ensuring data privacy, and securing sensitive actions within the platform. By strictly controlling access, the module prevents unauthorized entry and maintains system integrity.
 For user convenience, we offer diverse login methods:
 \begin{itemize}
     \item Primary Users can log in quickly using their Google Account or use the traditional \textbf{Email \& Password} method.
@@ -36,6 +37,7 @@ For user convenience, we offer diverse login methods:
 
 All users retain standard account management capabilities, including registering a new account and changing their password.
 
+\clearpage
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/GeneralUsecase-SystemManagement.drawio.png}
@@ -70,14 +72,14 @@ To ensure that discussions remain constructive and aligned with community guidel
 The \textbf{Submission} submodule is the core execution engine and interaction point for all coding activities within the CodeRank system. Its primary function is to facilitate the practice and assessment workflow for the Primary User. Users begin by accessing the \textbf{View Problem} function, which presents the algorithmic challenge and requirements. The fundamental action in this module is the \textbf{Submit Solution} function, which securely receives the user's code, initiates the automatic grading process in a sandboxed environment, and returns the execution verdict. For oversight and quality assurance, both the Superadmin and Moderators are granted the ability to Monitor Submissions. This administrative function is vital for diagnosing issues with test cases, tracking potential cases of plagiarism, and ensuring the overall stability and fairness of the automated grading system.
 
 \clearpage
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/ContestUsecase.png}
-%     \vspace{0.6cm}
-%     \caption{Contest Use Case}
-% \end{figure}
-% The Contest submodule is integral to the CodeRank platform, managing the entire lifecycle of competitive programming events. It provides the mechanism for the primary user to participate in a contest, engaging in time-constrained coding challenges with real-time feedback and ranking. The module also handles the initiation of new events, allowing primary users to submit contest creation requests. To maintain content quality and system integrity, all requests must undergo a review process conducted by both the Moderator and Superadmin roles.
-% \clearpage
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/ContestUsecase.png}
+    \vspace{0.6cm}
+    \caption{Contest Use Case}
+\end{figure}
+The \textbf{Contest} submodule is integral to the CodeRank platform, managing the entire lifecycle of competitive programming events. It provides the mechanism for the primary user to participate in a contest, engaging in time-constrained coding challenges with real-time feedback and ranking. To maintain content quality and system integrity, all requests must undergo a review process conducted by both the Moderator and Superadmin roles.
+\clearpage
 \begin{figure}[h!]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/InterviewUsecase.png}
@@ -88,16 +90,13 @@ The \textbf{Interview Practice} submodule is designed to simulate real-world cod
 
 \subsection{Use-case description tables}
 \input{Contents/Chapter 3/Usecase/Tables/uc-1.tex}
-% \input{Contents/Chapter 3/Usecase/Tables/uc-2.tex}
+\input{Contents/Chapter 3/Usecase/Tables/uc-2.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-3.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-4.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-5.tex}
-
 \input{Contents/Chapter 3/Usecase/Tables/uc-6.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-7.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-8.tex}
-\newpage
-% \input{Contents/Chapter 3/Usecase/Tables/uc-9.tex}
-\newpage
+\input{Contents/Chapter 3/Usecase/Tables/uc-9.tex}
 \input{Contents/Chapter 3/Usecase/Tables/uc-10.tex}
 \newpage

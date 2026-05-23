@@ -8,12 +8,12 @@
     \label{fig:deployment-diagram}
 \end{figure}
 
-The CodeRank system is deployed using a cloud-native architecture. The frontend application is deployed on Vercel because it provides simple hosting, automatic HTTPS, and continuous deployment for React/Vite applications. The backend, worker and llm services are deployed on Google Cloud using Google Kubernetes Engine (GKE), a managed Kubernetes platform for running containerized workloads. This separation allows the frontend to be optimized for static content delivery while the backend and code execution components are managed in an infrastructure environment designed for container orchestration.
+The CodeRank system is deployed using a cloud-native architecture. Frontend application is deployed on Vercel because it provides simple hosting, automatic HTTPS, and continuous deployment for React/Vite applications. On the other hand, backend and worker services are deployed on Google Cloud using Google Kubernetes Engine (GKE), a managed Kubernetes platform for running containerized workloads. This separation allows the frontend to be optimized for static content delivery while the backend and code execution components are managed in an infrastructure environment designed for container orchestration.
 
-The backend API, worker service, and programming language runners are containerized using Docker. Their images are stored in Google Artifact Registry, which is used as the private container registry for the project. The backend API runs as a long-running Kubernetes Deployment, while the worker service runs as an internal background Deployment that consumes messages from RabbitMQ. The language-specific code runners are not deployed as permanent services; instead, they are executed as short-lived Kubernetes Jobs created dynamically by the worker for each submission.
+While frontend is deployed through Vercel CI pipeline, the backend API, worker service, and programming language runners are containerized using Docker. Their images are stored in Google Artifact Registry, which is used as the private container registry for the project. The backend API runs as a long-running Kubernetes Deployment, while the worker service runs as an internal background Deployment that consumes messages from RabbitMQ. The language-specific code runners are not deployed as permanent services; instead, they are executed as short-lived Kubernetes Jobs created dynamically by the worker for each submission.
 
+For data layer, the system uses Supabase, a managed backend service built on top of PostgreSQL. Supabase is the Postgres development platform \cite{supabase2026}. Supabase provides a fully managed relational database along with a suite of backend capabilities, making it a comprehensive platform for modern application development. For asynchronous communication between the services, the system uses RabbitMQ hosted on CloudAMQP. CloudAMQP provides managed RabbitMQ servers and clusters in the cloud, including monitoring tools, alarms, and management interfaces \cite{cloudamqp2026}. For AI related workflow, we utilize n8n cloud, a workflow automation platform that allows us to create and manage complex workflows integrating various services, including Google Gemini for the chatbot feature \cite{n8n2026}.
 
-For data layer, the system uses Supabase, a managed backend service built on top of PostgreSQL. Supabase is the Postgres development platform \cite{supabase2026}. Supabase provides a fully managed relational database along with a suite of backend capabilities, making it a comprehensive platform for modern application development. For asynchronous communication between the services, the system uses RabbitMQ hosted on CloudAMQP. CloudAMQP provides managed RabbitMQ servers and clusters in the cloud, including monitoring tools, alarms, and management interfaces \cite{cloudamqp2026}.
 
 \subsection{Frontend Deployment}
 
@@ -29,7 +29,7 @@ The deployment process is straightforward and consists of the following steps:
   \item Configuration and Deployment: Configure required environment variables such as the backend API endpoint and start the deployment process. Vercel then builds and deploys the application automatically.
 \end{itemize}
 
-Once deployed, the frontend is served via Vercel and communicates with the backend service exposed from Google Cloud.
+Once deployed, the frontend is served via Vercel and communicates with the backend service exposed from Google Cloud. The production deployment of the CodeRank frontend is accessible at \url{https://code-rank-web.vercel.app/}.
 
 \subsection{Backend and Worker Services Deployment}
 
@@ -51,11 +51,7 @@ Google Artifact Registry is used to store and manage Docker images for the backe
 
 \subsubsection{Backend API Deployment}
 
-The backend API is deployed as a Kubernetes Deployment on Google Kubernetes Engine. The backend is implemented using NestJS and is packaged into a Docker image before deployment. The build process installs production dependencies, compiles the TypeScript source code, and produces a runnable Node.js application. The resulting image is pushed to Google Artifact Registry and referenced by the Kubernetes Deployment manifest.
-
 The backend Deployment runs one or more replicas of the API container. Each replica listens on the configured application port and is exposed through a Kubernetes Service. In the initial deployment, a Service of type \texttt{LoadBalancer} can be used to provide a public endpoint for the Vercel frontend. In a production environment, this can be replaced or extended with an Ingress controller and a custom domain to provide HTTPS termination and cleaner routing.
-
-The backend service is responsible for handling authentication, problem management, submission creation, discussion features, and result retrieval. During submission creation, the backend stores the submission in PostgreSQL and publishes an evaluation request to RabbitMQ. The message payload contains the submission identifier, programming language, submitted source code, testcase URL, timeout, memory limit, and entry function. This makes the worker independent from the backend database when executing a submission.
 
 The backend requires the following environment variables during deployment:
 
