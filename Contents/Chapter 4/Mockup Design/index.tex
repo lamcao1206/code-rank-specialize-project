@@ -75,39 +75,32 @@ To create a new discussion thread, the user can click in the button \textbf{Crea
     \caption{Create Discussion}
 \end{figure}
 
-% \subsubsection*{Contest Participation}
+\subsubsection*{Contest Participation}
 
-% Primary users can participate in coding contests hosted on the platform by navigating to the Contest List page from the main navigation menu. This page displays a list of upcoming and ongoing contests, along with relevant details such as contest name, start time, end time, and duration.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-1.jpeg}
-%     \vspace{0.6cm}
-%     \caption{Contest List}
-% \end{figure}
+Primary users can participate in coding contests hosted on the platform by navigating to the Contest List page from the main navigation menu. This page displays a list of upcoming and ongoing contests, along with relevant details such as contest name, start time, end time, and duration.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-1.png}
+    \vspace{0.6cm}
+    \caption{Contest List}
+\end{figure}
 
-% In order to view the details of a specific contest, the user can click on the contest name in the Contest List. This will take them to the Contest Detail page, where they can see the information about the contest, including the list of problems included in the contest and the rules for participation.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-3.jpeg}
-%     \vspace{0.6cm}
-%     \caption{Contest Detail}
-% \end{figure}
+In order to view the details of a specific contest, the user can click on the contest name in the Contest List. This will take them to the Contest Detail page, where they can see the information about the contest, including the list of problems included in the contest.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-2.png}
+    \vspace{0.6cm}
+    \caption{Contest Detail}
+\end{figure}
 
-% After the contest ended, user can view the leaderboard to see their ranking and performance compared to other participants by scrolling down below the contest detail.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-4.jpeg}
-%     \vspace{0.6cm}
-%     \caption{Contest Detail}
-% \end{figure}
 
-% In order to create a custom contest, the user can click on the \textbf{Create Contest} button in the Contest List page. Here, they can enter the contest name, select problems to include in the contest, set the start and end time, and define other contest settings.
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-2.jpeg}
-%     \vspace{0.6cm}
-%     \caption{Contest Creation}
-% \end{figure}
+In order to create a custom contest, moderator can go to the Contest monitor page. Here, they can enter the contest name, select problems to include in the contest, set the start and end time, and define other contest settings.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-3.png}
+    \vspace{0.6cm}
+    \caption{Contest Creation}
+\end{figure}
 
 \subsubsection*{Interview Preparation}
 Primary users can access the Interview Preparation feature from the main navigation menu. The Interview Preparation feature provides users with a curated list of coding problems and resources specifically designed to help them prepare for technical interviews. In the Interview Preparation page, there will be a conversation history section on the left side, displaying a list of previous interview preparation sessions. Users can select a session to view the details and continue their preparation or create a new session by clicking the \textbf{New Conversation} button.
@@ -187,26 +180,26 @@ A “Create Problem” button is positioned at the top-right corner of the inter
     \caption{Problem Request Create Modal}
 \end{figure}
 
-Users can also review any problem request by clicking on its corresponding row, which navigates them to the detailed view of that request. This page displays the full information of the problem request. All Moderators can view these details, but only Admins have permission to take action. At the bottom of the page, Admins can choose to Approve or Deny the request via two dedicated buttons.
-
+Moderators can also monitor submissions in real-time by navigating to the Submissions sidebar. This page displays a list of all submissions made by users, along with relevant details such as submission ID, user name, problem name, status (e.g., Accepted, Wrong Answer, Time Limit Exceeded), and submission time. Moderators can filter and sort the submissions based on various criteria to quickly identify any issues or patterns in user submissions.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_detail_1.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/submission_monitor.png}
     \vspace{0.6cm}
-    \caption{Problem Request Detail \#1}
+    \caption{Submission Monitor}
 \end{figure}
 
+Beside submissions, moderators can also monitor current discussions by navigating to the Discussions sidebar. This page displays a list of all active discussion threads, along with relevant details such as thread title, topic, number of messages, and last activity time. Moderators can filter and sort the discussions based on various criteria to quickly identify any issues or patterns in user discussions.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_detail_2.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/discussion_monitor.png}
     \vspace{0.6cm}
-    \caption{Problem Request Detail \#2}
+    \caption{Discussion Monitor}
 \end{figure}
 
-If an Admin selects Deny, a confirmation modal appears, requiring them to provide a mandatory explanation for the denial before the action can be confirmed.
+Moderator can also managing notifications and announcements to all users by navigating to the Notifications sidebar. This page displays a list of all notifications sent to users, along with relevant details such as notification type, recipient user name, content summary, and timestamp. Moderators can filter and sort the notifications based on various criteria to quickly identify any issues or patterns in user notifications.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_confirm_modal.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/app_notification.png}
     \vspace{0.6cm}
-    \caption{Problem Request Confirm Modal}
+    \caption{Notification Setting}
 \end{figure}
