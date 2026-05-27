@@ -13,7 +13,7 @@ Our system contains 6 main submodules:
 \begin{itemize}
     \item \textbf{Authentication \& Authorization}: Responsible for managing secure login and enforces Role-Based Access Control for 3 types of user.
     \item \textbf{Discussion}: Facilitates community interaction, allowing primary users to share solutions and ask questions related to problems. 
-    \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage problem creation, test cases, contests, user accounts, submissions, and global notifications.
+    \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage problem creation, test cases, contests, user accounts, submissions, discussions and global notifications.
     \item \textbf{Submission}: This core module handles the presentation of the coding challenge and the automatic evaluation of the user's submitted solution.
     \item \textbf{Contest}: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
     \item \textbf{Interview Practice}: Provides an AI agent that explains algorithmic concepts, recommends practice problems, lists solved or unsolved problems, and helps users debug failed submissions.
@@ -39,15 +39,17 @@ All users retain standard account management capabilities, including registering
 \clearpage
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/GeneralUsecase-SystemManagement.drawio.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 3/Usecase/Images/System-Management.drawio.png}
     \vspace{0.6cm}
     \caption{System Management Use Case}
 \end{figure}
 The \textbf{System Management submodule} is the administrative dashboard used exclusively by the \textbf{Moderator} and \textbf{Superadmin} roles to control the content and operation of the platform.
 \begin{itemize}
-    \item \textbf{Problem Management}: Only Superadmin is enabled to manage problems directly (create, modify, delete) without reviewing steps
-    \item \textbf{Content Workflow}: The Moderator initiates a Create Problem Request, and both the Moderator and Superadmin review problem requests before they go live.
+    \item \textbf{Problem Management}: Only Superadmin is enabled to manage problems directly (create, modify, delete) without reviewing steps. The Moderator initiates a Create Problem Request, and both the Moderator and Superadmin review problem requests before they go live.
     \item \textbf{Quality Control}: Both roles Monitor Submissions to track user activity, diagnose potential grading issues, and ensure fair play.
+    \item \textbf{Discussion Management}: Both roles Monitor Discussions to oversee user activity, identify and address inappropriate content, and uphold community standards.
+    \item \textbf{Contest Management}: Both roles review Create Contest Requests to ensure that contests meet quality standards and align with the platform's educational goals.
+    \item \textbf{User Management}: Both roles manage user accounts, including reviewing Create User Requests, modifying user information, and deleting accounts when necessary to maintain a safe and productive community environment.
 \end{itemize}
 \clearpage
 
