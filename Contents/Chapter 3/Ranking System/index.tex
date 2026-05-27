@@ -4,11 +4,11 @@ The ranking system is a core component of the platform, designed to motivate use
 
 \subsection*{Overall Ranking Mechanism}
 
-The platform maintains a global leaderboard that ranks all registered users based on their accumulated points obtained from solving programming problems. This leaderboard is dynamic and reflects the relative standing of users across the entire system. To balance data freshness and system performance, the displayed ranking is updated periodically rather than in real time.
+The platform maintains a global leaderboard that ranks all registered users based on their accumulated points obtained from solving programming problems. This leaderboard reflects the relative standing of users across the entire system and allows learners to compare their progress with others. However, to reduce server workload and avoid unnecessary real-time synchronization, the ranking data is not pushed to clients in real time.
 
-A background scheduling mechanism is implemented using a cron job that runs continuously 24/7. Every 30 minutes, the cron job retrieves the latest submission data of all users, recalculates their total scores, and updates the global leaderboard accordingly. This approach prevents excessive real-time updates that could lead to unnecessary resource consumption while still ensuring that the ranking remains sufficiently up to date for competitive and learning purposes.
+Instead, the frontend retrieves ranking data through the backend API when users access or refresh the leaderboard page. The backend calculates or returns the latest available ranking data based on accepted submissions and accumulated user scores. This request-based approach keeps the implementation simple and efficient while still providing users with sufficiently updated ranking information during normal platform usage.
 
-Although the public leaderboard is updated at fixed intervals, each user can always view their exact and up-to-date official rank and total score in their personal profile. This ensures transparency and allows users to accurately track their own progress regardless of the leaderboard refresh cycle.
+Although the leaderboard is not updated through real-time events, users can view their current score and ranking information whenever the relevant page or profile data is loaded from the backend. This design provides a practical balance between system performance, implementation complexity, and user experience.
 
 \subsection*{Point Allocation per Problem}
 
