@@ -58,6 +58,7 @@ The backend requires the following environment variables during deployment:
 \begin{itemize}
     \item \texttt{DATABASE\_URL}: connection string of the managed PostgreSQL database.
     \item \texttt{RABBITMQ\_URI}: AMQP connection string provided by CloudAMQP.
+    \item \texttt{N8N\_URL}: webhook endpoint used by the backend to forward chatbot requests to the n8n workflow.
     \item \texttt{CLIENT\_URL}: deployed Vercel frontend URL used for CORS configuration.
     \item \texttt{JWT\_ACCESS\_SECRET\_KEY} and \texttt{JWT\_REFRESH\_SECRET\_KEY}: secrets used for token generation.
     \item Third-party service credentials such as OAuth and Cloudinary credentials when enabled.
