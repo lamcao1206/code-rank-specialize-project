@@ -13,11 +13,10 @@ Our system contains 6 main submodules:
 \begin{itemize}
     \item \textbf{Authentication \& Authorization}: Responsible for managing secure login and enforces Role-Based Access Control for 3 types of user.
     \item \textbf{Discussion}: Facilitates community interaction, allowing primary users to share solutions and ask questions related to problems. 
-    \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage the problem creation, test cases, contests management and global user accounts.
-Contest: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
+    \item \textbf{System Management}: The administrative interface used by Moderator and Superadmin to manage problem creation, test cases, contests, user accounts, submissions, and global notifications.
     \item \textbf{Submission}: This core module handles the presentation of the coding challenge and the automatic evaluation of the user's submitted solution.
     \item \textbf{Contest}: Enables timed, high-stakes programming events with real-time ranking and automated leaderboards.
-    \item \textbf{Interview Practice}: Provides a simulated coding interview environment where users can practice solving problems with instant feedback, mimicking real-world technical interviews.
+    \item \textbf{Interview Practice}: Provides an AI agent that explains algorithmic concepts, recommends practice problems, lists solved or unsolved problems, and helps users debug failed submissions.
 \end{itemize}
 
 \subsection{Use-case diagrams for each submodule}
@@ -86,7 +85,7 @@ The \textbf{Contest} submodule is integral to the CodeRank platform, managing th
     \vspace{0.6cm}
     \caption{Interview Practice Use Case}
 \end{figure}
-The \textbf{Interview Practice} submodule is designed to simulate real-world coding interviews, providing users with a platform to practice and refine their problem-solving skills under conditions that mimic actual technical interviews. There will be a Conversation History leftside bar that allows users to easily navigate between previous interview sessions. Users can initiate a new practice session by selecting the \textbf{New Conversation} button, which start a new interview session specified time frame. The Chatbot will first asking the user to choose the topic that he/she wants to practice. After that, user can start the interview practice by solving the coding problems presented by the chatbot. Once the user submits their solution, the system will automatically evaluate the code and provide instant feedback, including correctness, efficiency, and potential improvements. This immediate response helps users learn from their mistakes and understand best practices in coding interviews.
+The \textbf{Interview Practice} submodule provides an AI agent for coding interview preparation. Users can ask the chatbot to explain algorithms and data structures, suggest practice problems by topic or difficulty, list solved problems, recommend unsolved problems, and analyze failed submissions. The conversation history sidebar allows users to navigate between previous sessions, while the \textbf{New Conversation} button starts a new tutoring session. When factual user-specific data is required, the chatbot retrieves it through backend-connected n8n tool workflows instead of generating unsupported results.
 
 \subsection{Use-case description tables}
 \input{Contents/Chapter 3/Usecase/Tables/uc-1.tex}
