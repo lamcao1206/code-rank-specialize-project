@@ -68,11 +68,11 @@ Each domain module represents a bounded context with clear ownership of its busi
 
 \subsubsection{Chatbot Module}
 \begin{itemize}
-    \item Intended to handle CRUD for AI conversation lifecycle (messages, sessions, histories).
-    \item Acts as an adapter between HTTP controllers and an AI agent service (conversation orchestration).
-    \item Stores or references conversation state and metadata for retrieval and continuation.
-    \item Handle async processing and retries for AI responses.
-    \item Integrates with infrastructure for calling external AI APIs and with message brokers for async tasks.
+    \item Manages the AI conversation lifecycle, including creating, listing, renaming, retrieving, and soft-deleting conversations.
+    \item Stores conversation metadata and message histories in the database, allowing users to continue previous chat sessions.
+    \item Acts as an adapter between HTTP controllers and the external n8n AI workflow by sending user messages to the configured n8n webhook.
+    \item Supports streaming chatbot responses to the client using Server-Sent Events (SSE), improving the real-time interaction experience.
+    \item Handles chatbot-related access control by ensuring that users can only access and modify their own conversations.
 \end{itemize}
 
 \subsubsection{Problem Module}
