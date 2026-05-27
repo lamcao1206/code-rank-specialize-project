@@ -42,8 +42,9 @@ In any software system, understanding the stakeholders is essential for defining
         \end{itemize}
     \item \textit{Interview Preparation (Virtual Assistant):}
         \begin{itemize}
-            \item The system shall offer a virtual assistant feature for practicing interview questions (e.g., mock interviews with predefined scenarios).
-            \item The system shall provide hints and feedback on interview responses.
+            \item The system shall provide an AI agent to support coding interview practice by explaining algorithms, data structures, problem-solving patterns, and complexity analysis.
+            \item The system shall recommend practice problems based on topic, difficulty, and the user's solved or unsolved problem history.
+            \item The system shall assist users in debugging failed submissions by providing hints, identifying bugs, explaining test case issues, and suggesting correct or optimal approaches.
         \end{itemize}
 \end{enumerate}
 \vspace{0.3cm}
@@ -67,6 +68,23 @@ In any software system, understanding the stakeholders is essential for defining
             \item The system shall enable moderators to define contest duration and problem sets.
             \item The system shall provide real-time monitoring of contest progress and participant activity.
         \end{itemize}
+    \item \textit{User Management:}
+        \begin{itemize}
+            \item The system shall allow moderators to view detailed user account information.
+            \item The system shall allow moderators to enable or disable user accounts when necessary.
+        \end{itemize}
+
+    \item \textit{Submission Management:}
+        \begin{itemize}
+            \item The system shall allow moderators to view the list of user submissions.
+            \item The system shall enable moderators to filter submissions by user, problem, status, programming language, and submission time.
+        \end{itemize}
+
+    \item \textit{Notification Management:}
+        \begin{itemize}
+            \item The system shall allow moderators to create, edit, and delete global system notifications.
+            \item The system shall allow moderators to view and manage the visibility status of notifications.
+        \end{itemize}
 \end{enumerate}
 \vspace{0.3cm}
 \noindent \textbf{\Large Superadmin}
@@ -81,7 +99,7 @@ The Superadmin shall possess all the functional capabilities and permissions gra
 \end{enumerate}
 
 \subsection{Non-functional requirements}
-\noindent \textit{Performance:} The system shall support at least 1,000 concurrent users while maintaining minimal latency during contests. Code submissions must be evaluated and feedback returned within 3 seconds for standard test cases, ensuring a responsive and smooth user experience.\\
+\noindent \textit{Performance:} The system shall support at least 1,000 concurrent users while maintaining minimal latency during contests. Code submissions must be evaluated and feedback returned within 5 seconds for standard test cases, ensuring a responsive and smooth user experience.\\
 
 \noindent \textit{Scalability:} The system shall be designed to support horizontal scaling, allowing it to handle increasing numbers of users and higher workloads by adding additional servers or computational resources as needed.\\
 
