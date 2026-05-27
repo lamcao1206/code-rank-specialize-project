@@ -54,7 +54,6 @@ The \textbf{Domain Layer} represents the heart of the application, where all bus
 \begin{itemize}
     \item Domain Entities such as Problem, Discussion, Contest, and Submission.
     \item Value Objects that encapsulate immutable attributes or concepts.
-Domain Events used to capture and react to significant changes within the system.
     \item Domain Events used to capture and react to significant changes within the system.
 \end{itemize}
 
@@ -65,7 +64,6 @@ The \textbf{Infrastructure Layer} provides the technical capabilities required t
 \begin{itemize}
     \item \textbf{Repositories}, which manage communication with the PostgreSQL database.
     \item \textbf{RabbitMQ Adapters}, responsible for publishing and consuming messages for asynchronous processing.
-Domain Events used to capture and react to significant changes within the system.
     \item \textbf{WebSocket Adapters}, enabling real-time communication such as live updates for submissions or discussion activities.
 \end{itemize}
 
