@@ -2,34 +2,80 @@
 
 \subsection{Gemini Models from Google AI}
 
-Gemini is a family of large language models developed by Google DeepMind, designed to support multimodal understanding including text, code, and structured data. These models are optimized for reasoning tasks, natural language understanding, and software engineering-related applications.
+Gemini is a family of large language models developed by Google DeepMind and provided through the Google AI ecosystem. The model family is designed to handle natural language understanding, reasoning, code-related tasks, and multimodal inputs. These capabilities make Gemini suitable for educational software systems in which the AI component must interpret user questions, reason about programming problems, and produce explanations that are understandable to learners.
 
-In the CodeRank system, Gemini is used as the core AI engine powering the chatbot and coding interview assistant. The system primarily leverages the text and code understanding capabilities of the model.
+In the CodeRank system, Gemini is selected as the core language model for the AI-powered chatbot and coding interview assistant. The chatbot is expected to support several tasks that are more complex than simple question answering, including explaining algorithmic concepts, recommending practice problems, generating hints, analyzing failed submissions, and guiding users through technical interview-style conversations. These tasks require the model to understand both natural language and programming-related context.
 
-\textbf{Rationale for Selection:}
+The main reasons for selecting Gemini are summarized as follows:
 \begin{itemize}
-    \item Strong performance in code generation and reasoning tasks
-    \item Suitable for educational and interview-style conversational systems
-    \item Large context window supporting multi-turn dialogue
-    \item Low-latency inference with Gemini 2.5 Flash
+    \item \textbf{Strong reasoning capability:} Gemini is suitable for tasks that require step-by-step reasoning, such as explaining algorithmic approaches, identifying mistakes in submitted code, and discussing time and space complexity.
+    
+    \item \textbf{Code understanding support:} Since CodeRank focuses on programming practice, the chatbot must understand code snippets, problem statements, test cases, and common algorithmic patterns. Gemini provides a practical foundation for these code-centric interactions.
+    
+    \item \textbf{Conversational context handling:} Interview preparation is naturally multi-turn. Gemini can operate with contextual prompts and conversation memory, allowing the chatbot to provide responses that are consistent with previous user messages.
+    
+    \item \textbf{Real-time suitability:} The chatbot must respond with low perceived latency in order to maintain a natural learning experience. Gemini 2.5 Flash provides a reasonable balance between response quality, latency, and operational cost for this use case.
+    
+    \item \textbf{Cost efficiency for early deployment:} The availability of accessible usage tiers through Google AI Studio helps reduce initial deployment cost, which is important during prototype development and academic project evaluation.
 \end{itemize}
 
-The project uses Gemini 2.5 Flash, which provides a balance between performance and computational efficiency. It is suitable for real-time chatbot applications requiring fast response generation.
+For these reasons, Gemini is an appropriate choice for the AI layer of CodeRank. It provides sufficient language and code reasoning capability while remaining practical for a real-time educational chatbot. In addition, Gemini can be integrated through workflow automation platforms, allowing the project to separate AI orchestration logic from the main backend application.
 
-Another important factor is cost efficiency. The availability of a free-tier quota through Google AI Studio significantly reduces operational cost, making it suitable for prototype development and initial deployment phases.
+\subsection{Workflow Automation for AI Agent Orchestration}
 
-\subsection{n8n Workflow Automation Platform}
+Modern AI-powered applications often require more than a direct request-response connection to a language model. In the CodeRank chatbot, the AI assistant must receive user messages, maintain conversation context, call backend services, retrieve problem or submission data, and return a structured response to the frontend. Implementing all of this logic directly inside the backend would tightly couple AI behavior with application business logic and make future changes more difficult.
 
-n8n is an open-source workflow automation platform that enables integration between APIs, services, and AI models through a node-based visual workflow system. It supports event-driven execution and allows developers to design data pipelines without tightly coupling logic into application code.\cite{n8n}
+To address this issue, the project integrates an automation workflow layer to implement the AI agent. A workflow automation platform acts as an orchestration layer between the frontend, backend services, memory component, external APIs, and the Gemini model. It allows the system to define agent behavior as a set of connected nodes, where each node performs a specific task such as receiving a webhook request, invoking the language model, calling backend APIs, or storing conversational context.
 
-In the CodeRank system, n8n is used as the orchestration layer for AI-related workflows, particularly for chatbot processing and interaction management.
+\subsubsection{n8n}
 
-\textbf{Rationale for Selection:}
-\begin{itemize}
-    \item Supports rapid integration with APIs and AI services
-    \item Provides visual workflow design for easier development
-    \item Reduces coupling between frontend, backend, and AI logic
-    \item Enables extensibility for future AI enhancements such as RAG or multi-agent systems
-\end{itemize}
+n8n is a workflow automation platform that allows developers to build workflows through a visual node-based interface. Each workflow is composed of connected nodes, where each node represents a specific operation such as receiving a webhook request, transforming data, calling an external API, invoking an AI model, or executing another workflow. n8n supports both cloud usage and self-hosting, which makes it flexible for different deployment requirements.\cite{n8n}
 
-n8n serves as the middleware layer that connects the frontend system with the Gemini model and backend services in a structured and maintainable manner.
+For AI-based applications, n8n is especially useful because it provides AI Agent nodes, language model nodes, memory nodes, and tool workflow integration. These features allow an AI agent to reason over user input and call predefined tools when external information is required. In the context of CodeRank, this structure matches the chatbot requirement because the agent must communicate with Gemini while also retrieving real data from backend services.
+
+\subsubsection{Zapier}
+
+Zapier is a popular workflow automation platform focused on connecting applications and automating business processes. It provides a large ecosystem of integrations with third-party software services and allows users to create automated workflows without extensive programming effort. Zapier also provides AI automation capabilities through Zapier Agents, which can execute tasks across connected applications.\cite{zapier_agents}
+
+Zapier is strong for business-oriented automation and software-as-a-service integration. However, the CodeRank chatbot requires deeper control over backend API calls, authenticated user context, custom workflow tools, and detailed inspection of each agent execution. Therefore, although Zapier is mature and convenient, it is less aligned with the developer-centric architecture required by this project.
+
+\subsubsection{Make}
+
+Make is a visual automation platform that allows users to design scenarios connecting applications, APIs, and data transformation steps. It provides a flexible visual interface and supports webhook-based automation, making it suitable for many integration and operational workflows.\cite{make_platform}
+
+Make is effective for building general automation scenarios and connecting cloud services. Nevertheless, the CodeRank chatbot requires an AI-agent workflow that can combine model reasoning, memory, and reusable tool workflows. While Make can support AI-related automation through API integrations, n8n provides a workflow structure that is more directly suitable for implementing and documenting an AI agent pipeline.
+
+\subsubsection{Pipedream}
+
+Pipedream is a developer-oriented automation platform that combines event-driven workflows with code-level customization. It is well suited for developers who need to integrate APIs, process events, and write custom logic inside workflow steps.\cite{pipedream_docs}
+
+Pipedream provides strong flexibility for API integration and custom code execution. However, its workflow model is more code-centered than the visual AI-agent structure needed for the CodeRank chatbot documentation. Since the project benefits from a workflow that can be visually inspected and explained in the graduation report, n8n provides a more appropriate balance between developer control and visual clarity.
+
+\subsubsection{Comparison of Workflow Automation Platforms}
+
+Several workflow automation platforms were considered for this role, including n8n, Zapier, Make, and Pipedream. These platforms provide different levels of visual design, developer customization, API integration, and AI-agent support. Table~\ref{tab:workflow-automation-comparison} presents a comparison of these alternatives.
+
+\begin{table}[H]
+\centering
+\caption{Comparison of workflow automation platforms for AI agent orchestration}
+\label{tab:workflow-automation-comparison}
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|p{2.1cm}|p{2.55cm}|p{2.55cm}|p{2.55cm}|p{2.55cm}|}
+\hline
+\textbf{Platform} & \textbf{Strengths} & \textbf{AI Agent Support} & \textbf{Integration Capability} & \textbf{Suitability for CodeRank} \\
+\hline
+n8n & Visual node-based workflow design, open-source orientation, cloud and self-hosting options, detailed execution logs & Supports AI Agent nodes, model nodes, memory nodes, and workflow tools & Strong webhook, HTTP request, API, and custom workflow integration support & High. It fits the need for a developer-oriented, observable, and extensible AI orchestration layer \\
+\hline
+Zapier & Mature automation ecosystem with many application integrations and user-friendly configuration & Provides Zapier Agents and AI automation features & Strong third-party SaaS integration support & Medium. It is convenient for business automation but less suitable for custom backend-centered academic implementation \\
+\hline
+Make & Visual scenario builder with many application connectors and flexible automation flows & Supports AI-related automation and API-based scenarios & Good webhook and application integration support & Medium. It is powerful for visual automation, but n8n provides a more suitable balance of developer control and AI workflow composition \\
+\hline
+Pipedream & Developer-focused workflow automation with code-level customization and API integration & Can integrate AI services through code and API steps & Strong HTTP, event, and code-based integration support & Medium. It is flexible for developers, but the visual AI-agent workflow model is less aligned with the project's documentation and maintainability goals \\
+\hline
+\end{tabular}
+\end{table}
+
+Based on this comparison, n8n was selected as the workflow automation platform for the CodeRank AI agent. The main reason is that n8n provides both visual workflow design and developer-level flexibility. It supports webhook-based entry points, AI Agent nodes, memory nodes, and reusable tool workflows, which match the architecture required by the chatbot. In addition, n8n's execution logs make it easier to inspect each step of the agent pipeline during debugging and evaluation.
+
+In the CodeRank system, n8n serves as the middleware layer that connects the backend API, Gemini model, conversational memory, and backend data retrieval tools. This design improves maintainability because prompt logic, tool routing, and AI behavior can be adjusted inside the workflow without requiring major changes to the frontend or backend codebase.

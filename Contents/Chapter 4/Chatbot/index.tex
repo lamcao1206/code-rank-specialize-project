@@ -1,80 +1,123 @@
 \section{Chatbot Implementation}
 
-This section describes the detailed implementation of the chatbot subsystem in the CodeRank system. The implementation focuses on enabling real-time, streaming-based conversational interaction between the user and the AI assistant.
-
-The chatbot is implemented using a multi-layer architecture consisting of the frontend client, backend API server, n8n workflow engine, and Gemini large language model. A key feature of the system is the use of Server-Sent Events (SSE) to support streaming responses, providing a real-time chat experience similar to modern AI assistants.
+This section describes the implementation of the chatbot subsystem in the CodeRank system. The chatbot is implemented as a multi-layer integration consisting of the frontend client, backend API server, n8n workflow engine, Gemini large language model, and backend tool APIs. The implementation focuses on three main requirements: secure user identification, real-time conversational interaction, and reliable access to CodeRank data during AI responses.
 
 \subsection{End-to-End Chatbot Request Flow}
 
-When a user interacts with the chatbot, the system processes the request through the following sequence:
+When a user interacts with the chatbot, the request is processed through the following sequence:
 
 \begin{enumerate}
-    \item The user submits a message from the frontend chatbot interface.
+    \item The authenticated user submits a message from the CodeRank frontend chatbot interface.
     
-    \item The frontend immediately sends the message to the backend API server using an HTTP request.
+    \item The frontend sends the message to the backend chatbot endpoint together with the conversation session identifier.
     
-    \item The backend receives the request and initiates a processing pipeline by calling an internal chatbot service.
+    \item The backend applies JWT authentication to verify the access token and identify the current user.
     
-    \item The backend triggers an n8n workflow via a webhook, passing the user input and conversation metadata.
+    \item After authentication succeeds, the backend extracts the trusted \texttt{userId} from the JWT payload and constructs the payload for n8n. The backend does not rely on a user identifier directly supplied by the client.
     
-    \item n8n processes the request and communicates with the Gemini model to generate a response.
+    \item The backend calls the n8n webhook endpoint and passes the required fields, including \texttt{chatInput}, \texttt{sessionId}, and \texttt{userId}.
     
-    \item The response is streamed back from n8n to the backend.
+    \item The n8n workflow executes the AI Agent pipeline. The agent uses Gemini for reasoning, Simple Memory for short-term context, and tool workflows when backend data is required.
     
-    \item The backend forwards the streamed response to the frontend using Server-Sent Events (SSE).
+    \item If the agent needs factual data, it invokes one of the connected tool workflows. These tools call internal backend APIs such as problem resolution, solved problem lookup, unsolved recommendation, and failed submission retrieval.
     
-    \item The frontend renders the response incrementally in real time as tokens are received.
+    \item The generated response is streamed back through the backend.
+    
+    \item The backend forwards response chunks to the frontend using Server-Sent Events (SSE), allowing the user interface to render the answer progressively.
 \end{enumerate}
 
-This architecture ensures low-latency interaction and improves user experience by allowing the response to appear progressively instead of waiting for the full output.
+This flow allows the chatbot to behave like a real-time assistant while preserving the backend as the security boundary of the system.
 
-\subsection{Backend Processing and Streaming Architecture}
+\subsection{JWT Authentication and User Context}
 
-The backend plays a critical role in managing request orchestration and enabling real-time response streaming.
+Authentication is handled at the backend layer before any request is forwarded to n8n. The frontend includes the user's JWT access token when calling the chatbot endpoint. The backend validates this token using the configured JWT authentication mechanism. If the token is missing, expired, or invalid, the request is rejected before it reaches the AI workflow.
 
-After receiving the request from the frontend, the backend does not wait for the full response from the AI pipeline. Instead, it establishes a Server-Sent Events (SSE) connection with the client and acts as a streaming proxy between n8n and the frontend.
+After a request is authenticated, the backend extracts the user identity from the validated token payload. This identity is then attached to the n8n request as \texttt{userId}. This design is important because several chatbot tools require user-specific data. For example, solved problem lookup and unsolved recommendation must operate on the authenticated user's account, not on a user identifier that could be modified from the client side.
 
-The backend performs the following tasks:
-
+The n8n webhook is therefore treated as an integration endpoint behind the backend rather than a public endpoint directly exposed to the frontend. This design provides the following security benefits:
 \begin{itemize}
-    \item Validates incoming chatbot requests
-    \item Forwards the request to the n8n webhook endpoint
-    \item Receives streamed response chunks from n8n
-    \item Forwards each chunk to the frontend via SSE channel
+    \item The frontend cannot directly invoke the workflow with an arbitrary \texttt{userId}.
+    
+    \item The backend remains responsible for authentication, authorization, and request validation.
+    
+    \item User-specific tool calls in n8n are based on a trusted identity derived from JWT authentication.
+    
+    \item The AI workflow can focus on orchestration logic without duplicating the backend authentication mechanism.
 \end{itemize}
 
-This streaming mechanism allows the system to handle long AI-generated responses efficiently while maintaining responsiveness.
+\subsection{n8n Workflow Implementation}
 
-\subsection{n8n Workflow Execution and Streaming Response}
+The main chatbot workflow in n8n is implemented as an AI agent workflow. The workflow starts with a POST webhook that receives the payload sent by the backend. The payload includes the current user message, the conversation session identifier, and the authenticated user identifier.
 
-Within the n8n workflow, the chatbot request is processed through multiple stages including context retrieval, prompt construction, and LLM inference.
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Chatbot/n8n_workflow.png}
+    \vspace{0.6cm}
+    \caption{n8n Agent Workflow for CodeRank Chatbot}
+\end{figure}
 
-Unlike traditional synchronous APIs, the integration is designed to support incremental response generation. As the Gemini model produces output, n8n streams partial results back to the backend instead of waiting for the full completion.
+The workflow is organized around the AI Agent node. The agent receives the user input from \texttt{chatInput} and uses the configured system prompt to determine the appropriate response mode. The workflow includes the following major components:
 
-This streaming behavior is essential for enabling real-time chat experiences and reducing perceived latency.
-
-The workflow acts as an intermediate layer that:
 \begin{itemize}
-    \item Receives user input from the backend via webhook
-    \item Processes conversational context and memory
-    \item Sends structured prompts to the Gemini model
-    \item Streams generated tokens or response chunks back to the backend
+    \item \textbf{Webhook node:} Receives chatbot requests from the backend using HTTP POST. The webhook is configured for streaming response behavior so that generated output can be returned incrementally.
+    
+    \item \textbf{AI Agent node:} Acts as the central controller of the chatbot. It interprets the user message, decides whether a tool call is required, and produces the final response.
+    
+    \item \textbf{Gemini model node:} Provides the language model capability for reasoning and response generation. Gemini is used to understand user intent, explain algorithmic concepts, analyze code-related questions, and compose educational responses.
+    
+    \item \textbf{Simple Memory node:} Maintains conversational context by using \texttt{sessionId} as the memory key. The memory window stores the latest 20 messages, which helps the chatbot maintain continuity within an interview practice session.
+    
+    \item \textbf{Tool workflow nodes:} Allow the agent to call controlled backend operations. These tools provide access to problem metadata, solved problem lists, unsolved recommendations, and failed submissions.
 \end{itemize}
 
-\subsection{Frontend Streaming with Server-Sent Events (SSE)}
+The tool workflows are implemented as reusable sub-workflows. Each sub-workflow starts with an \texttt{Execute Workflow Trigger} node and then calls a specific backend API through an HTTP Request node. This structure makes the tool layer modular and easier to extend. When a new chatbot capability is needed, a new tool workflow can be added without redesigning the entire agent pipeline.
 
-On the frontend side, the chatbot interface establishes a persistent SSE connection with the backend.
+\subsection{Implemented Tool Workflows}
 
-When a user sends a message, the frontend immediately displays a loading state and begins listening for streamed response events.
+The current chatbot agent uses the following tool workflows:
 
-As the backend receives chunks of data from n8n, it forwards them to the frontend incrementally. The frontend then appends each received chunk to the chat interface in real time.
-
-This results in a typewriter-like effect where the response appears progressively, significantly improving user experience compared to traditional request-response models.
-
-The SSE-based approach provides the following benefits:
 \begin{itemize}
-    \item Low latency response rendering
-    \item Improved perceived system performance
-    \item Smooth real-time interaction experience
-    \item Reduced waiting time for long AI outputs
+    \item \textbf{Resolve Problem Tool:} Calls the backend problem resolution API to find a problem by slug, title, or fuzzy keyword. This tool is used before problem-specific debugging or explanation.
+    
+    \item \textbf{Get Failed Submission Tool:} Calls the backend submission API to retrieve the latest failed submission of the authenticated user for a resolved problem. This allows the chatbot to explain likely errors based on the user's actual failed attempt.
+    
+    \item \textbf{Get Problem List:} Retrieves a list of problems related to a requested topic or tag. This tool supports general practice problem recommendation.
+    
+    \item \textbf{Get Unsolved Recommendations Tool:} Retrieves recommended problems that the current user has not solved yet. The backend performs the filtering against the user's solved problem list, and the chatbot only presents the returned recommendations.
+    
+    \item \textbf{Get Solved Problems Tool:} Retrieves all problems solved by the authenticated user. This tool is used when the user asks for solved problem history or progress information.
+\end{itemize}
+
+These tools ensure that the chatbot does not invent system data. For user-specific requests, the agent must call the relevant tool and base its response on the returned backend data.
+
+\subsection{Streaming Response with Server-Sent Events}
+
+The chatbot is designed to provide a real-time interaction experience. Instead of waiting until the full AI response is completed, the backend forwards generated response chunks to the frontend using Server-Sent Events.
+
+The streaming process works as follows:
+\begin{enumerate}
+    \item The frontend opens an SSE connection after sending the chatbot message.
+    
+    \item The backend triggers the n8n workflow and listens for streamed output.
+    
+    \item As n8n and Gemini produce response chunks, the backend forwards each chunk to the frontend through the SSE channel.
+    
+    \item The frontend appends each received chunk to the chatbot interface, creating a progressive response-rendering effect.
+\end{enumerate}
+
+This approach improves perceived performance because users can start reading the answer before the complete response is generated. It is especially useful for educational answers that may include explanations, code analysis, and complexity discussion.
+
+\subsection{Implementation Benefits}
+
+The implemented chatbot architecture provides several practical benefits:
+\begin{itemize}
+    \item \textbf{Security:} JWT authentication is enforced by the backend before the workflow is triggered, and the trusted user identity is passed to n8n only after validation.
+    
+    \item \textbf{Maintainability:} Prompt logic, model configuration, memory, and tool routing are managed in n8n, reducing the amount of AI-specific logic inside the backend codebase.
+    
+    \item \textbf{Extensibility:} New chatbot tools can be implemented as additional n8n sub-workflows connected to the agent.
+    
+    \item \textbf{Reliability:} Backend data is retrieved through explicit tools, which reduces hallucination for solved problems, unsolved recommendations, problem slugs, URLs, and submission records.
+    
+    \item \textbf{User experience:} SSE streaming allows responses to appear progressively, creating a smoother conversational interface.
 \end{itemize}

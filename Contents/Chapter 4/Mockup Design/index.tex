@@ -113,7 +113,7 @@ To create a new discussion thread, the user can click in the button \textbf{Crea
 Primary users can access the Interview Preparation feature from the main navigation menu. The Interview Preparation feature provides users with a curated list of coding problems and resources specifically designed to help them prepare for technical interviews. In the Interview Preparation page, there will be a conversation history section on the left side, displaying a list of previous interview preparation sessions. Users can select a session to view the details and continue their preparation or create a new session by clicking the \textbf{New Conversation} button.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/inteview-1.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/interview-1.png}
     \vspace{0.6cm}
     \caption{Interview Preparation Page}
 \end{figure}
@@ -126,6 +126,48 @@ After logging in as a Moderator/Admin, the user will be directed to the Moderato
     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/admin-1.png}
     \vspace{0.6cm}
     \caption{Moderator Dashboard}
+\end{figure}
+
+The Moderator/Admin dashboard also provides centralized management interfaces for major platform resources. These interfaces allow privileged users to inspect system data, update operational content, and perform moderation actions from a consistent administrative workspace.
+
+The Discussion Management interface displays all discussion threads available in the system. From this screen, Moderators/Admins can open a discussion detail page, review its comments, edit inappropriate content when necessary, or delete discussions and comments that violate platform policies.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/discussion_management.png}
+    \vspace{0.6cm}
+    \caption{Discussion Management}
+\end{figure}
+
+The Contest Management interface supports the creation, editing, and maintenance of contest content. Moderators/Admins can configure contest information, update contest details, and manage contest-related content from a single administrative view.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/contest_management.png}
+    \vspace{0.6cm}
+    \caption{Contest Management}
+\end{figure}
+
+The User Management interface is used to administer user accounts across the platform. It allows Moderators/Admins to view user details, delete users when required, and toggle account status to enable or disable access according to moderation decisions.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/user_management.png}
+    \vspace{0.6cm}
+    \caption{User Management}
+\end{figure}
+
+The Submission Management interface provides visibility into user submissions in the system. It helps Moderators/Admins review submission records, monitor judging results, and inspect submission-related information for operational or moderation purposes.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/submission_management.png}
+    \vspace{0.6cm}
+    \caption{Submission Management}
+\end{figure}
+
+The Notification Management interface is used to manage global notifications displayed on user-facing pages. Moderators/Admins can create new notifications, view existing notification details, delete outdated notifications, and control whether a notification is visible to users.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/notification_management.png}
+    \vspace{0.6cm}
+    \caption{Notification Management}
 \end{figure}
 
 Moderators/Admins can manage problem create requests submitted by another Moderator by navigating to the Problems sidebar, where a list of all problem requests is displayed along with their Difficulty level, color-coded for quick reference (Easy, Medium, Hard). In addition, this list is paginated, showing 10 items per page to ensure clear and efficient navigation.
@@ -168,4 +210,3 @@ If an Admin selects Deny, a confirmation modal appears, requiring them to provid
     \vspace{0.6cm}
     \caption{Problem Request Confirm Modal}
 \end{figure}
-

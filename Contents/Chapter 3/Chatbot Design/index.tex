@@ -1,286 +1,202 @@
 \section{Chatbot Design}
+
 \subsection{Overview}
-A chatbot, short for "chat robot", is an artificial intelligence (AI) software designed to simulate conversations with human users, especially over the internet. They interact with humans in their natural languages, typically through messaging applications, mobile apps or through a website. Chatbots can be programmed to respond the same way each time, to respond differently to messages containing specific keywords, or to use machine learning to adapt their responses to fit the situation. \cite{chatbot_definition}
 
-In the context of CodeRank System, the chatbot is an AI-powered interactive interview coach designed to assist learners practicing technical coding interviews, particularly algorithm problems. The system leverages Google Gemini as the underlying large language model (LLM) and LangChain as the orchestration framework that structures prompts, manages conversational flow, and implements contextual memory.
+A chatbot is an artificial intelligence software component designed to simulate conversation with human users through natural language interfaces.\cite{chatbot_definition} In CodeRank, the chatbot is designed as an AI-powered learning assistant for programming practice and technical interview preparation. Its purpose is not only to answer general questions, but also to guide users through algorithmic thinking, recommend suitable practice problems, and help users understand mistakes in failed submissions.
 
-The goal of the chatbot is to simulate real interview scenarios through step-by-step dialogue, enabling learners to experience guided practice, receive hints, refine answers, and develop a deeper understanding of algorithmic problem-solving techniques. To achieve human-like interaction, the chatbot must:
+The chatbot is implemented as an AI agent orchestrated by n8n and powered by Gemini as the underlying large language model. Instead of directly connecting the frontend to the AI model, CodeRank routes chatbot requests through the backend and an n8n workflow. This design allows the chatbot to combine language-model reasoning with real data retrieved from CodeRank services, such as solved problems, problem metadata, and failed submission records.
+
+The main design objectives of the chatbot are:
 \begin{enumerate}
-    \item Understand user inputs
-    \item Maintain awareness of previous exchanges
-    \item Adapt its questioning based on user responses
-    \item Provide constructive and relevant feedback
-    \item Prevent context loss during long interview sessions
+    \item Understand user requests related to algorithms, data structures, problem practice, and submission debugging.
+    \item Maintain short-term conversational context across multiple messages in the same session.
+    \item Use backend tools when factual system data is required, rather than generating unsupported answers.
+    \item Provide responses that are educational, concise, and suitable for interview preparation.
+    \item Separate AI orchestration logic from frontend and backend business logic.
 \end{enumerate}
 
-\subsection{Use case analysis}
-To ensure consistent behavior and maintain the structured flow of a technical interview, the chatbot uses a System Prompt, also known as a behavioral instruction prompt. This prompt defines the chatbot's role as an AI interview coach and outlines the rules that govern how it interacts with the user. The following system prompt defines the chatbot's role and behavior during the structured mock interview process:
+\subsection{n8n Agent Architecture}
+
+The chatbot subsystem is designed around the \textbf{Agent 2} workflow in n8n. This workflow acts as an orchestration layer between the CodeRank backend, Gemini, short-term memory, and several tool workflows that retrieve data from backend APIs.
+
+\textbf{Main workflow components:}
+\begin{itemize}
+    \item \textbf{Webhook Trigger:} Receives chatbot requests from the backend through an HTTP POST request. The request body contains the user message as \texttt{chatInput}, the conversation key as \texttt{sessionId}, and the authenticated user identifier as \texttt{userId}.
+    
+    \item \textbf{AI Agent Node:} Controls the chatbot behavior. It receives the user message, applies the system message, decides whether a tool call is necessary, and generates the final response.
+    
+    \item \textbf{Gemini Chat Model:} Provides the language understanding and reasoning capability used by the agent to explain concepts, infer user intent, and compose natural-language responses.
+    
+    \item \textbf{Simple Memory:} Maintains short-term conversation context using \texttt{sessionId} as the memory key. The configured context window stores the most recent 20 messages, allowing the chatbot to respond consistently within the same conversation.
+    
+    \item \textbf{Workflow Tools:} Provide controlled access to backend data. These tools are invoked by the agent only when the user request requires factual information from the CodeRank system.
+\end{itemize}
+
+This architecture supports a clear separation of responsibilities. The backend remains responsible for authentication, authorization, and domain APIs. n8n is responsible for agent orchestration and tool routing. Gemini is responsible for reasoning and response generation. The frontend is responsible for presenting the conversation to the user.
+
+\subsection{Agent Tool Design}
+
+The agent is connected to several tool workflows. Each tool workflow encapsulates one backend operation and exposes a restricted input interface to the AI agent. This design prevents the model from directly accessing arbitrary backend endpoints and ensures that tool calls remain aligned with predefined system capabilities.
+
+\begin{table}[h]
+\centering
+\caption{Tool workflows used by the CodeRank chatbot agent}
+\label{tab:chatbot-tool-workflows}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{|p{4.2cm}|p{5.2cm}|p{5.2cm}|}
+\hline
+\textbf{Tool Workflow} & \textbf{Purpose} & \textbf{Main Inputs} \\
+\hline
+Resolve Problem Tool & Resolves a problem from a slug, title, or fuzzy keyword before the agent performs problem-specific reasoning & \texttt{query}, optional \texttt{level} \\
+\hline
+Get Failed Submission Tool & Retrieves the latest failed submission of the authenticated user for a resolved problem & \texttt{userId}, \texttt{problemId} \\
+\hline
+Get Problem List & Retrieves practice problems related to a topic or tag & \texttt{keyword} \\
+\hline
+Get Unsolved Recommendations Tool & Recommends problems that the current user has not solved yet, optionally filtered by topic and difficulty & \texttt{userId}, \texttt{keyword}, \texttt{level}, \texttt{limit} \\
+\hline
+Get Solved Problems Tool & Retrieves the list of problems solved by the current user & \texttt{userId} \\
+\hline
+\end{tabular}
+\end{table}
+
+The use of these tool workflows is important because several chatbot responses depend on user-specific data. For example, when a user asks for solved problems, the chatbot must call the solved-problem tool and return only the records received from the backend. Similarly, when a user asks for unsolved recommendations, the chatbot must rely on the recommendation tool because the backend is responsible for filtering out already solved problems.
+
+\subsection{System Prompt Design}
+
+The system prompt defines the role, capabilities, and tool-selection rules of the chatbot agent. In CodeRank, the prompt is designed to reduce hallucination by requiring the agent to call tools for factual system data and by prohibiting the generation of fake problem identifiers, URLs, solved statuses, or submission records.
+
 \begin{tcolorbox}[
-    colback=white,      % White background
-    colframe=black,     % Black border
-    boxrule=0.8pt,      % Border thickness
-    breakable,          % Allow page breaks
-    sharp corners,      % Square corners
-    listing only,       % Use listings engine
+    colback=white,
+    colframe=black,
+    boxrule=0.8pt,
+    breakable,
+    sharp corners,
+    listing only,
     listing options={
-        basicstyle=\ttfamily\small,
-        breaklines=true,      % Wrap long lines
-        columns=fullflexible  % Prevent overflow
+        basicstyle=\ttfamily\scriptsize,
+        breaklines=true,
+        columns=fullflexible
     }
 ]
 \begin{verbatim}
-You are an AI interview coach for coding interviews.
-Your job is to conduct a structured mock interview.
+You are Tutor Agent for coding interview practice.
 
-Rules:
-1. The FIRST message you receive from the user is the topic they want
-to practice (e.g., arrays, dynamic programming, graphs).
+Capabilities:
+- Explain algorithm/data structure topics
+- Recommend problems by topic/tag/difficulty
+- List solved problems for the current user
+- Recommend unsolved problems for the current user
+- Provide hints
+- Explain bugs in failed submissions
+- Explain correct/optimal approaches
+- Analyze testcase and complexity issues
 
-2. After the user chooses a topic, ask ONE coding problem at a time.
+SOLVED LIST MODE
+If user asks which problems they solved, solved list, solved problems,
+or Vietnamese requests like "toi da solved bai nao",
+"danh sach bai da giai", "bai da lam":
+1. Call `Get Solved Problems Tool`.
+2. Pass current webhook userId automatically.
+3. Return solvedProblems from the tool with title/name,
+   difficulty/level, slug, and URL.
+4. Include total if returned.
+5. If solvedProblems is empty, say no solved problems were found.
+6. Never invent solved problems, IDs, slugs, URLs, or solved status.
 
-3. After giving a question:
-   - Wait for the user’s solution attempt.
-   - Do NOT evaluate until the user submits a solution.
-   - If the user is not ready, ask them to type their solution 
-   when ready.
+UNSOLVED RECOMMENDATION MODE
+If user asks for problems they have not solved yet,
+unsolved problems, remaining problems, next practice problems,
+or Vietnamese requests like "bai chua solved", "bai chua lam",
+"goi y bai chua giai":
+1. Call `Get Unsolved Recommendations Tool`.
+   Do not use `Get Problem List` for this mode.
+2. Pass current webhook userId automatically.
+   Infer keyword/topic and level from the message.
+   Default limit to 5.
+3. Use returned `recommendations` only.
+   These are already filtered against `solvedProblemIds` by backend.
+4. If recommendations are empty, say there are no matching unsolved
+   recommendations for that filter.
+   Ask whether to broaden topic/difficulty.
+5. Return up to 5 recommendations with title/name,
+   difficulty/level, slug, URL, and a short reason.
+6. Never invent solved status, problem IDs, slugs, URLs,
+   or tool results.
 
-4. Provide hints ONLY when:
-   - The user explicitly asks for a hint, OR
-   - The user gives 3 incorrect attempts.
+TOPIC MODE
+If user asks about a topic, explain core concepts, patterns,
+mistakes, and complexity. If they ask for practice problems,
+call `Get Problem List` and return top 5 usable results.
+If no usable result, generate 3 related practice problems
+manually without slug or URL.
 
-5. After the user solves (or gives up), provide:
-   - A concise explanation
-   - Optimal solution
-   - Time complexity
-   - Space complexity
+PROBLEM DEBUG MODE
+If user provides a problem slug and asks for hint, explain bug,
+correct approach, why wrong, or optimize solution:
+1. Call `Resolve Problem Tool`.
+2. If not found, ask user to clarify and stop.
+3. Call `Get Failed Submission Tool`.
+4. If no failed submission, inform user and stop.
+5. Infer mode:
+   hint/goi y -> hint;
+   explain bug/why wrong/WA/TLE -> explain_bug;
+   correct approach/optimal -> correct_approach;
+   default -> explain_bug.
+For all debug responses include problem name, problem slug,
+and failed submission id.
 
-6. Stay in interview mode.
+Never hallucinate tool results.
 \end{verbatim}
 \end{tcolorbox}
 
-To support a smooth and structured technical interview experience, the chatbot must be able to recognize different categories of user intentions. For the interview practice module of the CodeRank System, we classify user intents into three primary types: topic selection, problem-solving intent, and hint-seeking behavior. Each intent triggers a specific dialogue pattern that aligns with the structured mock interview workflow.
+This prompt intentionally separates the chatbot behavior into modes. Each mode defines when the agent should answer directly and when it must call a tool. As a result, the chatbot can provide flexible tutoring while still preserving factual correctness for user-specific data.
 
-\textbf{Topic Selection Intent:} When users explicitly mention an interview topic, 
-such as arrays, graphs, or dynamic programming, the system interprets this as an 
-intention to begin or switch an interview topic. The chatbot should confirm the 
-topic and proceed to present an appropriate coding problem. The possible questions are “Let’s practice arrays.”, “I want to try a dynamic 
-programming problem.”, “Graphs.”, ...
+\subsection{Supported Interaction Scenarios}
 
-\textit{For example when the user wants to find a topic to practice:}
+The chatbot supports four main interaction scenarios that correspond to the current n8n agent implementation.
+
+\textbf{Solved problem lookup:} When the user asks which problems they have solved, the agent calls \texttt{Get Solved Problems Tool}. The response must be based only on the backend result.
 
 \begin{quote}
-\textbf{User:} Find me an array problem.\\
-\textbf{Chatbot:} Sure! We'll practice arrays. Here is your first problem: 
-\textit{Given an integer array…} Please let me know when you're ready to 
-provide your solution.
+\textbf{User:} Which problems have I solved?\\
+\textbf{Chatbot:} You have solved 3 problems: Two Sum (Easy), Binary Search (Easy), and Longest Substring Without Repeating Characters (Medium). Here are their slugs and URLs.
 \end{quote}
 
-If the user provides additional details, the chatbot refines the difficulty:
+\textbf{Unsolved recommendation:} When the user asks for problems they have not solved yet, the agent calls \texttt{Get Unsolved Recommendations Tool}. The backend filters recommendations against the user's solved problem list.
 
 \begin{quote}
-\textbf{User:} Give me an easy array problem.\\
-\textbf{Chatbot:} Great! Here is an easy-level array problem for you…
+\textbf{User:} Recommend five medium dynamic programming problems I have not solved.\\
+\textbf{Chatbot:} Here are five medium dynamic programming problems that are still unsolved in your account. I recommend starting with the first one because it focuses on the basic state-transition pattern.
 \end{quote}
 
-\textbf{Problem-Solving Intent:} Once a coding problem has been presented, the user may 
-respond with a complete solution, partial reasoning, or follow-up questions. This indicates 
-the intention to solve the problem. The chatbot should acknowledge the attempt, avoid 
-evaluating prematurely, and respond only after the user explicitly submits their solution. Possible user messages include “Here is my solution…”, “Does this approach work?”, 
-or “I think we can use two pointers.”
-
-\textit{For example when the user wants to submit a solution:}
+\textbf{Topic explanation and practice:} When the user asks about an algorithmic topic, the agent can explain the concept directly. If the user asks for practice problems, the agent calls \texttt{Get Problem List}; if no usable backend result is available, it may generate practice prompts without system-specific slugs or URLs.
 
 \begin{quote}
-\textbf{User:} Here is my solution: \texttt{...code...}\\
-\textbf{Chatbot:} Thanks! Let me review your solution.
+\textbf{User:} Explain two pointers and give me some practice problems.\\
+\textbf{Chatbot:} Two pointers is a technique that uses two indices to scan a sequence efficiently. I will retrieve related practice problems and suggest the most relevant ones for this topic.
 \end{quote}
 
-If the user is still thinking:
+\textbf{Failed submission debugging:} When the user provides a problem slug and asks why their answer is wrong, the agent first resolves the problem, then retrieves the latest failed submission for the authenticated user. The final answer includes the problem name, slug, failed submission identifier, and debugging guidance.
 
 \begin{quote}
-\textbf{User:} I'm not ready yet.\\
-\textbf{Chatbot:} No problem—take your time. Let me know when you're ready to submit 
-your solution.
+\textbf{User:} Why is my submission wrong for two-sum?\\
+\textbf{Chatbot:} I found your latest failed submission for Two Sum. The issue is that the current approach may reuse the same index twice. A correct solution should store previously seen values and check whether the complement already exists.
 \end{quote}
 
-If the attempt is incorrect, the chatbot guides without revealing too much:
+\subsection{Design Benefits}
 
-\begin{quote}
-\textbf{Chatbot:} This is not fully correct. Try again—pay attention to the edge case 
-where the array may contain duplicates.
-\end{quote}
-
-\textbf{Hint-Seeking Intent:} When the user explicitly asks for help or expresses that they 
-are stuck, the system recognizes this as an intention to request a hint. According to the 
-interview rules, hints should only be provided when requested or after three unsuccessful 
-attempts. Possible user messages include “Give me a hint.”, “I’m stuck.”, or “Can you guide me?”
-
-\textit{For example when the user requests assistance:}
-
-\begin{quote}
-\textbf{User:} I’m stuck. Give me a hint.\\
-\textbf{Chatbot:} Sure! Here’s a hint: Try using a hash map to store the frequencies of 
-elements before making your decision.
-\end{quote}
-
-If the user is unclear about what type of hint they need:
-
-\begin{quote}
-\textbf{User:} I need help.\\
-\textbf{Chatbot:} Of course. Would you like a conceptual hint, or guidance on improving 
-your current approach?
-\end{quote}
-
-\section{Chatbot Design}
-
-This chapter presents the detailed architecture, design decisions, and implementation of the chatbot subsystem in the CodeRank system. The chatbot is designed as an AI-powered coding interview assistant capable of simulating real-world technical interview scenarios.
-
-Unlike traditional rule-based chatbots, the proposed system leverages a large language model combined with a workflow orchestration layer to enable adaptive reasoning, contextual memory, and dynamic response generation. This allows the system to behave as an intelligent interviewer that can guide users through structured problem-solving processes.
-
-\subsection{N8N Integration Architecture}
-
-The chatbot subsystem is implemented on top of \textbf{n8n}, which acts as a central orchestration layer connecting the frontend interface, backend services, and the Gemini large language model.
-
-Instead of establishing a direct communication channel between the frontend and the LLM provider, all chatbot requests are routed through n8n workflows. This architectural decision introduces a middleware layer responsible for handling request processing, prompt management, memory retrieval, and response generation logic.
-
-By decoupling AI logic from application layers, the system achieves better separation of concerns and improves maintainability in large-scale development.
-
-\textbf{System Benefits:}
+The proposed chatbot design provides several important benefits for the CodeRank system:
 \begin{itemize}
-    \item \textbf{Separation of Concerns:} AI logic is isolated from frontend and backend business logic, reducing system coupling.
+    \item \textbf{Modularity:} Agent behavior, memory, model configuration, and backend tool access are separated into workflow components.
     
-    \item \textbf{Centralized Workflow Management:} All chatbot-related logic is managed in a single workflow system, making it easier to modify prompts, behaviors, and processing rules.
+    \item \textbf{Maintainability:} Prompt rules and tool-routing logic can be updated in n8n without major changes to frontend or backend code.
     
-    \item \textbf{Improved Maintainability:} Changes in AI behavior do not require modifications in frontend or backend codebases.
+    \item \textbf{Factual reliability:} User-specific information is retrieved from backend tools instead of being generated by the language model.
     
-    \item \textbf{Observability:} n8n provides execution logs at each node level, enabling easier debugging and monitoring of AI interactions.
+    \item \textbf{Extensibility:} New AI capabilities, such as contest assistance, personalized study plans, or retrieval-augmented generation, can be added by introducing new workflow tools.
+    
+    \item \textbf{Observability:} n8n provides execution-level visibility, making it easier to inspect tool calls, model responses, and workflow failures during testing.
 \end{itemize}
 
-\textbf{Chatbot Communication Flow:}
-\begin{enumerate}
-    \item The user interacts with the chatbot through the CodeRank frontend interface.
-    
-    \item The frontend sends the user message along with metadata to a backend API endpoint.
-    
-    \item The backend validates the request and triggers an n8n workflow via a webhook.
-    
-    \item The n8n workflow processes the request through a series of structured nodes.
-    
-    \item The workflow communicates with the Gemini model to generate context-aware responses.
-    
-    \item The final response is returned through the backend API and rendered in the frontend interface.
-\end{enumerate}
-
-This layered architecture enables independent evolution of system components, allowing AI logic, backend services, and frontend interfaces to be updated without affecting each other significantly.
-
-\subsection{AI Agent Workflow Design in n8n}
-
-The chatbot workflow is designed as an AI agent pipeline that simulates structured human-like reasoning during technical interview sessions. The workflow is composed of multiple modular stages, where each stage is responsible for a specific transformation or processing step.
-
-This design follows a pipeline-based architecture, ensuring that input processing, context management, reasoning, and output generation are clearly separated.
-
-\textbf{Workflow Stages:}
-\begin{enumerate}
-    \item User input reception
-    \item Context and memory retrieval
-    \item Prompt construction
-    \item LLM processing
-    \item Response post-processing
-    \item Response delivery
-\end{enumerate}
-
-Each stage plays a critical role in ensuring that the chatbot maintains coherence, contextual awareness, and domain-specific behavior during long interview sessions.
-
-\subsubsection{Webhook Trigger}
-
-The workflow begins with a \textbf{Webhook Trigger Node}, which serves as the entry point for all incoming chatbot requests.
-
-This node receives HTTP requests from the backend containing structured data such as:
-\begin{itemize}
-    \item User message content
-    \item Conversation identifier for session tracking
-    \item Interview context or selected topic
-    \item User-related metadata (e.g., difficulty level, session state)
-\end{itemize}
-
-The webhook ensures that every interaction is properly initialized within the workflow execution context, enabling traceability and session continuity.
-
-\subsubsection{Context and Memory Management}
-
-One of the key challenges in conversational AI systems is maintaining context across multiple turns of interaction. To address this, the system implements a memory management mechanism within the workflow.
-
-Before generating a response, the system retrieves relevant historical data including:
-\begin{itemize}
-    \item Previously asked interview questions
-    \item User-submitted solutions or attempts
-    \item Feedback and hints provided by the system
-    \item Current interview progression state
-\end{itemize}
-
-This memory mechanism allows the chatbot to maintain consistency across long sessions and avoid treating each message as an isolated input. As a result, the AI behaves more like a continuous interviewer rather than a stateless response generator.
-
-\subsubsection{Prompt Construction}
-
-After retrieving contextual information, the system constructs a structured prompt that will be sent to the large language model.
-
-The prompt construction process combines multiple sources of information:
-\begin{itemize}
-    \item System-level instructions defining chatbot behavior
-    \item Current user input message
-    \item Conversation history retrieved from memory
-    \item Interview state and difficulty configuration
-\end{itemize}
-
-This step is crucial because prompt quality directly impacts the performance and consistency of the LLM output. By explicitly structuring the prompt, the system ensures that Gemini follows the expected interview logic and generates responses aligned with the CodeRank learning objectives.
-
-\subsubsection{LLM Processing with Gemini}
-
-The constructed prompt is passed to the \textbf{Google Gemini Chat Model node} within n8n. This node is responsible for interacting with the Gemini API and generating the final response based on the provided context.
-
-The Gemini model performs multiple reasoning tasks simultaneously, including:
-\begin{itemize}
-    \item Understanding user intent in a programming context
-    \item Generating coding interview questions dynamically
-    \item Providing step-by-step hints for problem-solving
-    \item Evaluating user approaches and suggesting optimizations
-\end{itemize}
-
-Depending on the state of the conversation, the model can act as an interviewer, tutor, or evaluator, allowing flexible adaptation to different learning scenarios.
-
-\subsubsection{Response Post-processing}
-
-After receiving the output from the LLM, the system performs a post-processing stage to ensure that the response is suitable for frontend rendering.
-
-This includes:
-\begin{itemize}
-    \item Formatting output into Markdown-compatible structure
-    \item Removing unnecessary tokens or artifacts
-    \item Validating response completeness and structure
-    \item Logging interaction data for debugging and analytics
-\end{itemize}
-
-This step ensures that the final response is clean, consistent, and user-friendly when displayed in the chatbot interface.
-
-\subsubsection{Frontend Delivery}
-
-The final processed response is returned through the backend API to the frontend application. The frontend then renders the response in real time within the chat interface.
-
-This completes the full request-response cycle, enabling an interactive and low-latency conversational experience for users during coding interview sessions.
-
-\subsection{System Design Benefits}
-
-The proposed chatbot architecture provides several important system-level advantages:
-
-\begin{itemize}
-    \item \textbf{Modular Architecture:} Each stage of the workflow is independently defined, allowing easy modification and extension without affecting the entire system.
-    
-    \item \textbf{Scalability:} The system can be extended to support additional AI features such as retrieval-augmented generation (RAG), multi-agent collaboration, or external knowledge integration.
-    
-    \item \textbf{Maintainability:} Centralized workflow logic reduces code duplication and simplifies long-term maintenance.
-    
-    \item \textbf{Flexibility:} New AI behaviors can be introduced by modifying workflow nodes without changing core application code.
-    
-    \item \textbf{Observability:} Built-in execution tracking in n8n provides transparency in each step of the AI pipeline, facilitating debugging and system optimization.
-\end{itemize}
-
-Overall, the architecture enables the development of a robust, extensible, and production-ready AI chatbot system that is suitable for technical interview training and educational purposes.
+Overall, the chatbot design enables CodeRank to provide a practical AI tutor for coding interview preparation while keeping the AI subsystem modular, observable, and aligned with the platform's existing backend services.
