@@ -1,0 +1,467 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{angularJS}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5129f9f4810757f6f0cf735675eb0541}{%
+           family={{AngularJS}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{fullhash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{fullhashraw}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{bibnamehash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{authorbibnamehash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{authornamehash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{authorfullhash}{5129f9f4810757f6f0cf735675eb0541}
+      \strng{authorfullhashraw}{5129f9f4810757f6f0cf735675eb0541}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://angularjs.org/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{asp_net}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=7425b1abd7eefcd11ccc01953bc06ce5}{%
+           family={{ASP.NET}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{fullhash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{fullhashraw}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{bibnamehash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{authorbibnamehash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{authornamehash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{authorfullhash}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \strng{authorfullhashraw}{7425b1abd7eefcd11ccc01953bc06ce5}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://dotnet.microsoft.com/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{atlassian_microservices_vs_monolith}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=a8fd8cd0b6d2cfda939a8ef257e60192}{%
+           family={{Atlassian}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{fullhash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{fullhashraw}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{bibnamehash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{authorbibnamehash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{authornamehash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{authorfullhash}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \strng{authorfullhashraw}{a8fd8cd0b6d2cfda939a8ef257e60192}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{Microservices vs Monolith}
+      \field{year}{n.d.}
+    \endentry
+    \entry{firecracker2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=325271d5a80da459ca32bbd262e079d7}{%
+           family={{AWS Firecracker Team}},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{fullhash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{fullhashraw}{325271d5a80da459ca32bbd262e079d7}
+      \strng{bibnamehash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{authorbibnamehash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{authornamehash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{authorfullhash}{325271d5a80da459ca32bbd262e079d7}
+      \strng{authorfullhashraw}{325271d5a80da459ca32bbd262e079d7}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{Firecracker: Lightweight Virtualization for Serverless Computing}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://firecracker-microvm.github.io/
+      \endverb
+      \verb{url}
+      \verb https://firecracker-microvm.github.io/
+      \endverb
+    \endentry
+    \entry{cassandra}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=7bfcc746dd3ae3853c4f0ef95551e22e}{%
+           family={{Cassandra}},
+           familyi={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{fullhash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{fullhashraw}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{bibnamehash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{authorbibnamehash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{authornamehash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{authorfullhash}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \strng{authorfullhashraw}{7bfcc746dd3ae3853c4f0ef95551e22e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://cassandra.apache.org/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{docker2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e6f3d214228cc5933c1a82019f7dc0e0}{%
+           family={{Docker, Inc.}},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{fullhash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{fullhashraw}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{bibnamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authorbibnamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authornamehash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authorfullhash}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \strng{authorfullhashraw}{e6f3d214228cc5933c1a82019f7dc0e0}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.docker.com/}}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{Docker: Accelerated Container Application Development}
+      \field{year}{2025}
+    \endentry
+    \entry{nsjail2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8b36e9207c24c76e6719268e49201d94}{%
+           family={{Google}},
+           familyi={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{fullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \strng{bibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorbibnamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authornamehash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhash}{8b36e9207c24c76e6719268e49201d94}
+      \strng{authorfullhashraw}{8b36e9207c24c76e6719268e49201d94}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://android.googlesource.com/platform/external/nsjail/}}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{Nsjail: Process Isolation Tool for Linux}
+      \field{year}{2025}
+    \endentry
+    \entry{langchain2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8de59538e5206b848891f2b0e1898dfb}{%
+           family={LangChain},
+           familyi={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{fullhash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{fullhashraw}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{bibnamehash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{authorbibnamehash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{authornamehash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{authorfullhash}{8de59538e5206b848891f2b0e1898dfb}
+      \strng{authorfullhashraw}{8de59538e5206b848891f2b0e1898dfb}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.langchain.com/}}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{LangChain Documentation}
+      \field{year}{2025}
+    \endentry
+    \entry{mongodb}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=206e3718af092fd1d12f80cae771ccac}{%
+           family={{MongoDB}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{fullhash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{fullhashraw}{206e3718af092fd1d12f80cae771ccac}
+      \strng{bibnamehash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{authorbibnamehash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{authornamehash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{authorfullhash}{206e3718af092fd1d12f80cae771ccac}
+      \strng{authorfullhashraw}{206e3718af092fd1d12f80cae771ccac}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.mongodb.com/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{mysql}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=62a004b95946bb97541afa471dcca73a}{%
+           family={{MySQL}},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{62a004b95946bb97541afa471dcca73a}
+      \strng{fullhash}{62a004b95946bb97541afa471dcca73a}
+      \strng{fullhashraw}{62a004b95946bb97541afa471dcca73a}
+      \strng{bibnamehash}{62a004b95946bb97541afa471dcca73a}
+      \strng{authorbibnamehash}{62a004b95946bb97541afa471dcca73a}
+      \strng{authornamehash}{62a004b95946bb97541afa471dcca73a}
+      \strng{authorfullhash}{62a004b95946bb97541afa471dcca73a}
+      \strng{authorfullhashraw}{62a004b95946bb97541afa471dcca73a}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.mysql.com/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{lambdatest_web_application_developement}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=0f8eb3977478be2ef095f127b337c8fb}{%
+           family={{Nazneen Ahmad}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{fullhash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{fullhashraw}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{bibnamehash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{authorbibnamehash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{authornamehash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{authorfullhash}{0f8eb3977478be2ef095f127b337c8fb}
+      \strng{authorfullhashraw}{0f8eb3977478be2ef095f127b337c8fb}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.lambdatest.com/learning-hub/web-application-development}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Web Application Development: A Detail Guide With Best Practices}
+      \field{year}{2025}
+    \endentry
+    \entry{client_side_vs_server_side}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=9d7b3d883350456c47e8d081a9d80d89}{%
+           family={{Nefe Emadamerho-Atori}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{fullhash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{fullhashraw}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{bibnamehash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{authorbibnamehash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{authornamehash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{authorfullhash}{9d7b3d883350456c47e8d081a9d80d89}
+      \strng{authorfullhashraw}{9d7b3d883350456c47e8d081a9d80d89}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://prismic.io/blog/client-side-vs-server-side-rendering}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Client-side Rendering (CSR) vs. Server-side Rendering (SSR)}
+      \field{year}{2024}
+    \endentry
+    \entry{nestJS}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=5328a9211442ed59c8275f20f7a84661}{%
+           family={{NestJS}},
+           familyi={N\bibinitperiod}}}%
+      }
+      \strng{namehash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{fullhash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{fullhashraw}{5328a9211442ed59c8275f20f7a84661}
+      \strng{bibnamehash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{authorbibnamehash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{authornamehash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{authorfullhash}{5328a9211442ed59c8275f20f7a84661}
+      \strng{authorfullhashraw}{5328a9211442ed59c8275f20f7a84661}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://nestjs.com/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{postgresql}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=399bd1ee587245ecac6f39beaa99886f}{%
+           family={{PostgreSQL}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{fullhash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{fullhashraw}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{bibnamehash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{authorbibnamehash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{authornamehash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{authorfullhash}{399bd1ee587245ecac6f39beaa99886f}
+      \strng{authorfullhashraw}{399bd1ee587245ecac6f39beaa99886f}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.postgresql.org/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{proofpoint_sandbox}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=99f0b5a240ded430effdb2b4745a6b47}{%
+           family={{Proofpoint, Inc.}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{fullhash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{fullhashraw}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{bibnamehash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{authorbibnamehash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{authornamehash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{authorfullhash}{99f0b5a240ded430effdb2b4745a6b47}
+      \strng{authorfullhashraw}{99f0b5a240ded430effdb2b4745a6b47}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.proofpoint.com/us/threat-reference/sandbox}}
+      \field{note}{Accessed: 2025-12-02}
+      \field{title}{What Is a Sandbox?}
+      \field{year}{n.d.}
+    \endentry
+    \entry{ReactJS}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=217c80ced5a5d142b0e105a86491709c}{%
+           family={{ReactJS}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{fullhash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{fullhashraw}{217c80ced5a5d142b0e105a86491709c}
+      \strng{bibnamehash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{authorbibnamehash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{authornamehash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{authorfullhash}{217c80ced5a5d142b0e105a86491709c}
+      \strng{authorfullhashraw}{217c80ced5a5d142b0e105a86491709c}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://react.dev/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{chatbot_definition}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=34acf86770f88cb1a1bdc7222b4ad9e2}{%
+           family={{Restream}},
+           familyi={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{fullhash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{fullhashraw}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{bibnamehash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{authorbibnamehash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{authornamehash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{authorfullhash}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \strng{authorfullhashraw}{34acf86770f88cb1a1bdc7222b4ad9e2}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://restream.io/learn/what-is/chatbot/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Chatbot}
+      \field{year}{n.d.}
+    \endentry
+    \entry{spring_boot}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=c8428a45869e78fb361ed20b9c23b0a8}{%
+           family={{Spring Boot}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{fullhash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{fullhashraw}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{bibnamehash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{authorbibnamehash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{authornamehash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{authorfullhash}{c8428a45869e78fb361ed20b9c23b0a8}
+      \strng{authorfullhashraw}{c8428a45869e78fb361ed20b9c23b0a8}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://spring.io/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+    \entry{VueJS}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8ecb50964991e3a29fb94800eb41acf1}{%
+           family={{VueJS}},
+           familyi={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{fullhash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{fullhashraw}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{bibnamehash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{authorbibnamehash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{authornamehash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{authorfullhash}{8ecb50964991e3a29fb94800eb41acf1}
+      \strng{authorfullhashraw}{8ecb50964991e3a29fb94800eb41acf1}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://vuejs.org/}}
+      \field{note}{Accessed: 2025-12-05}
+      \field{title}{Official Website}
+      \field{year}{n.d.}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

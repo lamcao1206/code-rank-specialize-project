@@ -3,91 +3,187 @@
 \bibitem{lambdatest_web_application_developement}
 {Nazneen Ahmad}.
 \newblock Web application development: A detail guide with best practices.
-\newblock \url{https://www.lambdatest.com/learning-hub/web-application-development}, 2025.
+\newblock Retrieved from \url{https://www.lambdatest.com/learning-hub/web-application-development}, 2025.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{client_side_vs_server_side}
 {Nefe Emadamerho-Atori}.
 \newblock Client-side rendering (csr) vs. server-side rendering (ssr).
-\newblock \url{https://prismic.io/blog/client-side-vs-server-side-rendering}, 2024.
+\newblock Retrieved from \url{https://prismic.io/blog/client-side-vs-server-side-rendering}, 2024.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{angularJS}
 {AngularJS}.
 \newblock Official website.
-\newblock \url{https://angularjs.org/}, n.d.
+\newblock Retrieved from \url{https://angularjs.org/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{ReactJS}
 {ReactJS}.
 \newblock Official website.
-\newblock \url{https://react.dev/}, n.d.
+\newblock Retrieved from \url{https://react.dev/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{VueJS}
 {VueJS}.
 \newblock Official website.
-\newblock \url{https://vuejs.org/}, n.d.
+\newblock Retrieved from \url{https://vuejs.org/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{asp_net}
 {ASP.NET}.
 \newblock Official website.
-\newblock \url{https://dotnet.microsoft.com/}, n.d.
+\newblock Retrieved from \url{https://dotnet.microsoft.com/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{nestJS}
 {NestJS}.
 \newblock Official website.
-\newblock \url{https://nestjs.com/}, n.d.
+\newblock Retrieved from \url{https://nestjs.com/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{spring_boot}
 {Spring Boot}.
 \newblock Official website.
-\newblock \url{https://spring.io/}, n.d.
+\newblock Retrieved from \url{https://spring.io/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{mysql}
 {MySQL}.
 \newblock Official website.
-\newblock \url{https://www.mysql.com/}, n.d.
+\newblock Retrieved from \url{https://www.mysql.com/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{postgresql}
 {PostgreSQL}.
 \newblock Official website.
-\newblock \url{https://www.postgresql.org/}, n.d.
+\newblock Retrieved from \url{https://www.postgresql.org/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{mongodb}
 {MongoDB}.
 \newblock Official website.
-\newblock \url{https://www.mongodb.com/}, n.d.
+\newblock Retrieved from \url{https://www.mongodb.com/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{cassandra}
 {Cassandra}.
 \newblock Official website.
-\newblock \url{https://cassandra.apache.org/}, n.d.
+\newblock Retrieved from \url{https://cassandra.apache.org/}, n.d.
 \newblock Accessed: 2025-12-05.
 
 \bibitem{proofpoint_sandbox}
 {Proofpoint, Inc.}
 \newblock What is a sandbox?
-\newblock \url{https://www.proofpoint.com/us/threat-reference/sandbox}, n.d.
+\newblock Retrieved from \url{https://www.proofpoint.com/us/threat-reference/sandbox}, n.d.
 \newblock Accessed: 2025-12-02.
 
 \bibitem{firecracker2025}
 {AWS Firecracker Team}.
 \newblock Firecracker: Lightweight virtualization for serverless computing.
-\newblock \url{https://firecracker-microvm.github.io/}, 2025.
+\newblock Retrieved from \url{https://firecracker-microvm.github.io/}, 2025.
 \newblock Accessed: 2025-12-02.
+
+\bibitem{docker2025}
+{Docker, Inc.}
+\newblock Docker: Accelerated container application development.
+\newblock Retrieved from \url{https://www.docker.com/}, 2025.
+\newblock Accessed: 2025-12-02.
+
+\bibitem{nsjail2025}
+{Google}.
+\newblock Nsjail: Process isolation tool for linux.
+\newblock Retrieved from \url{https://android.googlesource.com/platform/external/nsjail/}, 2025.
+\newblock Accessed: 2025-12-02.
+
+\bibitem{n8n}
+{n8n}.
+\newblock n8n documentation.
+\newblock Retrieved from \url{https://docs.n8n.io/}, 2026.
+\newblock Accessed: 2026-05-09.
+
+\bibitem{zapier_agents}
+{Zapier}.
+\newblock Zapier agents.
+\newblock Retrieved from \url{https://zapier.com/agents}, 2026.
+\newblock Accessed: 2026-05-26.
+
+\bibitem{make_platform}
+{Make}.
+\newblock Make automation platform.
+\newblock Retrieved from \url{https://www.make.com/en/product}, 2026.
+\newblock Accessed: 2026-05-26.
+
+\bibitem{pipedream_docs}
+{Pipedream}.
+\newblock Pipedream documentation.
+\newblock Retrieved from \url{https://pipedream.com/docs}, 2026.
+\newblock Accessed: 2026-05-26.
 
 \bibitem{atlassian_microservices_vs_monolith}
 {Atlassian}.
 \newblock Microservices vs monolith.
-\newblock \url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}, n.d.
+\newblock Retrieved from \url{https://www.atlassian.com/microservices/microservices-architecture/microservices-vs-monolith}, n.d.
 \newblock Accessed: 2025-12-02.
+
+\bibitem{chatbot_definition}
+{Restream}.
+\newblock Chatbot.
+\newblock Retrieved from \url{https://restream.io/learn/what-is/chatbot/}, n.d.
+\newblock Accessed: 2025-12-05.
+
+\bibitem{supabase2026}
+{Supabase}.
+\newblock Supabase | the postgres development platform.
+\newblock Retrieved from \url{https://supabase.com/}, 2026.
+\newblock Accessed: 2026-04-27.
+
+\bibitem{cloudamqp2026}
+{CloudAMQP}.
+\newblock Cloudamqp - queue starts here.
+\newblock Retrieved from \url{https://www.cloudamqp.com/}, 2026.
+\newblock Accessed: 2026-04-27.
+
+\bibitem{n8n2026}
+{n8n}.
+\newblock n8n cloud.
+\newblock Retrieved from \url{https://n8n.io/cloud/}, 2026.
+\newblock Accessed: 2026-05-26.
+
+\bibitem{google_cloud2026}
+{Google Cloud}.
+\newblock Google cloud.
+\newblock Retrieved from \url{https://cloud.google.com/}, 2026.
+\newblock Accessed: 2026-04-27.
+
+\bibitem{gke2026}
+{Google Cloud}.
+\newblock Kubernetes, evolved: The foundation for platform builders.
+\newblock Retrieved from \url{https://cloud.google.com/kubernetes-engine}, 2026.
+\newblock Accessed: 2026-04-27.
+
+\bibitem{artifact_registry2026}
+{Google Cloud}.
+\newblock Artifact registry overview.
+\newblock Retrieved from \url{https://cloud.google.com/artifact-registry/docs/overview}, 2026.
+\newblock Accessed: 2026-04-27.
+
+\bibitem{v8docs2026}
+{V8}.
+\newblock V8 javascript engine documentation.
+\newblock Retrieved from \url{https://v8.dev/docs}, 2026.
+\newblock Accessed: 2026-05-26.
+
+\bibitem{vitest_coverage2026}
+{Vitest}.
+\newblock Coverage.
+\newblock Retrieved from \url{https://vitest.dev/guide/coverage.html}, 2026.
+\newblock Accessed: 2026-05-26.
+
+\bibitem{lighthouse2026}
+{Google Chrome Developers}.
+\newblock Lighthouse.
+\newblock Retrieved from \url{https://developer.chrome.com/docs/lighthouse/overview}, 2026.
+\newblock Accessed: 2026-05-26.
 
 \end{thebibliography}
