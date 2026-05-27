@@ -1,11 +1,11 @@
 \section{Mockup Design}
 
-Mockup Design is a low-fidelity visual representation of a user interface that outlines the basic structure and layout of a digital product without focusing on visual design elements such as colors, typography, or imagery. Mockup Designs serve as a blueprint for developers and designers, defining the placement of content, navigation elements, and interactive components. This section will cover the Mockup Designs for two main user flows: \textit{Primary User flow} and \textit{Moderator/Admin flow} .
+Mockup Design is a low-fidelity visual representation of a user interface that outlines the basic structure and layout of a digital product without focusing on visual design elements such as colors, typography, or imagery. Mockup Designs serve as a blueprint for developers and designers, defining the placement of content, navigation elements, and interactive components. This section will cover the Mockup Designs for two main user flows: \textit{Primary User flow} and \textit{Moderator/Superadmin flow} .
 
 \subsection{Primary User flow}
 \subsubsection*{Login}
 
-Before accessing the application, users are required to login using their credentials. The Login Page will include 2 options based on role: Moderator/Admin login and User login.
+Before accessing the application, users are required to login using their credentials. The Login Page will include 2 options based on role: Moderator/Superadmin login and User login.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/login_selection.png}
@@ -94,14 +94,6 @@ In order to view the details of a specific contest, the user can click on the co
 \end{figure}
 
 
-In order to create a custom contest, moderator can go to the Contest monitor page. Here, they can enter the contest name, select problems to include in the contest, set the start and end time, and define other contest settings.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-3.png}
-    \vspace{0.6cm}
-    \caption{Contest Creation}
-\end{figure}
-
 \subsubsection*{Interview Preparation}
 Primary users can access the Interview Preparation feature from the main navigation menu. The Interview Preparation feature provides users with a curated list of coding problems and resources specifically designed to help them prepare for technical interviews. In the Interview Preparation page, there will be a conversation history section on the left side, displaying a list of previous interview preparation sessions. Users can select a session to view the details and continue their preparation or create a new session by clicking the \textbf{New Conversation} button.
 \begin{figure}[H]
@@ -111,9 +103,9 @@ Primary users can access the Interview Preparation feature from the main navigat
     \caption{Interview Preparation Page}
 \end{figure}
 
-\subsection{Moderator/Admin flow}
+\subsection{Moderator/Superadmin flow}
 
-After logging in as a Moderator/Admin, the user will be directed to the Moderator/Superadmin Dashboard. This dashboard provides an overview of key metrics and functionalities available to moderators and administrators, allowing them to manage the platform effectively.
+After logging in as a Moderator/Superadmin, the user will be directed to the Moderator/Superadmin Dashboard. This dashboard provides an overview of key metrics and functionalities available to moderators and superadmin, allowing them to manage the platform effectively.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/admin-1.png}
@@ -121,49 +113,22 @@ After logging in as a Moderator/Admin, the user will be directed to the Moderato
     \caption{Moderator Dashboard}
 \end{figure}
 
-The Moderator/Admin dashboard also provides centralized management interfaces for major platform resources. These interfaces allow privileged users to inspect system data, update operational content, and perform moderation actions from a consistent administrative workspace.
+The Moderator/Superadmin dashboard also provides centralized management interfaces for major platform resources. These interfaces allow privileged users to inspect system data, update operational content, and perform moderation actions from a consistent administrative workspace.
 
-The Discussion Management interface displays all discussion threads available in the system. From this screen, Moderators/Admins can open a discussion detail page, review its comments, edit inappropriate content when necessary, or delete discussions and comments that violate platform policies.
+
+\subsubsubsection*{Problem Management}
+
+Moderators/Superadmin can manage coding problems on the platform through the Problem list page. This page displays a list of all coding problems available on the platform, along with relevant details such as problem title, difficulty level, and tags. Moderators/Superadmin can filter and sort the problems based on various criteria to find specific challenges they want to manage.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/discussion_management.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_list_monitor.png}
     \vspace{0.6cm}
-    \caption{Discussion Management}
+    \caption{Problem List Management}
 \end{figure}
 
-The Contest Management interface supports the creation, editing, and maintenance of contest content. Moderators/Admins can configure contest information, update contest details, and manage contest-related content from a single administrative view.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/contest_management.png}
-    \vspace{0.6cm}
-    \caption{Contest Management}
-\end{figure}
 
-The User Management interface is used to administer user accounts across the platform. It allows Moderators/Admins to view user details, delete users when required, and toggle account status to enable or disable access according to moderation decisions.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/user_management.png}
-    \vspace{0.6cm}
-    \caption{User Management}
-\end{figure}
-
-The Submission Management interface provides visibility into user submissions in the system. It helps Moderators/Admins review submission records, monitor judging results, and inspect submission-related information for operational or moderation purposes.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/submission_management.png}
-    \vspace{0.6cm}
-    \caption{Submission Management}
-\end{figure}
-
-The Notification Management interface is used to manage global notifications displayed on user-facing pages. Moderators/Admins can create new notifications, view existing notification details, delete outdated notifications, and control whether a notification is visible to users.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/notification_management.png}
-    \vspace{0.6cm}
-    \caption{Notification Management}
-\end{figure}
-
-Moderators/Admins can manage problem create requests submitted by another Moderator by navigating to the Problems sidebar, where a list of all problem requests is displayed along with their Difficulty level, color-coded for quick reference (Easy, Medium, Hard). In addition, this list is paginated, showing 10 items per page to ensure clear and efficient navigation.
+Moderators/Superadmin can manage problem create requests submitted by another Moderator/Superadmin by navigating to the Problems sidebar, where a list of all problem requests is displayed along with their Difficulty level, color-coded for quick reference (Easy, Medium, Hard). In addition, this list is paginated, showing 10 items per page to ensure clear and efficient navigation.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_request_list.png}
@@ -171,8 +136,7 @@ Moderators/Admins can manage problem create requests submitted by another Modera
     \caption{Problem Request List}
 \end{figure}
 
-
-A “Create Problem” button is positioned at the top-right corner of the interface, allowing users to quickly submit a new problem request. When this button is clicked, a creation modal appears centered on the screen, enabling Moderators/Admins to input all necessary details, in which user is required to fill in fields such as Problem Name, Difficulty level, Topic, and any other relevant information needed to define the problem.
+A “Create Problem” button is positioned at the top-right corner of the interface, allowing users to quickly submit a new problem request. When this button is clicked, a creation modal appears centered on the screen, enabling Moderators/Superadmin to input all necessary details, in which user is required to fill in fields such as Problem Name, Difficulty level, Topic, and any other relevant information needed to define the problem.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/Problem_request_modal.png}
@@ -180,26 +144,61 @@ A “Create Problem” button is positioned at the top-right corner of the inter
     \caption{Problem Request Create Modal}
 \end{figure}
 
-Moderators can also monitor submissions in real-time by navigating to the Submissions sidebar. This page displays a list of all submissions made by users, along with relevant details such as submission ID, user name, problem name, status (e.g., Accepted, Wrong Answer, Time Limit Exceeded), and submission time. Moderators can filter and sort the submissions based on various criteria to quickly identify any issues or patterns in user submissions.
+
+\subsubsubsection*{Discussion Management}
+
+The Discussion Management interface displays all discussion threads available in the system. From this screen, Moderators/Superadmin can open a discussion detail page, review its comments, edit inappropriate content when necessary, or delete discussions and comments that violate platform policies.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/submission_monitor.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/discussion_management.png}
     \vspace{0.6cm}
-    \caption{Submission Monitor}
+    \caption{Discussion Management}
 \end{figure}
 
-Beside submissions, moderators can also monitor current discussions by navigating to the Discussions sidebar. This page displays a list of all active discussion threads, along with relevant details such as thread title, topic, number of messages, and last activity time. Moderators can filter and sort the discussions based on various criteria to quickly identify any issues or patterns in user discussions.
+\subsubsubsection*{Contest Management}
+
+The Contest Management interface supports the creation, editing, and maintenance of contest content. Moderators/Superadmin can configure contest information, update contest details, and manage contest-related content from a single administrative view.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/discussion_monitor.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/contest_management.png}
     \vspace{0.6cm}
-    \caption{Discussion Monitor}
+    \caption{Contest Management}
 \end{figure}
 
-Moderator can also managing notifications and announcements to all users by navigating to the Notifications sidebar. This page displays a list of all notifications sent to users, along with relevant details such as notification type, recipient user name, content summary, and timestamp. Moderators can filter and sort the notifications based on various criteria to quickly identify any issues or patterns in user notifications.
+In order to create a custom contest, Moderators/Superadmin can go to the Contest monitor page. Here, they can enter the contest name, select problems to include in the contest, set the start and end time, and define other contest settings.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/app_notification.png}
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Primary User/contest-3.png}
     \vspace{0.6cm}
-    \caption{Notification Setting}
+    \caption{Contest Creation}
+\end{figure}
+
+\subsubsubsection*{User Management}
+
+The User Management interface is used to administer user accounts across the platform. It allows Moderators/Superadmin to view user details, delete users when required, and toggle account status to enable or disable access according to moderation decisions.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/user_management.png}
+    \vspace{0.6cm}
+    \caption{User Management}
+\end{figure}
+
+\subsubsubsection*{Submission Monitoring}
+
+The Submission Management interface provides visibility into user submissions in the system. It helps Moderators/Superadmin review submission records, monitor judging results, and inspect submission-related information for operational or moderation purposes.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/submission_management.png}
+    \vspace{0.6cm}
+    \caption{Submission Management}
+\end{figure}
+
+\subsubsubsection*{Notification Management}
+
+The Notification Management interface is used to manage global notifications displayed on user-facing pages. Moderators/Superadmin can create new notifications, view existing notification details, delete outdated notifications, and control whether a notification is visible to users.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{Contents/Chapter 4/Mockup Design/Admin/notification_management.png}
+    \vspace{0.6cm}
+    \caption{Notification Management}
 \end{figure}
